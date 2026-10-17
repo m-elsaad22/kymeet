@@ -9,6 +9,8 @@
 | الفرع | `cursor/kymeet-app-ui-9531` — [PR #1](https://github.com/m-elsaad22/kymeet/pull/1) |
 | Staging | **غير متاح** حاليًا — التفعيل الأول على الإنتاج يتطلب خطة تراجع أدناه |
 
+**تحديث (2026-10):** التصميم الكامل للمتجر يُنفَّذ الآن داخل **قالب KAYAN** (`components/packs/kymeet-store/`). راجع `docs/KYMEET-THEME-DEPLOY.md` وملف `dist/kayan-theme.zip`. الإضافة اختيارية بعد التحقق.
+
 الإضافة **لا تكتب** إلى قاعدة البيانات (لا `wpdb`، لا تعديل منتجات/أسعار/مخزون). **لا تضيف** نقاط AJAX أو REST جديدة؛ السلة تستخدم نفس `/?wc-ajax=kymeet_cart` من قالب `kymeet-store`.
 
 ---

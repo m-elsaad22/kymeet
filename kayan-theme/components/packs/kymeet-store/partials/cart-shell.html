@@ -1,0 +1,19 @@
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>سلة التسوق</h3>
+    <button onclick="closeCart()" aria-label="إغلاق"><i class="fas fa-xmark"></i></button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">
+      <i class="fas fa-bag-shopping"></i>
+      <p>سلتك فارغة حاليًا</p>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span>الإجمالي</span>
+      <b id="cartTotal">0 ج.م</b>
+    </div>
+    <a href="#" class="btn btn-gold" onclick="checkout(event)">إتمام الشراء <i class="fas fa-arrow-left"></i></a>
+  </div>
+</aside>
