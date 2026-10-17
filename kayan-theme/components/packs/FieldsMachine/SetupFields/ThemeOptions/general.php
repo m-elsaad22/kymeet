@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => 'الإعدادات العامة',
 	'en_title'  => 'General settings',

@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => ' الرئيسية — المحتوى ',
 	'en_title' => 'Homepage — Content blocks',

@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => 'إعدادات العنوان',
 	'en_title'  => 'SEO OPTIONS',

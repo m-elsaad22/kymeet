@@ -1,4 +1,4 @@
-<?
+<?php
 if( !empty( $_POST ) ){
 	if( isset( $_POST['submitForm'] ) && isset( $_POST['post_id'] ) ){
 

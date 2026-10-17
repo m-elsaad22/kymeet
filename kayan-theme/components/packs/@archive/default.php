@@ -1,4 +1,4 @@
-<?
+<?php
 
 $obj = get_queried_object();
 

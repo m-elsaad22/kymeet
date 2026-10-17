@@ -1,4 +1,4 @@
-<?
+<?php
 $obj = get_queried_object();
 $Styles = array(
 	'kayan-home'  => 'kayan-home.css',

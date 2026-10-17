@@ -1,4 +1,4 @@
-<?
+<?php
 if ( ! function_exists( 'kayan_seo_get_dashboard_data' ) ) {
 	function kayan_seo_get_dashboard_data() {
 		$business = get_option( 'YourColor_Schema_business' );

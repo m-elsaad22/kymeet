@@ -1,4 +1,4 @@
-<?
+<?php
 function PostTypes() {
 	global $ThemeTree;
 	#

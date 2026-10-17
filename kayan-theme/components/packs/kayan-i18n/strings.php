@@ -1,4 +1,4 @@
-<?
+<?php
 if ( ! function_exists( 'kayan_i18n_ui_strings' ) ) {
 	function kayan_i18n_ui_strings() {
 		return array(

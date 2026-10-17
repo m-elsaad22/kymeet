@@ -1,4 +1,4 @@
-<?
+<?php
 if ( ! function_exists( 'kayan_seo_is_enabled' ) ) {
 	function kayan_seo_is_enabled() {
 		return empty( yc_get_option( 'kayan_seo_disable' ) );

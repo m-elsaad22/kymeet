@@ -1,4 +1,4 @@
-<?
+<?php
 $footer_pack = urlencode( '#footer' );
 $footer_uri  = get_template_directory_uri() . '/components/packs/' . $footer_pack . '/js/';
 

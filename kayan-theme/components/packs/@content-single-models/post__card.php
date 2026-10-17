@@ -1,4 +1,4 @@
-<?
+<?php
 $hide__post_card = get_post_meta( $post->ID,'hide__post_card',true );
 if( empty( $hide__post_card ) ) {
 

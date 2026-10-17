@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Extended Schema nodes: reviews, team, enriched Person/Organization.
  */

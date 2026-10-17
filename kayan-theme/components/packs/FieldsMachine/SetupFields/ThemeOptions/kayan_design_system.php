@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title' => 'نظام التصميم',
 	'en_title' => 'Design System',

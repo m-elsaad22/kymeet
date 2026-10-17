@@ -1,4 +1,4 @@
-<?
+<?php
 $search_query = get_search_query();
 $search_query = trim( $search_query );
 $Styles = array();

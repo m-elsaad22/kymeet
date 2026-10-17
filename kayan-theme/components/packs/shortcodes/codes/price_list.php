@@ -1,4 +1,4 @@
-<?
+<?php
 class price_list_short_code{
 	function __construct($argument=array() ){
 		

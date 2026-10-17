@@ -1,4 +1,4 @@
-<?
+<?php
 global $current_user;
 $obj = get_queried_object();
 $path = $CurrentDir.$obj->taxonomy.'.php';

@@ -1,4 +1,4 @@
-<?
+<?php
 # LOGO EDITS .
 	$whatsapp = yc_get_option('whatsapp_number');
 	if ( function_exists( 'kayan_homepage_build_footer_html' ) ) {

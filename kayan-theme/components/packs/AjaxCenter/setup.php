@@ -1,4 +1,4 @@
-<?
+<?php
 class AjaxCenter {
 	function __construct() {
 		$this->ThemeStatic = new ThemeStatic;

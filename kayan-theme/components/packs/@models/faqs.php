@@ -1,4 +1,4 @@
-<?
+<?php
 $Styles = array();
 $UniqId = uniqid();
 #

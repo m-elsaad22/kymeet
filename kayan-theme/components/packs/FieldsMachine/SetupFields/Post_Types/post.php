@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes['page_image'] = array(
 	'title'    => 'تحديد صورة وايقونة المقال',
 	'fields' => array(

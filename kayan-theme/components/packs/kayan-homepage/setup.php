@@ -1,4 +1,4 @@
-<?
+<?php
 require_once __DIR__ . '/options-panel.php';
 require_once __DIR__ . '/contact-resolver.php';
 require_once __DIR__ . '/helpers.php';

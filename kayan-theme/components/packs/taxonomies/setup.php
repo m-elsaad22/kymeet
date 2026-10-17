@@ -1,4 +1,4 @@
-<?
+<?php
 function Taxonomies() {
 	global $ThemeTree;
 	$ThemeTree->AddTaxonomy('category',array('works','post'), ' تصنيفات ', array('slug'=>'category'),true);

@@ -1,4 +1,4 @@
-<? if( class_exists('Relations__languages__locate') ) {
+<?php if( class_exists('Relations__languages__locate') ) {
 	$Relations__languages__locate = new Relations__languages__locate;
 
 	if( !isset( $UniqId ) ) $UniqId = uniqid();

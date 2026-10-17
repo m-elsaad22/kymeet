@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => ' الرئيسية — أقسام أخرى ',
 	'en_title' => 'Homepage — Other sections',

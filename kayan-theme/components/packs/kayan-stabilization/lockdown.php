@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Phase 1.9 — Production lockdown: KAYAN Theme is the only source of frontend behavior.
  */

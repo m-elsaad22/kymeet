@@ -1,4 +1,4 @@
-<?
+<?php
 
 class ThemeSeo {
 	function __construct() {

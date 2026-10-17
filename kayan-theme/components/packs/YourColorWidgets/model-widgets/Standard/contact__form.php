@@ -1,4 +1,4 @@
-<?/**
+<?php/**
  * 
  */
 class contact__form extends YC__WidgetsMachine{

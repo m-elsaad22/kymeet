@@ -1,4 +1,4 @@
-<?/**
+<?php/**
  * 
  */
 class Faqs__simple2 extends YC__WidgetsMachine{

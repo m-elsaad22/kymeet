@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Per-post / per-page phone & WhatsApp resolution for homepage v3.
  * Matches legacy chain: post_meta → theme options (via kayan_homepage_get_*_raw).

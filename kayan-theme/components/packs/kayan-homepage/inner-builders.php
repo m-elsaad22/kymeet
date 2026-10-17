@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Inner page layout markup — uses kayan-inner.css + kayan-home design tokens.
  */

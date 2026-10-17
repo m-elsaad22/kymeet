@@ -1,4 +1,4 @@
-<?
+<?php
 if ( ! function_exists( 'kayan_stabilization_theme_version' ) ) {
 	function kayan_stabilization_theme_version() {
 		$theme = wp_get_theme();

@@ -1,4 +1,4 @@
-<?
+<?php
 if ( ! function_exists( 'kayan_seo_build_local_business_node' ) ) {
 	function kayan_seo_build_local_business_node( $settings, $node_id = 'https://example.com/#business' ) {
 		$node = array(

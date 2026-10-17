@@ -1,4 +1,4 @@
-<?
+<?php
 function kayan_breadcrumb_finish_output( $html ) {
 	if ( function_exists( 'kayan_seo_uses_modern_schema' ) && kayan_seo_uses_modern_schema() ) {
 		$html = preg_replace( '/\s*itemscope(?:\s+itemtype="[^"]*")?/', '', $html );

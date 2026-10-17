@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * KAYAN SEO — third-party output suppression (Rank Math, Yoast, legacy theme schema).
  * Ensures a single head + JSON-LD source when KAYAN SEO controls the frontend.

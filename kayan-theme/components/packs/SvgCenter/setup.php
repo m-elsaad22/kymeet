@@ -1,4 +1,4 @@
-<?
+<?php
 class SvgCenter {
 	function __construct() {
 		$this->ThemeStatic = new ThemeStatic;

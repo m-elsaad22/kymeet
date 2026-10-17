@@ -1,4 +1,4 @@
-<?
+<?php
 class DBArguments {
 	function __construct() {
 		//$this->ConnectionMySQl = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);@mysql_query("SET NAMES 'utf8' ");

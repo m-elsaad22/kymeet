@@ -1,4 +1,4 @@
-<?if( !isset( $UniqId ) ) $UniqId = uniqid();
+<?phpif( !isset( $UniqId ) ) $UniqId = uniqid();
 if( !isset( $vars['UniqId'] ) ) $vars['UniqId'] = $UniqId;
 
 # SELECT ITEMS BOX .

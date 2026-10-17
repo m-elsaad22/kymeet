@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title' => 'لوحة SEO',
 	'en_title' => 'SEO Dashboard',

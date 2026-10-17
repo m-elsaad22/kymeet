@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Legacy AMP URL redirects only.
  * Sitemap: EXTERNAL (Rank Math issue) — not handled by the theme.

@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * لوحة إعدادات الصفحة الرئيسية في FieldsMachine (ThemeOptions).
  */

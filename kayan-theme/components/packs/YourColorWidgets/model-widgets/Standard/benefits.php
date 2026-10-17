@@ -1,4 +1,4 @@
-<?/**
+<?php/**
  * 
  */
 class benefits extends YC__WidgetsMachine{

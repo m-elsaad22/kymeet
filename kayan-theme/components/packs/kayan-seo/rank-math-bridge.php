@@ -1,4 +1,4 @@
-<?
+<?php
 if ( ! function_exists( 'kayan_seo_rank_math_active' ) ) {
 	function kayan_seo_rank_math_active() {
 		return defined( 'RANK_MATH_VERSION' ) || class_exists( 'RankMath' );

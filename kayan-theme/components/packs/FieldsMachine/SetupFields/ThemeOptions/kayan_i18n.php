@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => 'اللغة والدولة',
 	'en_title'  => 'LOCALE',

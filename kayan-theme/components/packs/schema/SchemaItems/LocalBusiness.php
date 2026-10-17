@@ -1,4 +1,4 @@
-<? /**
+<?php /**
  * 
  */
 class Schema__LocalBusiness extends YourColor__Schema {

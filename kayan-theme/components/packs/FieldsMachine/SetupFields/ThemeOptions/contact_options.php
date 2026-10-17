@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => 'إعدادات الاتصال ',
 	'en_title'  => 'CONTACT OPTIONS',

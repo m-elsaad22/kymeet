@@ -1,4 +1,4 @@
-<?
+<?php
 class ThemeStatic extends ThemeTree {
 	public function Locate() {
 	

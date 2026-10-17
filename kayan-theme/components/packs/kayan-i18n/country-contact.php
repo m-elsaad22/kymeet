@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Per-country phone & WhatsApp theme options + resolution chain.
  */

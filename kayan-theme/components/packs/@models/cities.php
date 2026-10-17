@@ -1,4 +1,4 @@
-<?
+<?php
 global $post;
 
 $Styles = array(

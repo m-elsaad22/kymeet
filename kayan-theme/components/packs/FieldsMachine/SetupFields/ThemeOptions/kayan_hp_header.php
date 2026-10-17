@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => ' الرئيسية — الهيدر ',
 	'en_title' => 'Homepage — Header',

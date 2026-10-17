@@ -1,4 +1,4 @@
-<?
+<?php
 
 $related__sections_data = get_option('related__sections_data');
 $related__sections_data = ( ( is_array( $related__sections_data ) ) ) ? $related__sections_data : array();

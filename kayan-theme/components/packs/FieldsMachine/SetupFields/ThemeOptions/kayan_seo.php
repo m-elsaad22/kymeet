@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title' => 'تحسين محركات البحث',
 	'en_title' => 'KAYAN SEO',

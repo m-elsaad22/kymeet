@@ -1,4 +1,4 @@
-<?
+<?php
 # GET URL OPTIONS .
 	if( $button_context['button_mode'] == 'manual' ){
 

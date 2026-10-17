@@ -1,4 +1,4 @@
-<?
+<?php
 if( !isset( $value ) || !isset( $value ) && ( is_string($value) || $value == '' ) ) $value = array();
 if( !isset( $require ) ) $require = false;
 if( !isset( $per ) ) $per = 5;

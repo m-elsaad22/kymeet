@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes = array(
 	'title'    => ' الرئيسية ',
 	'en_title' => 'HOME OPTIONS',

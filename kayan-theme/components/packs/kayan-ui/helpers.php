@@ -1,4 +1,4 @@
-<?
+<?php
 if ( ! function_exists( 'kayan_ui_show_call_button' ) ) {
 	/**
 	 * أزرار الاتصال داخل المحتوى (بطاقة، ودجات، هيدر، بوب أب) — يتحكم بها kayan_show_call_buttons فقط.

@@ -1,4 +1,4 @@
-<?function NumberOfWords($string) {
+<?phpfunction NumberOfWords($string) {
 
 	$string = strip_tags($string);
 

@@ -1,4 +1,4 @@
-<?
+<?php
 $metaboxes['citiesOptions'] = array(
 	'title'    => 'إعدادات التصنيف',
 	'number'=>1,

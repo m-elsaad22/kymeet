@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * KAYAN SEO — unified frontend output (single source of truth).
  * Title, meta, canonical, OG, Twitter, verification — all via wp_head.

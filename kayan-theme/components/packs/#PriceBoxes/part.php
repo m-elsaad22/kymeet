@@ -1,4 +1,4 @@
-<?
+<?php
 $ButtonText = 'اشتري الأن';
 $target = false;
 $hide__price__button = get_option('hide__price__button');
