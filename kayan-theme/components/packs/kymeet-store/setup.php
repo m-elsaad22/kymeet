@@ -5,10 +5,20 @@
 
 require_once __DIR__ . '/helpers.php';
 require_once __DIR__ . '/products.php';
-require_once __DIR__ . '/woo.php';
 require_once __DIR__ . '/includes/class-kymeet-render.php';
 require_once __DIR__ . '/includes/shell.php';
 require_once __DIR__ . '/widgets.php';
+
+add_action(
+	'plugins_loaded',
+	static function () {
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return;
+		}
+		require_once KYMEET_STORE_PATH . 'woo.php';
+	},
+	5
+);
 
 add_filter(
 	'body_class',
@@ -26,7 +36,7 @@ add_action(
 		if ( ! kymeet_store_active() ) {
 			return;
 		}
-		$ver = '2.0.0';
+		$ver = '2.0.1';
 		wp_enqueue_style(
 			'kymeet-store',
 			KYMEET_STORE_URL . 'assets/kymeet.css',
@@ -39,8 +49,15 @@ add_action(
 			array( 'kymeet-store' ),
 			$ver
 		);
-		$fa = get_template_directory_uri() . '/components/styles/FontAwesome/css/all.min.css';
-		wp_enqueue_style( 'kymeet-fa', $fa, array(), $ver );
+		$fa_path = get_template_directory() . '/components/styles/FontAwesome/css/all.min.css';
+		if ( file_exists( $fa_path ) ) {
+			wp_enqueue_style(
+				'kymeet-fa',
+				get_template_directory_uri() . '/components/styles/FontAwesome/css/all.min.css',
+				array(),
+				$ver
+			);
+		}
 		wp_enqueue_script(
 			'kymeet-store',
 			KYMEET_STORE_URL . 'assets/kymeet.js',

@@ -155,8 +155,3 @@ add_action(
 	20
 );
 
-foreach ( $kymeet_widget_classes as $class ) {
-	if ( class_exists( $class ) ) {
-		new $class();
-	}
-}

@@ -7,8 +7,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'KYMEET_STORE_PATH', trailingslashit( dirname( __FILE__ ) ) );
-define( 'KYMEET_STORE_URL', trailingslashit( get_template_directory_uri() . '/components/packs/kymeet-store' ) );
+if ( ! defined( 'KYMEET_STORE_PATH' ) ) {
+	define( 'KYMEET_STORE_PATH', trailingslashit( dirname( __FILE__ ) ) );
+}
+if ( ! defined( 'KYMEET_STORE_URL' ) ) {
+	define( 'KYMEET_STORE_URL', trailingslashit( get_template_directory_uri() . '/components/packs/kymeet-store' ) );
+}
 
 /**
  * Whether KYMEET storefront chrome should load (header, assets, cart AJAX).
@@ -28,10 +32,14 @@ function kymeet_store_active(): bool {
 	/**
 	 * Allow forcing on shop/product/cart when homepage widgets are empty.
 	 */
-	return (bool) apply_filters(
-		'kymeet_store_active',
-		is_shop() || is_product() || is_cart() || is_checkout() || is_account_page() || is_front_page()
-	);
+	$scope = false;
+	if ( function_exists( 'is_front_page' ) && is_front_page() ) {
+		$scope = true;
+	}
+	if ( function_exists( 'is_shop' ) ) {
+		$scope = $scope || is_shop() || is_product() || is_cart() || is_checkout() || is_account_page();
+	}
+	return (bool) apply_filters( 'kymeet_store_active', $scope );
 }
 
 function kymeet_store_wish_key(): string {

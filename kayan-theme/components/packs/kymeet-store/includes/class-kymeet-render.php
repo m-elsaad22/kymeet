@@ -57,7 +57,14 @@ final class Kymeet_Render {
 					break;
 				}
 			}
-			$count = count( array_filter( $data['products'], static fn( $x ) => $x['brand'] === $brand ) );
+			$count = count(
+				array_filter(
+					$data['products'],
+					static function ( $x ) use ( $brand ) {
+						return isset( $x['brand'] ) && $x['brand'] === $brand;
+					}
+				)
+			);
 			echo '<a class="kbrand rv" href="' . esc_url( wc_get_page_permalink( 'shop' ) ) . '" data-b="' . esc_attr( $brand ) . '" onclick="pickBrand(this.dataset.b);return false">';
 			echo '<span class="bk-img fit">';
 			if ( $img ) {

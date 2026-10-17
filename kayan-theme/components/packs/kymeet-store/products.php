@@ -7,7 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-function kymeet_product_brand( WC_Product $product ): string {
+function kymeet_product_brand( $product ): string {
+	if ( ! is_object( $product ) || ! method_exists( $product, 'get_meta' ) ) {
+		return '';
+	}
 	$meta = $product->get_meta( '_kymeet_brand' );
 	if ( $meta ) {
 		return (string) $meta;
@@ -20,7 +23,10 @@ function kymeet_product_brand( WC_Product $product ): string {
 	return $parts[0] ?? '';
 }
 
-function kymeet_map_product( WC_Product $product ): array {
+function kymeet_map_product( $product ): array {
+	if ( ! is_object( $product ) || ! method_exists( $product, 'get_id' ) ) {
+		return array();
+	}
 	$slug   = $product->get_slug();
 	$image  = wp_get_attachment_image_url( $product->get_image_id(), 'woocommerce_single' );
 	if ( ! $image ) {
@@ -72,8 +78,11 @@ function kymeet_get_product_rows(): array {
 	);
 	foreach ( $q->posts as $pid ) {
 		$p = wc_get_product( $pid );
-		if ( $p instanceof WC_Product ) {
-			$cache[] = kymeet_map_product( $p );
+		if ( is_object( $p ) && method_exists( $p, 'get_id' ) ) {
+			$mapped = kymeet_map_product( $p );
+			if ( ! empty( $mapped['id'] ) ) {
+				$cache[] = $mapped;
+			}
 		}
 	}
 	return $cache;
