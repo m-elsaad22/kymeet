@@ -55,6 +55,11 @@
     document.getElementById('catalog').closest('.sec')?.before(sec);
   }
 
+  function wishHomeHref() {
+    const base = HOME.replace(/\/?$/, '/');
+    return base + '#kymeet-wish';
+  }
+
   function renderWishGrid() {
     const grid = document.getElementById('wishGrid');
     if (!grid || !window.KYMEET_DATA) return;
@@ -63,6 +68,7 @@
     try {
       ids = JSON.parse(localStorage.getItem(key) || '[]');
     } catch (e) {}
+    ids = [...new Set(ids.filter(Boolean))];
     const list = (window.KYMEET_DATA.products || []).filter((p) => ids.includes(p.id));
     if (!list.length) {
       grid.innerHTML = '<p class="empty">لا توجد عطور في المفضلة بعد.</p>';
@@ -70,6 +76,7 @@
     }
     if (typeof productHTML === 'function') {
       grid.innerHTML = list.map((p) => productHTML(p, true)).join('');
+      if (typeof wishSync === 'function') setTimeout(wishSync, 50);
     }
   }
 
@@ -84,11 +91,17 @@
       '<a class="an-i" data-nav="shop" href="' +
       SHOP +
       '"><i class="fas fa-store"></i><span>المتجر</span></a>' +
-      '<a class="an-i" data-nav="brands" href="#brands"><i class="fas fa-gem"></i><span>البراندات</span></a>' +
-      '<a class="an-i" data-nav="wish" href="#kymeet-wish"><i class="far fa-heart"></i><span>المفضلة</span></a>' +
+      '<a class="an-i" data-nav="brands" href="' +
+      HOME.replace(/\/?$/, '/') +
+      '#brands"><i class="fas fa-gem"></i><span>البراندات</span></a>' +
+      '<button type="button" class="an-i" data-nav="cart" onclick="openCart()"><i class="fas fa-bag-shopping"></i><span>العربة</span><b class="an-badge" id="anBadge">0</b></button>' +
+      '<a class="an-i" data-nav="wish" href="' +
+      wishHomeHref() +
+      '"><i class="far fa-heart"></i><span>المفضلة</span></a>' +
       '<a class="an-i" data-nav="account" href="' +
       ACCOUNT +
       '"><i class="far fa-user"></i><span>حسابي</span></a>';
+    nav.style.gridTemplateColumns = 'repeat(6, 1fr)';
     const path = location.pathname.replace(/\/$/, '');
     nav.querySelectorAll('.an-i').forEach((a) => a.classList.remove('on'));
     if (path === '' || path === '/') nav.querySelector('[data-nav="home"]')?.classList.add('on');

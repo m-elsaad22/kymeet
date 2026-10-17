@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KYMEET Perfumes UI
  * Description: واجهة تطبيق فاخرة لمتجر KYMEET — تصميم كحلي/ذهبي، تنقل سفلي، وتحسينات UX دون تعديل قالب KAYAN مباشرة.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: KYMEET
  * Text Domain: kymeet-ui
  * Requires at least: 6.0
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'KYMEET_UI_VERSION', '1.0.0' );
+define( 'KYMEET_UI_VERSION', '1.0.1' );
 define( 'KYMEET_UI_PATH', plugin_dir_path( __FILE__ ) );
 define( 'KYMEET_UI_URL', plugin_dir_url( __FILE__ ) );
 

@@ -38,8 +38,30 @@ final class KYMEET_UI_Assets {
 				wp_deregister_script( $handle );
 			}
 		}
-		// Theme bundles a second jQuery 3.4 — keep WordPress core jQuery only.
-		wp_dequeue_script( 'yourcolor-script-js' );
+		self::dedupe_theme_jquery( $wp_scripts );
+	}
+
+	/**
+	 * Drop theme jQuery 3.4.1 (handle yourcolor-script) after pointing dependents at core jquery.
+	 */
+	private static function dedupe_theme_jquery( WP_Scripts $wp_scripts ): void {
+		if ( ! isset( $wp_scripts->registered['yourcolor-script'] ) ) {
+			return;
+		}
+		wp_enqueue_script( 'jquery' );
+		foreach ( $wp_scripts->registered as $handle => $script ) {
+			if ( empty( $script->deps ) || ! is_array( $script->deps ) ) {
+				continue;
+			}
+			$script->deps = array_map(
+				static function ( $dep ) {
+					return 'yourcolor-script' === $dep ? 'jquery' : $dep;
+				},
+				$script->deps
+			);
+		}
+		wp_dequeue_script( 'yourcolor-script' );
+		wp_deregister_script( 'yourcolor-script' );
 	}
 
 	public static function enqueue(): void {

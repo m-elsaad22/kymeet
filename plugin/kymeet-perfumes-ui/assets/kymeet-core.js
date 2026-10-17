@@ -74,26 +74,26 @@ document.querySelectorAll('dialog').forEach(d=>d.addEventListener('click',e=>{if
 const WKEY=(window.KYMEET_UI&&KYMEET_UI.wishKey)||'kymeet_wish_v1';
 function wishStore(){try{return JSON.parse(localStorage.getItem(WKEY)||'[]')}catch(e){return []}}
 function wishSave(a){try{localStorage.setItem(WKEY,JSON.stringify(a))}catch(e){}}
+function wishPidFromBtn(btn){
+  const img=btn.closest('.prod-img');
+  const onclick=(img&&img.getAttribute('onclick'))||'';
+  let m=onclick.match(/openP\('([^']+)'\)/);
+  if(m)return m[1];
+  const add=btn.closest('.prod')?.querySelector('.add');
+  m=add&&add.getAttribute('onclick')?.match(/addToCart\('([^']+)'/);
+  return m&&m[1];
+}
 function wishSync(){
   const ids=new Set(wishStore());
   document.querySelectorAll('.prod-wish').forEach(btn=>{
-    const card=btn.closest('.prod,.prod-img');if(!card)return;
-    const onclick=card.getAttribute('onclick')||'';
-    const m=onclick.match(/openP\('([^']+)'\)/)||btn.closest('article')?.querySelector('.add')?.getAttribute('onclick')?.match(/addToCart\('([^']+)'/);
-    const id=m&&m[1];if(!id)return;
+    const id=wishPidFromBtn(btn);if(!id)return;
     const on=ids.has(id);btn.classList.toggle('active',on);
     const i=btn.querySelector('i');if(i){i.classList.toggle('far',!on);i.classList.toggle('fas',on)}
   });
 }
 function wish(btn,e){
   e.stopPropagation();
-  const card=btn.closest('.prod')||btn.closest('.prod-img')?.parentElement;
-  let id='';
-  if(card){
-    const add=card.querySelector('.add');
-    const m=add&&add.getAttribute('onclick')?.match(/addToCart\('([^']+)'/);
-    if(m)id=m[1];
-  }
+  const id=wishPidFromBtn(btn);
   btn.classList.toggle('active');
   const i=btn.querySelector('i');i.classList.toggle('far');i.classList.toggle('fas');
   if(id){

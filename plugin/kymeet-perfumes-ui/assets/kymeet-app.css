@@ -9,7 +9,7 @@
   --kymeet-muted: #9fb0cc;
   --kymeet-line: rgba(201, 162, 39, 0.22);
   --kymeet-r: 16px;
-  --kymeet-nav-h: 68px;
+  --kymeet-nav-h: 64px;
   --kymeet-safe-b: env(safe-area-inset-bottom, 0px);
 }
 
@@ -101,11 +101,23 @@ body.kymeet-app-ui .tag.en {
 }
 
 /* Hero */
+body.kymeet-app-ui .hero {
+  background: radial-gradient(120% 80% at 50% 0%, var(--kymeet-navy-3), var(--kymeet-navy)) !important;
+}
+
 body.kymeet-app-ui .hero-c .hcb {
   background: var(--kymeet-navy-2) !important;
   border: 1px solid var(--kymeet-line);
   border-radius: var(--kymeet-r);
   overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+body.kymeet-app-ui .hv-slide img,
+body.kymeet-app-ui .hero-c img {
+  object-fit: cover;
+  width: 100%;
+  max-height: min(52vh, 420px);
 }
 
 body.kymeet-app-ui .hcb-price b {
@@ -119,6 +131,29 @@ body.kymeet-app-ui article.prod {
   border: 1px solid var(--kymeet-line) !important;
   border-radius: var(--kymeet-r) !important;
   overflow: hidden;
+}
+
+body.kymeet-app-ui .prod-img {
+  aspect-ratio: 3 / 4;
+  background: var(--kymeet-navy-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.kymeet-app-ui .prod-img img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  padding: 10px;
+}
+
+body.kymeet-app-ui .prod-name,
+body.kymeet-app-ui .kbrand b,
+body.kymeet-app-ui .brand-chip-x {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 body.kymeet-app-ui .prod-name,
@@ -236,12 +271,60 @@ body.kymeet-app-ui nav.appnav {
   body.kymeet-app-ui nav.appnav {
     display: none !important;
   }
+
+  body.kymeet-app-ui #hdr .hdr-actions,
+  body.kymeet-app-ui #hdr .mob-only {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+body.kymeet-app-ui .kslider,
+body.kymeet-app-ui .kslider-track,
+body.kymeet-app-ui .kbrand-row {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.kymeet-app-ui .kslider-track {
+  scroll-padding-inline: 16px;
+}
+
+body.kymeet-app-ui nav.appnav {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 2px;
+  padding-inline: 4px;
 }
 
 body.kymeet-app-ui nav.appnav .an-i {
   color: var(--kymeet-muted) !important;
-  font-size: 11px;
-  gap: 4px;
+  font-size: 10px;
+  gap: 3px;
+  min-width: 0;
+  padding-inline: 2px;
+}
+
+body.kymeet-app-ui nav.appnav .an-i span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 390px) {
+  body.kymeet-app-ui nav.appnav .an-i {
+    font-size: 9px;
+  }
+}
+
+body.kymeet-app-ui nav.appnav button.an-i {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
 }
 
 body.kymeet-app-ui nav.appnav .an-i.on,
