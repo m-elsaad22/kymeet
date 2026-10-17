@@ -7,7 +7,44 @@ require_once __DIR__ . '/helpers.php';
 require_once __DIR__ . '/products.php';
 require_once __DIR__ . '/includes/class-kymeet-render.php';
 require_once __DIR__ . '/includes/shell.php';
+require_once __DIR__ . '/includes/homepage.php';
 require_once __DIR__ . '/widgets.php';
+
+add_action( 'BeforeBlade_index', 'kymeet_homepage_takeover', -1 );
+add_action( 'BeforeBlade_page', 'kymeet_homepage_takeover', -1 );
+
+add_action(
+	'wp',
+	static function () {
+		if ( ! function_exists( 'kymeet_use_store_homepage' ) || ! kymeet_use_store_homepage() ) {
+			return;
+		}
+		$opt_key = function_exists( 'yc_option_key' ) ? yc_option_key( 'kayan_homepage_v3_disable' ) : 'kayan_homepage_v3_disable';
+		add_filter(
+			'option_' . $opt_key,
+			static function () {
+				return '1';
+			}
+		);
+	},
+	0
+);
+
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		if ( ! function_exists( 'kymeet_use_store_homepage' ) || ! kymeet_use_store_homepage() ) {
+			return;
+		}
+		foreach ( array( 'kayan-home', 'kayan-home-fonts', 'kayan-home-fa' ) as $handle ) {
+			wp_dequeue_style( $handle );
+			wp_deregister_style( $handle );
+		}
+		wp_dequeue_script( 'kayan-home' );
+		wp_deregister_script( 'kayan-home' );
+	},
+	200
+);
 
 add_action(
 	'plugins_loaded',
@@ -26,6 +63,9 @@ add_filter(
 		if ( kymeet_store_active() ) {
 			$classes[] = 'kymeet-store-active';
 		}
+		if ( function_exists( 'kymeet_use_store_homepage' ) && kymeet_use_store_homepage() ) {
+			$classes[] = 'kymeet-home';
+		}
 		return $classes;
 	}
 );
@@ -36,7 +76,7 @@ add_action(
 		if ( ! kymeet_store_active() ) {
 			return;
 		}
-		$ver = '2.1.0';
+		$ver = '2.1.1';
 		wp_enqueue_style(
 			'kymeet-fonts',
 			'https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Cinzel:wght@500;700&display=swap',

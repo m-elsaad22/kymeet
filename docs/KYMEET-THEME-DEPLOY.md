@@ -2,7 +2,9 @@
 
 ## ما الذي تغيّر؟
 
-- التصميم والتفاعلات أصبحت داخل **حزمة القالب** `components/packs/kymeet-store/` (ملفات PHP + `assets/kymeet.css` + `assets/kymeet-luxury.css` + `kymeet.js` / `kymeet-ui.js`).
+- التصميم والتفاعلات أصبحت داخل **حزمة القالب** `components/packs/kymeet-store/` (ملفات PHP + `assets/kymeet.css` + `assets/kymeet-luxury.css` + **`assets/kymeet-egypt.css`** + `kymeet.js` / `kymeet-ui.js`).
+- من **1.7.0**: واجهة تطبيق **KYMEET Egypt** (خلفية داكنة، شاشة افتتاحية، بطاقات بيضاء للصور، شرائح تصفية، إخفاء هيدر KAYAN المكرر).
+- من **1.7.1**: تعطيل **KAYAN Homepage v3** (قالب خدمات/إمارات) على الرئيسية واستبداله بأقسام KYMEET تلقائيًا — **لا حاجة لتعديل `wp-config.php` للتصميم**.
 - **لا تعتمد** على إضافة `kymeet-perfumes-ui` لتحميل CSS/JS (الإضافة على الإنتاج كانت ناقصة — ملفات `assets` تُرجع 404).
 
 ## التثبيت
@@ -10,7 +12,7 @@
 1. من لوحة WordPress: **المظهر → قوالب → أضف جديد → رفع قالب** واختر `dist/kayan-theme.zip`.
    - يجب أن يحتوي الـ ZIP على مجلد **`kayan-theme/style.css`** (ليس `style.css` في جذر الملف المضغوط فقط).
    - إذا ظهر «القالب لا يحتوي على style.css» أو «تعذّر تثبيت الحزمة»، استخدم ZIP من الإصدار **1.6.1+** في هذا المستودع.
-2. فعّل القالب **KAYAN Theme** (الإصدار 1.6.0 في هذا المستودع).
+2. فعّل القالب **KAYAN Theme** (الإصدار **1.7.1** في هذا المستودع).
 3. **LiteSpeed Cache → Purge All** (أو مسح كاش CDN إن وُجد).
 4. تأكد أن WooCommerce مفعّل وأن الصفحة الرئيسية ما زالت تستخدم ويدجتات `kymeet_*` (إعدادات KAYAN Homepage).
 
@@ -18,7 +20,7 @@
 
 بعد التحقق من:
 
-- ظهور `kymeet.css` / `kymeet-luxury.css` في مصدر الصفحة (Network).
+- ظهور `kymeet.css` / `kymeet-luxury.css` / **`kymeet-egypt.css`** في مصدر الصفحة (Network).
 - عمل `/?wc-ajax=kymeet_cart` (إضافة/عرض السلة).
 - شريط التنقل السفلي (6 عناصر) والمفضلة (localStorage).
 
