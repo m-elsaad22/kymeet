@@ -99,7 +99,7 @@ class kymeet_new extends Kymeet_Widget_Base {
 		$this->widget__name = 'kymeet_new';
 	}
 	public function widget__ui( $vars ) {
-		Kymeet_Render::product_slider( 'new', 'NEW ARRIVALS', 'إصدارات <em>حديثة</em>', 'وصل حديثًا — أحدث المنتجات في المتجر.', 'newGrid' );
+		Kymeet_Render::product_slider( 'new', 'NEW', 'أحدث <em>العطور</em>', 'وصل حديثًا إلى المتجر.', 'newGrid', home_url( '/#catalog' ) );
 	}
 }
 

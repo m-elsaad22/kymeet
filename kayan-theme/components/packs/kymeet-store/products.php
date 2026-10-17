@@ -7,6 +7,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function kymeet_product_segment( $product ): string {
+	if ( ! is_object( $product ) || ! method_exists( $product, 'get_id' ) ) {
+		return '';
+	}
+	$terms = get_the_terms( $product->get_id(), 'product_cat' );
+	if ( ! is_array( $terms ) ) {
+		return '';
+	}
+	foreach ( $terms as $term ) {
+		$blob = mb_strtolower( $term->slug . ' ' . $term->name );
+		if ( preg_match( '/men|male|رجال|رجالي/u', $blob ) ) {
+			return 'men';
+		}
+		if ( preg_match( '/women|female|نساء|نسائي/u', $blob ) ) {
+			return 'women';
+		}
+	}
+	return '';
+}
+
 function kymeet_product_brand( $product ): string {
 	if ( ! is_object( $product ) || ! method_exists( $product, 'get_meta' ) ) {
 		return '';
@@ -50,6 +70,7 @@ function kymeet_map_product( $product ): array {
 		'image'  => $image,
 		'url'    => get_permalink( $product->get_id() ),
 		'tag'    => $tag,
+		'seg'    => kymeet_product_segment( $product ),
 	);
 	if ( $product->is_on_sale() && $regular > $price ) {
 		$row['regular'] = $regular;

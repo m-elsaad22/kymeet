@@ -36,17 +36,29 @@ add_action(
 		if ( ! kymeet_store_active() ) {
 			return;
 		}
-		$ver = '2.0.1';
+		$ver = '2.1.0';
+		wp_enqueue_style(
+			'kymeet-fonts',
+			'https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Cinzel:wght@500;700&display=swap',
+			array(),
+			null
+		);
 		wp_enqueue_style(
 			'kymeet-store',
 			KYMEET_STORE_URL . 'assets/kymeet.css',
-			array(),
+			array( 'kymeet-fonts' ),
 			$ver
 		);
 		wp_enqueue_style(
 			'kymeet-store-luxury',
 			KYMEET_STORE_URL . 'assets/kymeet-luxury.css',
 			array( 'kymeet-store' ),
+			$ver
+		);
+		wp_enqueue_style(
+			'kymeet-store-egypt',
+			KYMEET_STORE_URL . 'assets/kymeet-egypt.css',
+			array( 'kymeet-store-luxury' ),
 			$ver
 		);
 		$fa_path = get_template_directory() . '/components/styles/FontAwesome/css/all.min.css';
@@ -86,6 +98,7 @@ add_action(
 			return;
 		}
 		echo '<div class="kymeet-chrome-root">';
+		kymeet_render_splash();
 		kymeet_render_header();
 	},
 	5

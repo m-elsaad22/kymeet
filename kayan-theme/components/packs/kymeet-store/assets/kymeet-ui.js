@@ -25,7 +25,7 @@
     sec.className = 'sec kymeet-cats-sec';
     sec.id = 'kymeet-cats';
     sec.innerHTML =
-      '<div class="wrap"><div class="shead rv"><span class="tag en">COLLECTIONS</span><h2>تصنيفات <em>العطور</em></h2><p>تصفح حسب العلامة أو اكتشف أحدث الإصدارات.</p></div>' +
+      '<div class="wrap"><div class="shead rv"><span class="tag en">CATEGORIES</span><h2>تصنيفات <em>العطور</em></h2><p>نسائي، رجالي، ووصل حديثًا.</p></div>' +
       '<div class="kslider kymeet-cat-slider" data-auto="0"><div class="kslider-track kymeet-cat-track">' +
       '<a class="kcat rv" href="' +
       SHOP +
@@ -80,6 +80,44 @@
     }
   }
 
+  function dismissSplash() {
+    const splash = document.getElementById('kymeet-splash');
+    if (!splash || splash.classList.contains('is-hidden')) return;
+    splash.classList.add('is-hidden');
+    try {
+      sessionStorage.setItem('kymeet_splash_seen', '1');
+    } catch (e) {}
+  }
+
+  function initSplash() {
+    const splash = document.getElementById('kymeet-splash');
+    if (!splash) return;
+    try {
+      if (sessionStorage.getItem('kymeet_splash_seen') === '1') {
+        splash.classList.add('is-hidden');
+        return;
+      }
+    } catch (e) {}
+    splash.querySelector('#kymeet-splash-go')?.addEventListener('click', dismissSplash);
+    setTimeout(dismissSplash, 12000);
+  }
+
+  function injectCheckoutSteps() {
+    if (document.querySelector('.kymeet-checkout-steps')) return;
+    const isCart = document.body.classList.contains('woocommerce-cart');
+    const isCheckout = document.body.classList.contains('woocommerce-checkout');
+    if (!isCart && !isCheckout) return;
+    const bar = document.createElement('div');
+    bar.className = 'kymeet-checkout-steps';
+    bar.innerHTML =
+      '<span class="' +
+      (isCart ? 'on' : '') +
+      '">1</span><span class="' +
+      (isCheckout ? 'on' : '') +
+      '">2</span><span>3</span>';
+    document.querySelector('.kymeet-chrome-root')?.prepend(bar) || document.body.prepend(bar);
+  }
+
   function rebuildBottomNav() {
     const nav = document.querySelector('nav.appnav');
     if (!nav || nav.dataset.kymeetV2) return;
@@ -93,15 +131,12 @@
       '"><i class="fas fa-store"></i><span>المتجر</span></a>' +
       '<a class="an-i" data-nav="brands" href="' +
       HOME.replace(/\/?$/, '/') +
-      '#brands"><i class="fas fa-gem"></i><span>البراندات</span></a>' +
+      '#discover"><i class="fas fa-gem"></i><span>البراندات</span></a>' +
       '<button type="button" class="an-i" data-nav="cart" onclick="openCart()"><i class="fas fa-bag-shopping"></i><span>العربة</span><b class="an-badge" id="anBadge">0</b></button>' +
-      '<a class="an-i" data-nav="wish" href="' +
-      wishHomeHref() +
-      '"><i class="far fa-heart"></i><span>المفضلة</span></a>' +
-      '<a class="an-i" data-nav="account" href="' +
+      '<a class="an-i" data-nav="more" href="' +
       ACCOUNT +
-      '"><i class="far fa-user"></i><span>حسابي</span></a>';
-    nav.style.gridTemplateColumns = 'repeat(6, 1fr)';
+      '"><i class="fas fa-ellipsis"></i><span>المزيد</span></a>';
+    nav.style.gridTemplateColumns = 'repeat(5, 1fr)';
     const path = location.pathname.replace(/\/$/, '');
     nav.querySelectorAll('.an-i').forEach((a) => a.classList.remove('on'));
     if (path === '' || path === '/') nav.querySelector('[data-nav="home"]')?.classList.add('on');
@@ -118,9 +153,11 @@
 
   function init() {
     markReducedMotion();
+    initSplash();
     injectCategoryRail();
     injectWishlistSection();
     rebuildBottomNav();
+    injectCheckoutSteps();
     setTimeout(renderWishGrid, 400);
     document.addEventListener('click', (e) => {
       if (e.target.closest('.prod-wish')) setTimeout(renderWishGrid, 200);

@@ -7,6 +7,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function kymeet_render_splash(): void {
+	if ( ! kymeet_store_active() || ! is_front_page() ) {
+		return;
+	}
+	$bg = KYMEET_STORE_URL . 'assets/splash-pyramids.jpg';
+	$shop = wc_get_page_permalink( 'shop' );
+	?>
+<div id="kymeet-splash" class="kymeet-splash" style="background-image:url('<?php echo esc_url( $bg ); ?>')">
+  <div class="kymeet-splash__veil" aria-hidden="true"></div>
+  <div class="kymeet-splash__logo">
+    <div class="kymeet-splash__mark"><i class="fas fa-crown" aria-hidden="true"></i></div>
+    <b>KYMEET</b>
+    <small>Egypt I.E.A</small>
+  </div>
+  <div class="kymeet-splash__cta">
+    <a class="btn btn-gold" href="<?php echo esc_url( $shop ); ?>" id="kymeet-splash-go">تسوق الآن <i class="fas fa-arrow-left"></i></a>
+  </div>
+</div>
+	<?php
+}
+
 function kymeet_render_header(): void {
 	if ( ! kymeet_store_active() ) {
 		return;
@@ -17,7 +38,7 @@ function kymeet_render_header(): void {
 	$logo   = get_theme_mod( 'custom_logo' );
 	$logo_u = $logo ? wp_get_attachment_image_url( $logo, 'medium' ) : '';
 	?>
-<header id="hdr" class="kymeet-hdr">
+<header id="kymeet-hdr" class="kymeet-hdr">
   <div class="wrap nav">
     <a href="<?php echo esc_url( $home ); ?>" class="logo">
       <?php if ( $logo_u ) : ?>
@@ -44,7 +65,7 @@ function kymeet_render_header(): void {
     </div>
   </div>
 </header>
-<div class="mob" id="mob">
+<div class="mob kymeet-mob" id="kymeet-mob">
   <button class="mob-close" onclick="toggleMob(false)" aria-label="إغلاق"><i class="fas fa-xmark"></i></button>
   <a class="mlink" href="<?php echo esc_url( $shop ); ?>" onclick="toggleMob(false)">تسوق العطور</a>
   <a class="mlink" href="<?php echo esc_url( $home ); ?>#catalog" onclick="toggleMob(false)">كل العطور</a>

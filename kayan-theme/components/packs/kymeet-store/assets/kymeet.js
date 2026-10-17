@@ -46,10 +46,26 @@ function renderProducts(){
 /* ══ الكتالوج: بحث وتصفية وترتيب ══ */
 const fb=$('fb');
 BR.forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;fb.appendChild(o)});
+let segFilter='all';
+function bindFilterChips(){
+  document.querySelectorAll('.k-chip').forEach(chip=>{
+    if(chip.dataset.bound)return;
+    chip.dataset.bound='1';
+    chip.addEventListener('click',()=>{
+      document.querySelectorAll('.k-chip').forEach(c=>c.classList.remove('on'));
+      chip.classList.add('on');
+      segFilter=chip.dataset.seg||'all';
+      renderCatalog();
+    });
+  });
+}
 function renderCatalog(){
   const q=$('q').value.trim().toLowerCase(),b=fb.value,mx=+$('mx').value,so=$('so').value;
   $('mv').textContent='حتى '+money(mx)+' ج.م';
   let l=products.filter(p=>(!b||p.brand===b)&&p.price<=mx&&(p.name+' '+p.brand).toLowerCase().includes(q));
+  if(segFilter==='men')l=l.filter(p=>p.seg==='men');
+  if(segFilter==='women')l=l.filter(p=>p.seg==='women');
+  if(segFilter==='feat')l=l.filter(p=>BEST.includes(p.id));
   if(so==='a')l.sort((x,y)=>x.price-y.price);
   if(so==='d')l.sort((x,y)=>y.price-x.price);
   if(so==='n')l.sort((x,y)=>x.name.localeCompare(y.name,'ar'));
@@ -160,10 +176,10 @@ document.querySelectorAll('.cfg-wa').forEach(a=>{CFG.WA?a.href='https://wa.me/'+
 document.querySelectorAll('.cfg-tel').forEach(a=>{CFG.TEL?a.href='tel:+'+CFG.TEL:a.style.display='none'});
 const mc=document.querySelector('.mcta');if(mc&&!CFG.WA&&!CFG.TEL)mc.style.display='none';
 /* ══ المحمّل والهيدر والقائمة ══ */
-const hdr=$('hdr'),fab=$('fab');
-const onScroll=()=>{hdr.classList.toggle('scrolled',scrollY>40||!HAS_HERO);if(fab)fab.classList.toggle('show',scrollY>500)};
+const hdr=document.getElementById('kymeet-hdr')||document.getElementById('hdr'),fab=$('fab');
+const onScroll=()=>{if(hdr)hdr.classList.toggle('scrolled',scrollY>40||!HAS_HERO);if(fab)fab.classList.toggle('show',scrollY>500)};
 addEventListener('scroll',onScroll,{passive:true});onScroll();
-function toggleMob(o){$('mob').classList.toggle('open',o)}
+function toggleMob(o){const m=document.getElementById('kymeet-mob')||document.getElementById('mob');if(m)m.classList.toggle('open',o)}
 /* ══ فقاعات معطّلة في وضع السلايدر فقط — أخف أداءً ══ */
 (function(){const box=$('bubbles');if(box)box.remove();})();
 /* ══ ظهور الأقسام من الأسفل عند التمرير ══ */
@@ -187,7 +203,7 @@ document.addEventListener('click',e=>{
   const r=document.createElement('span');r.className='rp';const rc=b.getBoundingClientRect(),s=Math.max(rc.width,rc.height);
   r.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-rc.left-s/2}px;top:${e.clientY-rc.top-s/2}px`;b.appendChild(r);setTimeout(()=>r.remove(),650);
 });
-try{renderProducts();renderCatalog()}catch(e){console.error('KYMEET render error:',e)}
+try{bindFilterChips();renderProducts();renderCatalog()}catch(e){console.error('KYMEET render error:',e)}
 updateCart();
 if(WC)wcCall('get');
 

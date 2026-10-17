@@ -39,14 +39,17 @@ body.kymeet-store-active {
 }
 
 /* Header */
-body.kymeet-store-active #hdr {
+body.kymeet-store-active #hdr,
+body.kymeet-store-active #kymeet-hdr {
   background: linear-gradient(180deg, rgba(5, 13, 31, 0.96), rgba(5, 13, 31, 0.72)) !important;
   border-bottom: 1px solid var(--kymeet-line);
   backdrop-filter: blur(12px);
 }
 
 body.kymeet-store-active #hdr .logo,
-body.kymeet-store-active #hdr .btn-icon {
+body.kymeet-store-active #kymeet-hdr .logo,
+body.kymeet-store-active #hdr .btn-icon,
+body.kymeet-store-active #kymeet-hdr .btn-icon {
   color: var(--kymeet-gold-2) !important;
 }
 

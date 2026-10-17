@@ -26,20 +26,18 @@ final class Kymeet_Render {
 		if ( empty( $slides ) ) {
 			$slides = array_slice( $data['products'], 0, 5 );
 		}
-		echo '<section class="hero hero-c hero-slider-only hero-luxury" data-hc>';
+		echo '<section class="hero hero-egypt hero-slider-only" data-hc>';
 		echo '<div class="hero-grid"></div><div class="hc-track">';
 		foreach ( $slides as $p ) {
-			$price = kymeet_money( $p['price'] );
-			echo '<div class="hc-slide hc-ban"><div class="wrap hcb">';
-			echo '<div class="hcb-txt"><span class="tag en">KYMEET</span><small>' . esc_html( $p['brand'] ) . '</small>';
+			echo '<div class="hc-slide"><article class="k-hero-card">';
+			echo '<div class="k-hero-card__copy">';
+			echo '<small class="en">' . esc_html( $p['brand'] ) . '</small>';
 			echo '<h2>' . esc_html( $p['name'] ) . '</h2>';
-			echo '<div class="hcb-price"><b>' . esc_html( $price ) . '</b> ج.م</div>';
-			echo '<div class="hcb-act">';
-			echo '<button type="button" class="btn btn-gold" onclick="addToCart(\'' . esc_js( $p['id'] ) . '\',event,' . (int) $p['pid'] . ')"><i class="fas fa-bag-shopping"></i> أضف للسلة</button>';
-			echo '<a class="btn btn-ghost-w" href="' . esc_url( $p['url'] ) . '">التفاصيل</a>';
-			echo '</div></div>';
-			echo '<a class="hcb-img" href="' . esc_url( $p['url'] ) . '"><img src="' . esc_url( $p['image'] ) . '" alt="' . esc_attr( $p['name'] ) . '" data-brand="' . esc_attr( $p['brand'] ) . '" loading="lazy" onerror="imgErr(this)"></a>';
-			echo '</div></div>';
+			echo '<p class="k-tagline">رحلة إلى عمق العطارة — اكتشف تفاصيل هذا العطر.</p>';
+			echo '<a class="btn btn-gold" href="' . esc_url( $p['url'] ) . '">اكتشف الآن <i class="fas fa-arrow-left"></i></a>';
+			echo '</div>';
+			echo '<a class="k-hero-card__media" href="' . esc_url( $p['url'] ) . '"><img src="' . esc_url( $p['image'] ) . '" alt="' . esc_attr( $p['name'] ) . '" data-brand="' . esc_attr( $p['brand'] ) . '" loading="lazy" onerror="imgErr(this)"></a>';
+			echo '</article></div>';
 		}
 		echo '</div><div class="hc-dots"></div></section>';
 	}
@@ -47,7 +45,7 @@ final class Kymeet_Render {
 	public static function discover(): void {
 		$data = kymeet_get_data_payload();
 		echo '<section class="sec" id="discover"><div class="wrap">';
-		echo '<div class="shead rv"><span class="tag en">DISCOVER</span><h2>اكتشف عالَم <em>KYMEET</em></h2><p>تشكيلة من بيوت عطور مختلفة؛ اختر العلامة التي تستهويك.</p></div>';
+		echo '<div class="shead rv"><span class="tag en">BRANDS</span><h2>العلامات <em>التجارية</em></h2><p>بيوت عطور عالمية مختارة بعناية.</p></div>';
 		echo '<div class="kslider" data-auto="3800"><div class="kslider-track kbrands">';
 		foreach ( $data['BR'] as $brand ) {
 			$img = '';
@@ -77,9 +75,14 @@ final class Kymeet_Render {
 		echo '</div></div></div></section>';
 	}
 
-	public static function product_slider( string $id, string $tag_en, string $title, string $subtitle, string $grid_id ): void {
+	public static function product_slider( string $id, string $tag_en, string $title, string $subtitle, string $grid_id, string $view_all_href = '' ): void {
 		echo '<section class="sec" id="' . esc_attr( $id ) . '"><div class="wrap">';
-		echo '<div class="shead rv"><span class="tag en">' . esc_html( $tag_en ) . '</span><h2>' . wp_kses_post( $title ) . '</h2><p>' . esc_html( $subtitle ) . '</p></div>';
+		if ( $view_all_href ) {
+			echo '<div class="kymeet-sec-row"><div class="shead rv"><span class="tag en">' . esc_html( $tag_en ) . '</span><h2>' . wp_kses_post( $title ) . '</h2><p>' . esc_html( $subtitle ) . '</p></div>';
+			echo '<a class="kymeet-view-all" href="' . esc_url( $view_all_href ) . '">عرض الكل</a></div>';
+		} else {
+			echo '<div class="shead rv"><span class="tag en">' . esc_html( $tag_en ) . '</span><h2>' . wp_kses_post( $title ) . '</h2><p>' . esc_html( $subtitle ) . '</p></div>';
+		}
 		echo '<div class="kslider" data-auto="4200"><div class="kslider-track" id="' . esc_attr( $grid_id ) . '"></div></div>';
 		if ( 'bestsellers' === $id ) {
 			echo '<div class="more-row"><a href="#catalog" class="btn btn-outline-royal">اكتشف كل العطور <i class="fas fa-arrow-left"></i></a></div>';
@@ -115,8 +118,14 @@ final class Kymeet_Render {
 	public static function catalog(): void {
 		$max = kymeet_get_data_payload()['maxPrice'];
 		echo '<section class="sec" id="catalog"><div class="wrap">';
-		echo '<div class="shead rv"><span class="tag en">COLLECTION</span><h2>اعثر على <em>عطرك</em></h2><p>ابحث بالاسم أو العلامة، رتّب النتائج، وحدد نطاق السعر.</p></div>';
-		echo '<div class="toolbar rv"><div class="tsearch"><i class="fas fa-magnifying-glass"></i><input id="q" type="search" placeholder="ابحث بالاسم أو العلامة" aria-label="ابحث"></div>';
+		echo '<div class="shead rv"><span class="tag en">SHOP</span><h2>جميع <em>العطور</em></h2><p>ابحث، صفِّ، واختر من التشكيلة الكاملة.</p></div>';
+		echo '<div class="k-filter-chips rv" role="tablist" aria-label="تصفية">';
+		echo '<button type="button" class="k-chip on" data-seg="all">الكل</button>';
+		echo '<button type="button" class="k-chip" data-seg="men">رجالي</button>';
+		echo '<button type="button" class="k-chip" data-seg="women">نسائي</button>';
+		echo '<button type="button" class="k-chip" data-seg="feat">المميزة</button>';
+		echo '</div>';
+		echo '<div class="toolbar rv"><div class="tsearch"><i class="fas fa-magnifying-glass"></i><input id="q" type="search" placeholder="ابحث عن عطر..." aria-label="ابحث"></div>';
 		echo '<select id="fb" aria-label="العلامة"><option value="">كل العلامات</option></select>';
 		echo '<select id="so" aria-label="ترتيب"><option value="">ترتيب مميز</option><option value="a">السعر: من الأقل</option><option value="d">السعر: من الأعلى</option><option value="n">الاسم: أ إلى ي</option></select>';
 		echo '<label class="trng"><span id="mv">حتى ' . esc_html( kymeet_money( $max ) ) . ' ج.م</span><input id="mx" type="range" min="800" max="' . (int) $max . '" step="100" value="' . (int) $max . '" aria-label="حتى"></label></div>';
