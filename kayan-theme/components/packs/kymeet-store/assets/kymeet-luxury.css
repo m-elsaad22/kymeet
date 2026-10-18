@@ -262,7 +262,7 @@ body.kymeet-store-active nav.appnav {
   z-index: 900;
   height: calc(var(--kymeet-nav-h) + var(--kymeet-safe-b));
   padding-bottom: var(--kymeet-safe-b);
-  background: rgba(5, 13, 31, 0.96) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
   border-top: 1px solid var(--kymeet-line) !important;
   backdrop-filter: blur(14px);
   display: flex !important;
@@ -297,7 +297,7 @@ body.kymeet-store-active .kslider-track {
 
 body.kymeet-store-active nav.appnav {
   display: grid !important;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 2px;
   padding-inline: 4px;
 }

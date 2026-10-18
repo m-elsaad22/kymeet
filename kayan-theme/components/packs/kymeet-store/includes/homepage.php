@@ -65,7 +65,7 @@ function kymeet_render_store_document( callable $render_main ): void {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php wp_head(); ?>
 </head>
-<body <?php body_class( 'kymeet-doc kymeet-home kymeet-store-active' ); ?> mode="dark">
+<body <?php body_class( 'kymeet-doc kymeet-home kymeet-store-active kymeet-theme-light' ); ?> mode="light">
 <?php
 	wp_body_open();
 	/**
@@ -121,10 +121,13 @@ function kymeet_homepage_takeover_early(): void {
  * WooCommerce shop archive — same KYMEET catalog UI as mockup (not kayan-inner services).
  */
 function kymeet_shop_takeover(): void {
-	if ( ! kymeet_store_active() || ! function_exists( 'is_shop' ) || ! is_shop() ) {
+	if ( ! class_exists( 'WooCommerce' ) || is_admin() || wp_doing_ajax() ) {
 		return;
 	}
-	if ( is_search() || is_product_taxonomy() ) {
+	if ( ! kymeet_is_shop_listing() ) {
+		return;
+	}
+	if ( is_singular( 'product' ) ) {
 		return;
 	}
 

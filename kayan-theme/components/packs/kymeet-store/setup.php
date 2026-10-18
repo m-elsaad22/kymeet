@@ -71,6 +71,7 @@ add_filter(
 	static function ( $classes ) {
 		if ( kymeet_store_active() ) {
 			$classes[] = 'kymeet-store-active';
+			$classes[] = 'kymeet-theme-light';
 		}
 		if ( function_exists( 'kymeet_use_store_homepage' ) && kymeet_use_store_homepage() ) {
 			$classes[] = 'kymeet-home';
@@ -85,7 +86,7 @@ add_action(
 		if ( ! kymeet_store_active() ) {
 			return;
 		}
-		$ver = '2.1.3';
+		$ver = '2.1.4';
 		wp_enqueue_style(
 			'kymeet-fonts',
 			'https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Cinzel:wght@500;700&display=swap',

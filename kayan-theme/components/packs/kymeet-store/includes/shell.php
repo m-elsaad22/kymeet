@@ -97,10 +97,9 @@ function kymeet_render_footer_shell(): void {
 <nav class="appnav kymeet-appnav" aria-label="التنقل الرئيسي">
   <a class="an-i" data-nav="home" href="<?php echo esc_url( $home ); ?>"><i class="fas fa-house"></i><span>الرئيسية</span></a>
   <a class="an-i" data-nav="shop" href="<?php echo esc_url( $shop ); ?>"><i class="fas fa-store"></i><span>المتجر</span></a>
-  <a class="an-i" data-nav="brands" href="<?php echo esc_url( $home ); ?>#brands"><i class="fas fa-gem"></i><span>البراندات</span></a>
+  <a class="an-i" data-nav="wish" href="<?php echo esc_url( $home ); ?>#kymeet-wish"><i class="fas fa-heart"></i><span>المفضلة</span></a>
   <button type="button" class="an-i" data-nav="cart" onclick="openCart()"><i class="fas fa-bag-shopping"></i><span>العربة</span><b class="an-badge" id="anBadge">0</b></button>
-  <a class="an-i" data-nav="wish" href="<?php echo esc_url( $home ); ?>#kymeet-wish"><i class="far fa-heart"></i><span>المفضلة</span></a>
-  <a class="an-i" data-nav="account" href="<?php echo esc_url( $acct ); ?>"><i class="far fa-user"></i><span>حسابي</span></a>
+  <a class="an-i" data-nav="account" href="<?php echo esc_url( $acct ); ?>"><i class="fas fa-user"></i><span>حسابي</span></a>
 </nav>
 	<?php
 	kymeet_print_config_scripts();

@@ -17,27 +17,48 @@ if ( ! defined( 'KYMEET_STORE_URL' ) ) {
 /**
  * Whether KYMEET storefront chrome should load (header, assets, cart AJAX).
  */
+/**
+ * WooCommerce shop listing (archive or assigned shop page).
+ */
+function kymeet_is_shop_listing(): bool {
+	if ( ! class_exists( 'WooCommerce' ) ) {
+		return false;
+	}
+	if ( is_search() ) {
+		return false;
+	}
+	if ( function_exists( 'is_shop' ) && is_shop() && ! is_singular( 'product' ) ) {
+		return true;
+	}
+	$shop_id = wc_get_page_id( 'shop' );
+	return $shop_id > 0 && is_page( $shop_id );
+}
+
 function kymeet_store_active(): bool {
 	if ( ! class_exists( 'WooCommerce' ) ) {
 		return false;
+	}
+	if ( is_admin() && ! wp_doing_ajax() ) {
+		return false;
+	}
+	$scope = false;
+	if ( function_exists( 'is_front_page' ) && is_front_page() ) {
+		$scope = true;
+	}
+	if ( function_exists( 'is_woocommerce' ) && is_woocommerce() ) {
+		$scope = true;
+	}
+	if ( kymeet_is_shop_listing() ) {
+		$scope = true;
 	}
 	$widgets = yc_get_option( 'widgets_home__meta' );
 	if ( is_array( $widgets ) ) {
 		foreach ( $widgets as $row ) {
 			if ( ! empty( $row['widget_id'] ) && 0 === strpos( (string) $row['widget_id'], 'kymeet_' ) ) {
-				return true;
+				$scope = true;
+				break;
 			}
 		}
-	}
-	/**
-	 * Allow forcing on shop/product/cart when homepage widgets are empty.
-	 */
-	$scope = false;
-	if ( function_exists( 'is_front_page' ) && is_front_page() ) {
-		$scope = true;
-	}
-	if ( function_exists( 'is_shop' ) ) {
-		$scope = $scope || is_shop() || is_product() || is_cart() || is_checkout() || is_account_page();
 	}
 	return (bool) apply_filters( 'kymeet_store_active', $scope );
 }

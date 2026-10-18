@@ -138,19 +138,20 @@
       '<a class="an-i" data-nav="shop" href="' +
       SHOP +
       '"><i class="fas fa-store"></i><span>المتجر</span></a>' +
-      '<a class="an-i" data-nav="brands" href="' +
-      HOME.replace(/\/?$/, '/') +
-      '#discover"><i class="fas fa-gem"></i><span>البراندات</span></a>' +
+      '<a class="an-i" data-nav="wish" href="' +
+      wishHomeHref() +
+      '"><i class="fas fa-heart"></i><span>المفضلة</span></a>' +
       '<button type="button" class="an-i" data-nav="cart" onclick="openCart()"><i class="fas fa-bag-shopping"></i><span>العربة</span><b class="an-badge" id="anBadge">0</b></button>' +
-      '<a class="an-i" data-nav="more" href="' +
+      '<a class="an-i" data-nav="account" href="' +
       ACCOUNT +
-      '"><i class="fas fa-ellipsis"></i><span>المزيد</span></a>';
+      '"><i class="fas fa-user"></i><span>حسابي</span></a>';
     nav.style.gridTemplateColumns = 'repeat(5, 1fr)';
     const path = location.pathname.replace(/\/$/, '');
     nav.querySelectorAll('.an-i').forEach((a) => a.classList.remove('on'));
     if (path === '' || path === '/') nav.querySelector('[data-nav="home"]')?.classList.add('on');
     else if (path.includes('shop')) nav.querySelector('[data-nav="shop"]')?.classList.add('on');
     else if (path.includes('my-account')) nav.querySelector('[data-nav="account"]')?.classList.add('on');
+    else if (location.hash === '#kymeet-wish') nav.querySelector('[data-nav="wish"]')?.classList.add('on');
     else nav.querySelector('[data-nav="home"]')?.classList.add('on');
   }
 

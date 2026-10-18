@@ -678,11 +678,6 @@ body.kymeet-store-active nav.appnav {
   grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
 }
 
-body.kymeet-store-active nav.appnav .an-i[data-nav="wish"],
-body.kymeet-store-active nav.appnav .an-i[data-nav="account"] {
-  display: none !important;
-}
-
 /* Dialog product quick view */
 body.kymeet-store-active dialog#pd {
   background: var(--eg-navy-2);
@@ -708,4 +703,94 @@ body.kymeet-store-active dialog#pd .pd-in {
   body.kymeet-store-active #bestsellers {
     display: none !important;
   }
+}
+
+/* Light app theme (ivory / white — no dark olive hero) */
+body.kymeet-theme-light.kymeet-store-active,
+body.kymeet-theme-light.kymeet-doc,
+body.kymeet-theme-light.kymeet-store-active[mode="light"] {
+  --eg-navy: #f4f1ea;
+  --eg-navy-2: #ffffff;
+  --eg-navy-3: #ebe6dc;
+  --eg-ink: #152238;
+  --eg-muted: #5a6882;
+  --eg-line: rgba(201, 162, 39, 0.28);
+  background: var(--eg-navy) !important;
+  color: var(--eg-ink) !important;
+}
+
+body.kymeet-theme-light.kymeet-store-active .kymeet-chrome-root,
+body.kymeet-theme-light.kymeet-doc .kymeet-chrome-root {
+  background: var(--eg-navy);
+}
+
+body.kymeet-theme-light.kymeet-store-active.kayan-inner-page,
+body.kymeet-theme-light.woocommerce.kymeet-store-active {
+  background: var(--eg-navy) !important;
+}
+
+body.kymeet-theme-light #kymeet-hdr {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-bottom: 1px solid var(--eg-line) !important;
+  box-shadow: 0 4px 20px rgba(21, 34, 56, 0.06) !important;
+}
+
+body.kymeet-theme-light #kymeet-hdr .logo-text {
+  color: var(--eg-ink) !important;
+}
+
+body.kymeet-theme-light #kymeet-hdr .btn-icon {
+  color: var(--eg-ink) !important;
+  background: rgba(201, 162, 39, 0.1) !important;
+}
+
+body.kymeet-theme-light .sec {
+  background: var(--eg-navy) !important;
+}
+
+body.kymeet-theme-light .hero.hero-egypt {
+  background: var(--eg-navy) !important;
+}
+
+body.kymeet-theme-light .k-hero-card {
+  background: #fff !important;
+  border: 1px solid var(--eg-line);
+  box-shadow: 0 12px 32px rgba(21, 34, 56, 0.08);
+}
+
+body.kymeet-theme-light .k-hero-card__copy h2 {
+  color: var(--eg-ink) !important;
+}
+
+body.kymeet-theme-light .k-hero-card__media img {
+  filter: none;
+}
+
+body.kymeet-theme-light .hero.hero-egypt .hc-dots button {
+  background: rgba(21, 34, 56, 0.2);
+}
+
+body.kymeet-theme-light nav.appnav {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-top: 1px solid var(--eg-line) !important;
+  box-shadow: 0 -8px 24px rgba(21, 34, 56, 0.06);
+}
+
+body.kymeet-theme-light nav.appnav .an-i {
+  color: var(--eg-muted) !important;
+}
+
+body.kymeet-theme-light nav.appnav .an-i.on,
+body.kymeet-theme-light nav.appnav .an-i.on i {
+  color: #9a7b1a !important;
+}
+
+body.kymeet-theme-light .prod-card,
+body.kymeet-theme-light .kdisc-card {
+  background: #fff !important;
+  border-color: var(--eg-line) !important;
+}
+
+body.kymeet-theme-light .kymeet-splash__veil {
+  background: linear-gradient(180deg, rgba(244, 241, 234, 0.2) 0%, rgba(244, 241, 234, 0.92) 70%, #f4f1ea 100%);
 }
