@@ -1,6 +1,9 @@
 <?php
 # KYMEET: الفوتر + السلة + السكربت من تصميم KYMEET3 على الرئيسية
 if ( function_exists( 'kymeet_store_active' ) && kymeet_store_active() ) {
+	if ( function_exists( 'kymeet_render_app_footer' ) ) {
+		kymeet_render_app_footer();
+	}
 	kymeet_store_tpl( 'footer' );
 	echo kymeet_store_appnav(); // phpcs:ignore
 	kymeet_store_cfg_script();

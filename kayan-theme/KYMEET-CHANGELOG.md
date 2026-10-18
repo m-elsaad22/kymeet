@@ -1,3 +1,10 @@
+# 1.6.7 — Step 3 app chrome
+- هيدر أبيض 56px موحّد (شعار + بحث + سلة Pepsi)
+- شريط سفلي 5 تبويبات، مخفي ≥1024، حسابي → /my-account/
+- لوحة بحث واقتراحات، المفضلة localStorage
+- chips المتجر: الكل / رجالي / نسائي / مميز / علامات Woo
+- فوتر royal-900 + شريط إعلان قابل للإغلاق (placeholders)
+
 # 1.6.6 — Step 2 tokens + fixes
 - `assets/css/tokens.css` + `typography.css` + self-hosted fonts (IBM Plex Arabic, Cairo, Cormorant, Inter)
 - `kymeet-app.css` أبيض فقط (إزالة dark/light و `data-theme`)

@@ -294,36 +294,10 @@ if ( ! function_exists( 'kymeet_store_clean_widget_list' ) ) {
 }
 
 require_once dirname( __FILE__ ) . '/includes/fixes.php';
+require_once dirname( __FILE__ ) . '/includes/shell-v3.php';
 require_once dirname( __FILE__ ) . '/admin.php';
 
-# ═══ شريط التنقل السفلي (مثل تطبيقات التسوق) ═══
-function kymeet_store_appnav() {
-	$en   = kymeet_store_is_en();
-	$home = home_url( '/' );
-	$shop = 'https://kymeet-perfumes.com/shop/';
-	if ( kymeet_wc_active() && function_exists( 'wc_get_page_permalink' ) ) {
-		$shop_perm = wc_get_page_permalink( 'shop' );
-		if ( $shop_perm ) {
-			$shop = $shop_perm;
-		}
-	}
-	$acc  = kymeet_wc_active() ? wc_get_page_permalink( 'myaccount' ) : $home;
-	$fp   = is_front_page();
-	$is_shop = ( function_exists( 'is_shop' ) && is_shop() ) || ( function_exists( 'is_product_category' ) && is_product_category() ) || ( function_exists( 'is_product_tag' ) && is_product_tag() );
-	$is_acc = kymeet_wc_active() && function_exists( 'is_account_page' ) && is_account_page();
-	$items  = array(
-		array( 'a', $home, 'fas fa-house', $en ? 'Home' : 'الرئيسية', $fp ),
-		array( 'a', $fp ? '#brands' : $home . '#brands', 'fas fa-gem', $en ? 'Brands' : 'البراندات', false ),
-		array( 'a', $shop, 'fas fa-store', $en ? 'Store' : 'المتجر', $is_shop ),
-		array( 'a', $acc, 'far fa-user', $en ? 'Account' : 'الحساب', $is_acc ),
-	);
-	$out = '<nav class="appnav" aria-label="' . esc_attr( $en ? 'Main navigation' : 'التنقل الرئيسي' ) . '">';
-	foreach ( $items as $i ) {
-		$out .= '<a class="an-i' . ( $i[4] ? ' on' : '' ) . '" href="' . esc_url( $i[1] ) . '"><i class="' . esc_attr( $i[2] ) . '"></i><span>' . esc_html( $i[3] ) . '</span></a>';
-	}
-	$out .= '<button type="button" class="an-i" onclick="openCart()"><i class="fas fa-bag-shopping"></i><span>' . esc_html( $en ? 'Cart' : 'العربة' ) . '</span><b class="an-badge" id="anBadge">0</b></button></nav>';
-	return $out;
-}
+# شريط التنقل: kymeet_store_appnav() في includes/shell-v3.php
 
 # شعار الموقع (من إعدادات الهيدر أو الافتراضي)
 function kymeet_store_logo_url() {

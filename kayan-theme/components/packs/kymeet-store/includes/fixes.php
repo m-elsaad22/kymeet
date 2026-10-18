@@ -14,12 +14,6 @@ function kymeet_fix_product_main_query( $query ) {
 	if ( ! empty( $query->query_vars['product'] ) ) {
 		$query->set( 'post_type', 'product' );
 	}
-	if ( ! empty( $query->query_vars['pagename'] ) && function_exists( 'wc_get_page_id' ) ) {
-		$shop_id = wc_get_page_id( 'shop' );
-		if ( $shop_id > 0 && $query->query_vars['pagename'] === get_post_field( 'post_name', $shop_id ) ) {
-			$query->set( 'post_type', 'product' );
-		}
-	}
 }
 add_action( 'pre_get_posts', 'kymeet_fix_product_main_query', 6 );
 
@@ -47,12 +41,3 @@ function kymeet_schema_strip_empty_ratings( $data ) {
 	}
 	return $data;
 }
-
-add_filter(
-	'kayan_schema_jsonld_store',
-	'kymeet_schema_strip_empty_ratings',
-	10,
-	1
-);
-
-// If filter unused, patch at output buffer is heavy — direct filter on print_jsonld via action if exists.

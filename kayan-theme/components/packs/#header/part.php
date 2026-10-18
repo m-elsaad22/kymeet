@@ -177,7 +177,12 @@ if ( empty( $hide__theme_seo ) && class_exists( 'ThemeSeo' ) ) {
 
 # KYMEET: الهيدر + القائمة + اللودر من تصميم KYMEET3 ثم الخروج
 if ( ! empty( $kymeet_mode ) && ! isset( $_GET['ajax'] ) ) {
-	kymeet_store_tpl( 'header' );
+	if ( function_exists( 'kymeet_render_announce' ) ) {
+		kymeet_render_announce();
+		kymeet_render_app_header();
+	} else {
+		kymeet_store_tpl( 'header' );
+	}
 	return;
 }
 
