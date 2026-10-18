@@ -30,9 +30,21 @@ add_action(
 		}
 		$theme_uri = get_template_directory_uri();
 		wp_enqueue_style(
+			'kymeet-tokens',
+			$theme_uri . '/assets/css/tokens.css',
+			array(),
+			kymeet_app_ui_asset_ver( 'assets/css/tokens.css' )
+		);
+		wp_enqueue_style(
+			'kymeet-typography',
+			$theme_uri . '/assets/css/typography.css',
+			array( 'kymeet-tokens' ),
+			kymeet_app_ui_asset_ver( 'assets/css/typography.css' )
+		);
+		wp_enqueue_style(
 			'kymeet-app',
 			$theme_uri . '/components/styles/kymeet-app.css',
-			array(),
+			array( 'kymeet-typography' ),
 			kymeet_app_ui_asset_ver( 'components/styles/kymeet-app.css' )
 		);
 		wp_enqueue_script(
@@ -42,6 +54,9 @@ add_action(
 			kymeet_app_ui_asset_ver( 'components/packs/#footer/js/kymeet-app.js' ),
 			true
 		);
+		if ( function_exists( 'kymeet_wc_active' ) && kymeet_wc_active() ) {
+			wp_enqueue_script( 'jquery' );
+		}
 	},
 	25
 );
@@ -60,13 +75,23 @@ add_action(
 
 add_action( 'wp_enqueue_scripts', function(){
 } );
-add_action( 'wp_footer', function(){
-wp_enqueue_script ( 'yourcolor-script', get_template_directory_uri() . '/components/packs/'.urlencode('#footer').'/js/jquery-3.4.1.min.js' );
-wp_enqueue_script ( 'yourcolor-owlcarousel', get_template_directory_uri() . '/components/packs/'.urlencode('#footer').'/js/owl.carousel.min.js' );
-wp_enqueue_script ( 'yourcolor-init', get_template_directory_uri() . '/components/packs/'.urlencode('#footer').'/js/setup.js');
-});
+add_action(
+	'wp_footer',
+	static function () {
+		if ( function_exists( 'kymeet_store_active' ) && kymeet_store_active() ) {
+			return;
+		}
+		wp_enqueue_script( 'yourcolor-script', get_template_directory_uri() . '/components/packs/' . urlencode( '#footer' ) . '/js/jquery-3.4.1.min.js' );
+		wp_enqueue_script( 'yourcolor-owlcarousel', get_template_directory_uri() . '/components/packs/' . urlencode( '#footer' ) . '/js/owl.carousel.min.js' );
+		wp_enqueue_script( 'yourcolor-init', get_template_directory_uri() . '/components/packs/' . urlencode( '#footer' ) . '/js/setup.js' );
+	},
+	5
+);
 
 function disable_unnecessary_scripts() {
+	if ( function_exists( 'kymeet_store_active' ) && kymeet_store_active() ) {
+		return;
+	}
         wp_dequeue_script( 'jquery' );
         wp_dequeue_script( 'owl.carousel.min' );
         wp_dequeue_script( 'wp-embed' );
@@ -111,6 +136,10 @@ function kayan_is_protected_asset_handle( $handle ) {
         'seo-by-rank-math',
         'kayan-',
         'kymeet-app',
+        'kymeet-tokens',
+        'kymeet-typography',
+        'woocommerce',
+        'wc-',
         'yourcolor-',
         // تبعيات Rank Math / WP الأساسية التي يعتمد عليها الإضافة
         'wp-i18n',
@@ -137,7 +166,7 @@ function kayan_is_protected_asset_src( $src ) {
     if ( ! is_string( $src ) || '' === $src ) {
         return false;
     }
-    $needles = array( 'rank-math', 'seo-by-rank-math', '/kayan-', 'kymeet-app', 'fa-free-fixes' );
+    $needles = array( 'rank-math', 'seo-by-rank-math', '/kayan-', 'kymeet-app', 'kymeet-tokens', 'kymeet-typography', '/assets/css/tokens', 'woocommerce', 'fa-free-fixes' );
     foreach ( $needles as $needle ) {
         if ( false !== strpos( $src, $needle ) ) {
             return true;
@@ -152,6 +181,8 @@ function disable_all_scripts() {
         return;
     }
 
+    $kymeet_front = function_exists( 'kymeet_store_active' ) && kymeet_store_active();
+
     global $wp_scripts, $wp_styles;
 
     if ( isset( $wp_scripts->queue ) && is_array( $wp_scripts->queue ) ) {
@@ -159,8 +190,20 @@ function disable_all_scripts() {
             if ( kayan_is_protected_asset_handle( $handle ) ) {
                 continue;
             }
+            if ( $kymeet_front && 0 === strpos( $handle, 'woocommerce' ) ) {
+                continue;
+            }
+            if ( $kymeet_front && 0 === strpos( $handle, 'wc-' ) ) {
+                continue;
+            }
+            if ( $kymeet_front && in_array( $handle, array( 'jquery', 'jquery-core', 'jquery-migrate' ), true ) ) {
+                continue;
+            }
             $src = isset( $wp_scripts->registered[ $handle ]->src ) ? $wp_scripts->registered[ $handle ]->src : '';
             if ( kayan_is_protected_asset_src( $src ) ) {
+                continue;
+            }
+            if ( $kymeet_front && false !== strpos( $src, 'woocommerce' ) ) {
                 continue;
             }
             wp_dequeue_script( $handle );
@@ -172,8 +215,14 @@ function disable_all_scripts() {
             if ( kayan_is_protected_asset_handle( $handle ) ) {
                 continue;
             }
+            if ( $kymeet_front && ( 0 === strpos( $handle, 'woocommerce' ) || 0 === strpos( $handle, 'kymeet-' ) ) ) {
+                continue;
+            }
             $src = isset( $wp_styles->registered[ $handle ]->src ) ? $wp_styles->registered[ $handle ]->src : '';
             if ( kayan_is_protected_asset_src( $src ) ) {
+                continue;
+            }
+            if ( $kymeet_front && false !== strpos( $src, 'woocommerce' ) ) {
                 continue;
             }
             wp_dequeue_style( $handle );

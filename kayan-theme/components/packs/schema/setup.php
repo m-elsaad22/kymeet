@@ -13,6 +13,9 @@ class YourColor__Schema{
 		if ( empty( $schema ) || ! is_array( $schema ) ) {
 			return;
 		}
+		if ( function_exists( 'kymeet_schema_strip_empty_ratings' ) ) {
+			$schema = kymeet_schema_strip_empty_ratings( $schema );
+		}
 		echo '<script type="application/ld+json">';
 		echo wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
 		echo '</script>';

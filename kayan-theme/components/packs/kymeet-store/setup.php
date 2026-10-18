@@ -293,6 +293,7 @@ if ( ! function_exists( 'kymeet_store_clean_widget_list' ) ) {
 	add_action( 'init', 'kymeet_store_migrate_home', 100 );
 }
 
+require_once dirname( __FILE__ ) . '/includes/fixes.php';
 require_once dirname( __FILE__ ) . '/admin.php';
 
 # ═══ شريط التنقل السفلي (مثل تطبيقات التسوق) ═══
