@@ -1,143 +1,69 @@
 /**
- * KYMEET App UI — Phase 1 design tokens + base shell hooks
- * Scoped with body.kymeet-app; theme via html[data-theme="dark|light"]
+ * KYMEET App UI — layout hooks on white tokens (no dark mode)
  */
-
-/* ── Dark (default) ── */
-html[data-theme="dark"] {
-  --kapp-bg-start: #050e24;
-  --kapp-bg-end: #0a1a3d;
-  --kapp-card: #0f2350;
-  --kapp-card-border: rgba(201, 162, 39, 0.25);
-  --kapp-card-glow: rgba(201, 162, 39, 0.12);
-  --kapp-gold: #c9a227;
-  --kapp-gold-light: #e5c76b;
-  --kapp-gold-glow: rgba(201, 162, 39, 0.35);
-  --kapp-text: #ffffff;
-  --kapp-text-muted: #b8c2dc;
-  --kapp-theme-color: #050e24;
-  --kapp-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
-
-/* ── Light ── */
-html[data-theme="light"] {
-  --kapp-bg-start: #eef4ff;
-  --kapp-bg-end: #ffffff;
-  --kapp-card: #ffffff;
-  --kapp-card-border: rgba(11, 58, 133, 0.12);
-  --kapp-card-glow: transparent;
-  --kapp-gold: #0b3a85;
-  --kapp-gold-light: #1a6bd8;
-  --kapp-gold-glow: rgba(26, 107, 216, 0.25);
-  --kapp-text: #0a1230;
-  --kapp-text-muted: #6b7794;
-  --kapp-theme-color: #eef4ff;
-  --kapp-shadow: 0 12px 32px rgba(11, 58, 133, 0.1);
-}
-
-html:not([data-theme]) {
-  --kapp-bg-start: #050e24;
-  --kapp-bg-end: #0a1a3d;
-  --kapp-card: #0f2350;
-  --kapp-card-border: rgba(201, 162, 39, 0.25);
-  --kapp-card-glow: rgba(201, 162, 39, 0.12);
-  --kapp-gold: #c9a227;
-  --kapp-gold-light: #e5c76b;
-  --kapp-gold-glow: rgba(201, 162, 39, 0.35);
-  --kapp-text: #ffffff;
-  --kapp-text-muted: #b8c2dc;
-  --kapp-theme-color: #050e24;
-  --kapp-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
-
-:root {
-  --kapp-radius-card: 20px;
-  --kapp-radius-input: 14px;
-  --kapp-radius-sheet: 28px;
-  --kapp-radius-pill: 999px;
-  --kapp-space-1: 4px;
-  --kapp-space-2: 8px;
-  --kapp-space-3: 12px;
-  --kapp-space-4: 16px;
-  --kapp-space-5: 24px;
-  --kapp-space-6: 32px;
-  --kapp-touch: 44px;
-  --kapp-font-serif: Cinzel, "Playfair Display", Georgia, serif;
-  --kapp-nav-h: 56px;
-  --kapp-safe-b: env(safe-area-inset-bottom, 0px);
-}
-
 body.kymeet-app {
-  background: linear-gradient(165deg, var(--kapp-bg-start) 0%, var(--kapp-bg-end) 55%, var(--kapp-bg-end) 100%) !important;
-  color: var(--kapp-text);
-  -webkit-font-smoothing: antialiased;
-}
-
-body.kymeet-app .logo-text,
-body.kymeet-app .logo b,
-body.kymeet-app .shead h2 em {
-  font-family: var(--kapp-font-serif);
+  background: var(--bg) !important;
+  color: var(--text);
+  min-height: 100vh;
 }
 
 body.kymeet-app .sec,
-body.kymeet-app .hero {
+body.kymeet-app .hero,
+body.kymeet-app .kymeet-chrome-root {
   background: transparent !important;
+}
+
+body.kymeet-app .sec:nth-of-type(even) {
+  background: var(--bg-soft) !important;
 }
 
 body.kymeet-app .prod-card,
 body.kymeet-app .kdisc-card,
 body.kymeet-app .k-hero-card {
-  background: var(--kapp-card) !important;
-  border: 1px solid var(--kapp-card-border) !important;
-  border-radius: var(--kapp-radius-card) !important;
-  box-shadow: var(--kapp-shadow), inset 0 0 0 1px var(--kapp-card-glow);
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-1) !important;
 }
 
 body.kymeet-app .btn-gold,
 body.kymeet-app .btn.btn-gold {
-  border-radius: var(--kapp-radius-pill) !important;
-  min-height: var(--kapp-touch);
-}
-
-body.kymeet-app nav.appnav {
-  background: color-mix(in srgb, var(--kapp-card) 92%, transparent) !important;
-  border-top: 1px solid var(--kapp-card-border) !important;
-  padding-bottom: calc(var(--kapp-space-2) + var(--kapp-safe-b));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-body.kymeet-app nav.appnav .an-i.on,
-body.kymeet-app nav.appnav .an-i.on i {
-  color: var(--kapp-gold-light) !important;
+  background: var(--royal-metal) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: var(--radius-pill) !important;
+  min-height: 44px;
+  box-shadow: var(--shadow-btn);
 }
 
 body.kymeet-app #hdr,
 body.kymeet-app header#hdr {
-  background: color-mix(in srgb, var(--kapp-bg-end) 88%, transparent) !important;
-  border-bottom: 1px solid var(--kapp-card-border) !important;
+  background: color-mix(in srgb, var(--surface) 94%, transparent) !important;
+  border-bottom: 1px solid var(--border) !important;
+  min-height: 56px;
   backdrop-filter: blur(12px);
 }
 
-/* Theme toggle (Phase 1 — usable from Phase 2 “المزيد” sheet) */
-.kymeet-theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--kapp-space-2);
-  min-width: var(--kapp-touch);
-  min-height: var(--kapp-touch);
-  padding-inline: var(--kapp-space-4);
-  border-radius: var(--kapp-radius-pill);
-  border: 1px solid var(--kapp-card-border);
-  background: var(--kapp-card);
-  color: var(--kapp-text);
-  font: inherit;
-  cursor: pointer;
+body.kymeet-app nav.appnav {
+  background: var(--surface) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-1);
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
 }
 
-.kymeet-theme-toggle:active {
-  transform: scale(0.97);
+body.kymeet-app nav.appnav .an-i.on,
+body.kymeet-app nav.appnav .an-i.on i {
+  color: var(--royal-700) !important;
+}
+
+body.kymeet-app nav.appnav .an-badge {
+  background: var(--pepsi-500) !important;
+  color: #fff !important;
+}
+
+body.kymeet-app :focus-visible {
+  outline: 2px solid var(--pepsi-500);
+  outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -147,9 +73,5 @@ body.kymeet-app header#hdr {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-
-  .kymeet-theme-toggle:active {
-    transform: none;
   }
 }

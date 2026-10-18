@@ -17,8 +17,9 @@ if( !isset($_GET['ajax']) ) {
 		if ( $kymeet_mode ) {
 			echo '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">';
 			echo '<meta charset="utf-8">';
-			echo '<meta name="theme-color" content="#050E24">';
-			echo '<script>(function(){try{var t=localStorage.getItem("kymeet_theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>';
+			echo '<meta name="theme-color" content="#FFFFFF">';
+			$font_preload = get_template_directory_uri() . '/assets/fonts/ibm-plex-sans-arabic/400.woff2';
+			echo '<link rel="preload" href="' . esc_url( $font_preload ) . '" as="font" type="font/woff2" crossorigin>';
 		} else {
 			echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
 			echo '<meta charset="utf-8">';
@@ -77,8 +78,6 @@ if ( empty( $hide__theme_seo ) && class_exists( 'ThemeSeo' ) ) {
 
 
 		if ( $kymeet_mode ) {
-			echo '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-			echo '<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">';
 			echo '<link rel="stylesheet" href="' . esc_url( $this->StylesURL . 'FontAwesome/css/all.min.css' ) . '">';
 		}
 		$Styles['forms'] = 'forms.css';
@@ -100,6 +99,9 @@ if ( empty( $hide__theme_seo ) && class_exists( 'ThemeSeo' ) ) {
 				$this->Part('fonts');
 			echo '</style>';
 			if ( $kymeet_mode ) {
+				$assets_uri = get_template_directory_uri() . '/assets/css/';
+				echo '<link rel="stylesheet" href="' . esc_url( $assets_uri . 'tokens.css?v=' . filemtime( get_template_directory() . '/assets/css/tokens.css' ) ) . '" />';
+				echo '<link rel="stylesheet" href="' . esc_url( $assets_uri . 'typography.css?v=' . filemtime( get_template_directory() . '/assets/css/typography.css' ) ) . '" />';
 				echo '<link rel="stylesheet" data-style-ajax="kymeet" type="text/css" href="'.$this->StylesURL.'kymeet.css?v='.filemtime( $this->StylesPath.'kymeet.css' ).'" />';
 				$kapp_css = $this->StylesPath . 'kymeet-app.css';
 				if ( is_readable( $kapp_css ) ) {
@@ -123,11 +125,18 @@ if ( empty( $hide__theme_seo ) && class_exists( 'ThemeSeo' ) ) {
 		    echo '<style>';
 				$this->Part('fonts');
 				if ( $kymeet_mode ) {
+					$assets_uri = get_template_directory_uri() . '/assets/css/';
+					echo '</style>';
+					echo '<link rel="stylesheet" href="' . esc_url( $assets_uri . 'tokens.css?v=' . filemtime( get_template_directory() . '/assets/css/tokens.css' ) ) . '" />';
+					echo '<link rel="stylesheet" href="' . esc_url( $assets_uri . 'typography.css?v=' . filemtime( get_template_directory() . '/assets/css/typography.css' ) ) . '" />';
+					echo '<style>';
 					require ($this->StylesPath."/kymeet.css");
+					echo '</style>';
 					$kapp_css = $this->StylesPath . 'kymeet-app.css';
 					if ( is_readable( $kapp_css ) ) {
-						echo '</style><link rel="stylesheet" href="' . esc_url( $this->StylesURL . 'kymeet-app.css?v=' . filemtime( $kapp_css ) ) . '" /><style>';
+						echo '<link rel="stylesheet" href="' . esc_url( $this->StylesURL . 'kymeet-app.css?v=' . filemtime( $kapp_css ) ) . '" />';
 					}
+					echo '<style>';
 				} else {
 				if(isset($Styles)){
 					foreach ($Styles as $skey => $meky) {

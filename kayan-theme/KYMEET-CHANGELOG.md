@@ -1,3 +1,8 @@
+# 1.6.6 — Step 2 tokens + fixes
+- `assets/css/tokens.css` + `typography.css` + self-hosted fonts (IBM Plex Arabic, Cairo, Cormorant, Inter)
+- `kymeet-app.css` أبيض فقط (إزالة dark/light و `data-theme`)
+- إصلاحات: استعلام منتج WC، إيقاف yourcolor jQuery/setup على واجهة KYMEET، حماية scripts WC، schema بدون `aggregateRating` فارغ، `woocommerce/single-product.php`
+
 # 1.6.5 — KYMEET App UI Phase 1
 - `components/styles/kymeet-app.css` — tokens داكن/فاتح + `body.kymeet-app`
 - `components/packs/#footer/js/kymeet-app.js` — `html[data-theme]` + `localStorage` + `theme-color`
