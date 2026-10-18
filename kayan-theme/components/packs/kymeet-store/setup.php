@@ -8,6 +8,7 @@ require_once __DIR__ . '/products.php';
 require_once __DIR__ . '/includes/class-kymeet-render.php';
 require_once __DIR__ . '/includes/shell.php';
 require_once __DIR__ . '/includes/homepage.php';
+require_once __DIR__ . '/includes/remote-sync.php';
 require_once __DIR__ . '/widgets.php';
 
 add_action( 'template_redirect', 'kymeet_store_takeover_early', -2 );
