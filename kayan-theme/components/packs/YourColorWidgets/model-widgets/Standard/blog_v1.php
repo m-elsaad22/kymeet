@@ -1,4 +1,5 @@
-<?php/**
+<?php
+/**
  * 
  */
 class blog_v1 extends YC__WidgetsMachine{

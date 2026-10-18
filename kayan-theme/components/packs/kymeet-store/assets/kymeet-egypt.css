@@ -43,6 +43,21 @@ body.kymeet-home > root {
   display: none !important;
 }
 
+body.kymeet-store-active .kayan-inner-hero,
+body.kymeet-store-active .kayan-inner-breadcrumb,
+body.kymeet-store-active .--YourColor--phone-button {
+  display: none !important;
+}
+
+body.kymeet-store-active.kayan-inner-page,
+body.woocommerce.kymeet-store-active {
+  background: var(--eg-navy) !important;
+}
+
+body.kymeet-store-active .kymeet-wc-shell {
+  padding: 72px 0 100px;
+}
+
 body.kymeet-store-active .kymeet-chrome-root {
   background: var(--eg-navy);
   min-height: 100vh;

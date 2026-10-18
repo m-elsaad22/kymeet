@@ -1,4 +1,5 @@
-<?phpheader("Content-Type: application/json");
+<?php
+header("Content-Type: application/json");
 ob_start();
 $json = array();
 $json['output'] = '';

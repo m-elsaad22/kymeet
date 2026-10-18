@@ -7,6 +7,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+add_action(
+	'woocommerce_before_main_content',
+	static function () {
+		if ( ! kymeet_store_active() || is_shop() ) {
+			return;
+		}
+		echo '<div class="kx-wc kymeet-wc-shell"><div class="wrap">';
+	},
+	2
+);
+
+add_action(
+	'woocommerce_after_main_content',
+	static function () {
+		if ( ! kymeet_store_active() || is_shop() ) {
+			return;
+		}
+		echo '</div></div>';
+	},
+	98
+);
+
 function kymeet_cart_json(): array {
 	if ( ! WC()->cart ) {
 		wc_load_cart();

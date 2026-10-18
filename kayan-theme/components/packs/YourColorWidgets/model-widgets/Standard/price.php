@@ -1,4 +1,5 @@
-<?php/**
+<?php
+/**
  * 
  */
 class price extends YC__WidgetsMachine{

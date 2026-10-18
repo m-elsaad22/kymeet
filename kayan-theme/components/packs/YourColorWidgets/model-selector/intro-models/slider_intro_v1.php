@@ -1,4 +1,5 @@
-<?php/**
+<?php
+/**
  * 
  */
 class slider_intro_v1 extends YC__WidgetsMachine{

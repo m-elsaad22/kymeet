@@ -116,3 +116,29 @@ function kymeet_homepage_takeover(): void {
 function kymeet_homepage_takeover_early(): void {
 	kymeet_homepage_takeover();
 }
+
+/**
+ * WooCommerce shop archive — same KYMEET catalog UI as mockup (not kayan-inner services).
+ */
+function kymeet_shop_takeover(): void {
+	if ( ! kymeet_store_active() || ! function_exists( 'is_shop' ) || ! is_shop() ) {
+		return;
+	}
+	if ( is_search() || is_product_taxonomy() ) {
+		return;
+	}
+
+	kymeet_render_store_document(
+		static function () {
+			echo '<main class="kymeet-home-main kymeet-shop-main" id="kymeet-shop">';
+			Kymeet_Render::catalog();
+			echo '</main>';
+		}
+	);
+	exit;
+}
+
+function kymeet_store_takeover_early(): void {
+	kymeet_homepage_takeover();
+	kymeet_shop_takeover();
+}
