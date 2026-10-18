@@ -1,0 +1,42 @@
+<footer><div class="wrap"><div class="f-grid">
+<div class="f-col"><div class="f-logo"><img class="logo-img" src="{{footer_img1}}" alt=""><span class="logo-text">{{footer_t2}}<b>.</b></span></div><p>{{footer_t3}}</p><div class="f-social"><a href="#" class="cfg-wa" data-cfg="wa" aria-label="واتساب"><i class="{{footer_ic4}}"></i></a></div></div>
+<div class="f-col"><h4>{{footer_t5}}</h4><ul><li><a href="#catalog"><i class="{{footer_ic6}}"></i> {{footer_t7}}</a></li><li><a href="#bestsellers"><i class="{{footer_ic8}}"></i> {{footer_t9}}</a></li><li><a href="#new"><i class="{{footer_ic10}}"></i> {{footer_t11}}</a></li><li><a href="#brands"><i class="{{footer_ic12}}"></i> {{footer_t13}}</a></li></ul></div>
+<div class="f-col"><h4>{{footer_t14}}</h4><ul><li><a href="#story"><i class="{{footer_ic15}}"></i> {{footer_t16}}</a></li><li><a href="#faq"><i class="{{footer_ic17}}"></i> {{footer_t18}}</a></li><li><a href="#contact"><i class="{{footer_ic19}}"></i> {{footer_t20}}</a></li></ul></div>
+<div class="f-col"><h4>{{footer_t21}}</h4><p>{{footer_t22}}</p></div>
+</div><div class="f-bottom">{{footer_t23}} <span>{{footer_t24}}</span> {{footer_t25}}</div></div></footer>
+<dialog id="pd"><div class="pdg"><button class="pd-x" type="button" onclick="this.closest('dialog').close()" aria-label="إغلاق"><i class="{{footer_ic26}}"></i></button><div class="pd-img" id="pdImg"></div><div class="pd-txt" id="pdTxt"></div></div></dialog>
+<dialog id="cod"><form class="pdg" id="cof" style="grid-template-columns:1fr"><button class="pd-x" type="button" onclick="this.closest('dialog').close()" aria-label="إغلاق"><i class="{{footer_ic27}}"></i></button><div class="pd-txt"><h3>{{footer_t28}}</h3><input id="on" required placeholder="{{footer_a29}}" aria-label="الاسم"><input id="op" required type="tel" placeholder="{{footer_a30}}" aria-label="رقم الهاتف"><input id="oa" required placeholder="{{footer_a31}}" aria-label="العنوان"><div class="cart-total"><span>{{footer_t32}}</span><b id="ot"></b></div><button class="btn btn-gold" type="submit">{{footer_t33}}</button><p class="note" id="om" role="status"></p></div></form></dialog>
+
+<!-- ═══════════════ Cart drawer ═══════════════ -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>{{footer_t34}}</h3>
+    <button onclick="closeCart()" aria-label="إغلاق"><i class="{{footer_ic35}}"></i></button>
+  </div>
+  <div class="cart-body" id="cartBody">
+    <div class="cart-empty">
+      <i class="{{footer_ic36}}"></i>
+      <p>{{footer_t37}}</p>
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total">
+      <span>{{footer_t38}}</span>
+      <b id="cartTotal">0 ج.م</b>
+    </div>
+    <a href="#" class="btn btn-gold" onclick="checkout(event)">{{footer_t39}} <i class="{{footer_ic40}}"></i></a>
+  </div>
+</aside>
+
+<!-- ═══════════════ Floating WhatsApp ═══════════════ -->
+<a href="#" data-cfg="wa" class="fab cfg-wa" id="fab" aria-label="واتساب"><i class="{{footer_ic41}}"></i></a>
+
+<!-- ═══════════════ Toast ═══════════════ -->
+<div class="toast" id="toast">
+  <i class="{{footer_ic42}}"></i>
+  <div>
+    <b id="toastTitle">تمت الإضافة</b>
+    <small id="toastMsg">العطر في سلتك الآن</small>
+  </div>
+</div>

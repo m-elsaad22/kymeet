@@ -1,0 +1,227 @@
+{
+ "products": [
+  {
+   "id": "rayhaan-italia",
+   "name": "RAYHAAN ITALIA",
+   "brand": "RAYHAAN",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1772748042263701180.jpg",
+   "tag": "اختيار كيميت"
+  },
+  {
+   "id": "rayhaan-aura",
+   "name": "RAYHAAN AURA",
+   "brand": "RAYHAAN",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1773163850929900359.jpg"
+  },
+  {
+   "id": "cedrus-blanc",
+   "name": "RAYHAAN CEDRUS BLANC",
+   "brand": "RAYHAAN",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1788770314806814662.jpg"
+  },
+  {
+   "id": "rayhaan-tiger",
+   "name": "RAYHAAN TIGER",
+   "brand": "RAYHAAN",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1780703716843070307.jpg"
+  },
+  {
+   "id": "nava-sol",
+   "name": "RAYHAAN NAVA SOL",
+   "brand": "RAYHAAN",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1788770228706524411.jpg"
+  },
+  {
+   "id": "rayhaan-obsidian",
+   "name": "RAYHAAN OBSIDIAN",
+   "brand": "RAYHAAN",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1772747855905722720.jpg"
+  },
+  {
+   "id": "ibraq-c2a",
+   "name": "C2A",
+   "brand": "IBRAQ",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1780446623911721303.jpg",
+   "tag": "الأكثر مبيعًا"
+  },
+  {
+   "id": "mini-musk",
+   "name": "ميني مسك",
+   "brand": "IBRAQ",
+   "price": 800,
+   "image": "https://files.easy-orders.net/1780446445314254440.jpg",
+   "tag": "الأكثر مبيعًا"
+  },
+  {
+   "id": "emerald-soul",
+   "name": "Emerald Soul Diamond",
+   "brand": "IBRAQ",
+   "price": 1350,
+   "image": "https://files.easy-orders.net/1772571430143988871.jpg",
+   "tag": "الأكثر مبيعًا"
+  },
+  {
+   "id": "musk-powder",
+   "name": "مسك باودر",
+   "brand": "IBRAQ",
+   "price": 1000,
+   "image": "https://files.easy-orders.net/1772410097739815233.jpg"
+  },
+  {
+   "id": "moon-box",
+   "name": "IBRAQ SHAPE OF MOON BOX",
+   "brand": "IBRAQ",
+   "price": 4000,
+   "image": "https://files.easy-orders.net/1772887801508788038.jpg"
+  },
+  {
+   "id": "arabian-tobacco",
+   "name": "Arabian Tobacco",
+   "brand": "IBRAQ",
+   "price": 1400,
+   "image": "https://files.easy-orders.net/1772408634370189430.jpg"
+  },
+  {
+   "id": "perseviron",
+   "name": "PERSEVIRON",
+   "brand": "PARIS CORNER",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1773404621718733631.jpg"
+  },
+  {
+   "id": "eshal-vanilla",
+   "name": "ESHAL VANILLA",
+   "brand": "PARIS CORNER",
+   "price": 1400,
+   "image": "https://files.easy-orders.net/1777812847444463705.jpg"
+  },
+  {
+   "id": "indomitable",
+   "name": "INDOMITABLE",
+   "brand": "PARIS CORNER",
+   "price": 1600,
+   "image": "https://files.easy-orders.net/1774102333369307664.jpg"
+  },
+  {
+   "id": "december-vanilla",
+   "name": "DECEMBER VANILLA",
+   "brand": "PARIS CORNER",
+   "price": 1400,
+   "image": "https://files.easy-orders.net/1780446874310276032.jpg"
+  },
+  {
+   "id": "fatal-embrace",
+   "name": "Fatal Embrace",
+   "brand": "PARIS CORNER",
+   "price": 1500,
+   "image": "https://files.easy-orders.net/1778625451618260830.jpg"
+  },
+  {
+   "id": "gissah-oryx",
+   "name": "GISSAH ORYX",
+   "brand": "GISSAH",
+   "price": 1900,
+   "image": "https://files.easy-orders.net/1772749318793339383.jpg",
+   "tag": "إصدار جديد"
+  },
+  {
+   "id": "gissah-nardo",
+   "name": "GISSAH NARDO",
+   "brand": "GISSAH",
+   "price": 1999,
+   "image": "https://files.easy-orders.net/1772748876887740223.jpg",
+   "tag": "إصدار جديد"
+  },
+  {
+   "id": "gissah-sky",
+   "name": "GISSAH SKY",
+   "brand": "GISSAH",
+   "price": 5300,
+   "image": "https://files.easy-orders.net/1772749094285138047.jpg",
+   "tag": "إصدار جديد"
+  },
+  {
+   "id": "one-only",
+   "name": "GISSAH ONE&ONLY",
+   "brand": "GISSAH",
+   "price": 1999,
+   "image": "https://files.easy-orders.net/1772748909516610871.jpg",
+   "tag": "إصدار جديد"
+  },
+  {
+   "id": "la-luna",
+   "name": "GISSAH LA LUNA",
+   "brand": "GISSAH",
+   "price": 1999,
+   "image": "https://files.easy-orders.net/1772749874471853675.jpg",
+   "tag": "إصدار جديد"
+  },
+  {
+   "id": "gissah-hudson",
+   "name": "GISSAH HUDSON",
+   "brand": "GISSAH",
+   "price": 1999,
+   "image": "https://files.easy-orders.net/1772749914696291029.jpg",
+   "tag": "إصدار جديد"
+  },
+  {
+   "id": "gissah-gala",
+   "name": "GISSAH GALA",
+   "brand": "GISSAH",
+   "price": 1999,
+   "image": "https://files.easy-orders.net/1772748989403165220.jpg",
+   "tag": "إصدار جديد"
+  },
+  {
+   "id": "gissah-rogue",
+   "name": "GISSAH ROGUE",
+   "brand": "GISSAH",
+   "price": 1999,
+   "image": "https://files.easy-orders.net/1772748753891162631.jpg",
+   "tag": "إصدار جديد"
+  }
+ ],
+ "brands": [
+  "RAYHAAN",
+  "IBRAQ",
+  "PARIS CORNER",
+  "GISSAH",
+  "ARABIYAT PRESTIGE",
+  "RIIFFS PARFUMES",
+  "NUSUK",
+  "ZIMAYA",
+  "AFNAN",
+  "FRENCH AVENUE",
+  "ARMAF",
+  "RASASI",
+  "LATAFA",
+  "LAVERNE",
+  "AL MAJED OUD",
+  "ALMAS PERFUMES"
+ ],
+ "best": [
+  "ibraq-c2a",
+  "mini-musk",
+  "emerald-soul",
+  "musk-powder",
+  "moon-box",
+  "arabian-tobacco"
+ ],
+ "new": [
+  "gissah-oryx",
+  "gissah-nardo",
+  "gissah-sky",
+  "one-only",
+  "la-luna",
+  "gissah-hudson",
+  "gissah-gala",
+  "gissah-rogue"
+ ]
+}

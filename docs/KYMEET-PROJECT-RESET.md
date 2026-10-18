@@ -24,7 +24,20 @@ IMG_…١٣٣١٤٦.png            → logo PNG
 README.md
 ```
 
-**`kayan-theme/` غير موجود على `main` حتى الآن** — يلزم رفع القالب من جهتك لنبدأ التعديل.
+**`kayan-theme.zip` على `main` (commit `d0c1d4b`)** — تم فكّه محلياً إلى `kayan-theme/` على فرع `feature/kymeet-app-ui`.
+
+### تحقق سريع من القabat المرفوع
+
+| البند | الحالة |
+|--------|--------|
+| `components/styles/kymeet.css` (~85KB) | ✅ |
+| Widgets `kymeet_*` في `YourColorWidgets/.../Standard/` | ✅ |
+| `kymeet-store` (manifest، templates، `kymeet.js`) | ✅ — **بدون** استيلاء `template_redirect` / `kymeet-egypt` |
+| `woocommerce/content-product.php` | ✅ |
+| مصدر المنتجات | **WooCommerce `product`** إن WC مفعّل؛ وإلا CPT **`perfumes`** (`kayan-cpt`) |
+| إصدار `style.css` | **1.6.0** (سجل `KYMEET-CHANGELOG.md` حتى 1.6.4) |
+
+**Phase 1 (البرومبت):** `kymeet-app.css` + `kymeet-app.js` + `body.kymeet-app` — لم يُنفَّذ بعد.
 
 ## النشر على kymeet-perfumes.com
 

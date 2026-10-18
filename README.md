@@ -8,9 +8,9 @@
 |--------|---------|
 | [`cursor-prompt-kymeet-app-theme.md`](cursor-prompt-kymeet-app-theme.md) | تعليمات التطوير الكاملة (9 مراحل) |
 | [`docs/design/`](docs/design/) | Mockup داكن/فاتح + شعار KYMEET |
-| **`kayan-theme/`** | **قالب كيميت الذي ترفعه أنت** — يجب أن يطابق هيكل البرومبت (`components/styles/kymeet.css`, وidgets `kymeet_*`, …) |
+| **`kayan-theme/`** + **`kayan-theme.zip`** | قالب كيميت **1.6.x** (مرفوع على GitHub) |
 
-> **تنبيه:** فرع `cursor/kymeet-app-ui-9531` وحزمة `kymeet-store` السابقة (استيلاء v3 + بقايا خدمات) **لم تعد baseline**. لا نبني عليها.
+> **تنبيه:** فرع `cursor/kymeet-app-ui-9531` (تعديلات Agent السابقة) **لم يعد baseline**.
 
 ## فرع العمل
 
@@ -18,11 +18,10 @@
 feature/kymeet-app-ui   ← من main (البرومبت + التصاميم)
 ```
 
-## الخطوة التالية (مطلوبة منك)
+## الخطوة التالية
 
-1. ارفع مجلد **`kayan-theme/`** (أو `kayan-theme.zip`) إلى هذا المستودع على فرع `feature/kymeet-app-ui` — نسخة **كيميت** وليس قالب خدمات KAYAN فقط.
-2. بعد ظهور القالب في GitHub نبدأ **Phase 1** من البرومبت: `kymeet-app.css` + `kymeet-app.js` + `body.kymeet-app`.
-3. النشر على الاستضافة: رفع ZIP القالب من `dist/kayan-theme.zip` (يُبنى لاحقاً) + Purge LiteSpeed.
+1. **Phase 1** (البرومبت): `components/styles/kymeet-app.css` + `#footer/js/kymeet-app.js` + `body.kymeet-app`.
+2. النشر: رفع `kayan-theme.zip` (أو ZIP من `dist/` بعد البناء) + Purge LiteSpeed على kymeet-perfumes.com.
 
 ## مراجع التصميم
 
