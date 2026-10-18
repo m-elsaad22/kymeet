@@ -6,7 +6,9 @@
 
 | المصدر | المحتوى |
 |--------|---------|
-| [`cursor-prompt-kymeet-app-theme.md`](cursor-prompt-kymeet-app-theme.md) | تعليمات التطوير الكاملة (9 مراحل) |
+| [`docs/KYMEET-CURSOR-PROMPT-v2.md`](docs/KYMEET-CURSOR-PROMPT-v2.md) | **البرومبت المعتمد** — Royal Blue على أبيض (بدون خلفيات داكنة) |
+| [`docs/KYMEET-THEME-AUDIT.md`](docs/KYMEET-THEME-AUDIT.md) | تقرير Step 1 (تدقيق القالب) |
+| [`cursor-prompt-kymeet-app-theme.md`](cursor-prompt-kymeet-app-theme.md) | نسخة قديمة (dark/light) — للمرجع فقط |
 | [`docs/design/`](docs/design/) | Mockup داكن/فاتح + شعار KYMEET |
 | **`kayan-theme/`** + **`kayan-theme.zip`** | قالب كيميت **1.6.x** (مرفوع على GitHub) |
 
