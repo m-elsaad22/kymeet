@@ -44,30 +44,75 @@ function kymeet_render_homepage_sections(): void {
 	Kymeet_Render::catalog();
 }
 
+/**
+ * Minimal HTML document: wp_head/wp_footer + KYMEET chrome only (no KAYAN v3 loader/home).
+ *
+ * @param callable $render_main Callback that echoes main content.
+ */
+function kymeet_render_store_document( callable $render_main ): void {
+	if ( ! headers_sent() ) {
+		status_header( 200 );
+		nocache_headers();
+	}
+
+	$lang = function_exists( 'kayan_homepage_is_english' ) && kayan_homepage_is_english() ? 'en' : 'ar';
+	$dir  = 'en' === $lang ? 'ltr' : 'rtl';
+	?>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?> dir="<?php echo esc_attr( $dir ); ?>" lang="<?php echo esc_attr( $lang ); ?>">
+<head>
+<meta charset="<?php bloginfo( 'charset' ); ?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<?php wp_head(); ?>
+</head>
+<body <?php body_class( 'kymeet-doc kymeet-home kymeet-store-active' ); ?> mode="dark">
+<?php
+	wp_body_open();
+	/**
+	 * KYMEET splash + header (see setup.php on yc_hook_body_start).
+	 */
+	do_action( 'yc_hook_body_start' );
+	call_user_func( $render_main );
+	wp_footer();
+	?>
+</body>
+</html>
+	<?php
+}
+
+/**
+ * Disable KAYAN Homepage v3 option when KYMEET home is active.
+ *
+ * @param mixed $value Stored option.
+ */
+function kymeet_filter_kayan_v3_disable( $value ) {
+	if ( is_admin() || wp_doing_ajax() || wp_doing_cron() ) {
+		return $value;
+	}
+	if ( ! function_exists( 'kymeet_use_store_homepage' ) || ! kymeet_use_store_homepage() ) {
+		return $value;
+	}
+	return '1';
+}
+
 function kymeet_homepage_takeover(): void {
 	if ( ! kymeet_use_store_homepage() ) {
 		return;
 	}
 
-	global $ThemeStatic;
-	$theme = ( isset( $ThemeStatic ) && $ThemeStatic instanceof ThemeStatic ) ? $ThemeStatic : new ThemeStatic();
-
-	$body_class = 'kymeet-home kymeet-store-active rtl';
-	if ( function_exists( 'kayan_homepage_is_english' ) && kayan_homepage_is_english() ) {
-		$body_class .= ' kymeet-home-en';
-	}
-
-	$theme->Part(
-		'header',
-		array(
-			'bodyClass' => $body_class,
-		)
+	kymeet_render_store_document(
+		static function () {
+			echo '<main class="kymeet-home-main" id="kymeet-home">';
+			kymeet_render_homepage_sections();
+			echo '</main>';
+		}
 	);
-
-	echo '<main class="kymeet-home-main" id="kymeet-home">';
-	kymeet_render_homepage_sections();
-	echo '</main>';
-
-	$theme->Part( 'footer' );
 	exit;
+}
+
+/**
+ * Run before kayan-stabilization homepage v3 (template_redirect priority 0).
+ */
+function kymeet_homepage_takeover_early(): void {
+	kymeet_homepage_takeover();
 }

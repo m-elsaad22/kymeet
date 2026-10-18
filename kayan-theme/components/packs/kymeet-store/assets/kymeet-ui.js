@@ -89,6 +89,15 @@
     } catch (e) {}
   }
 
+  function killKayanLoader() {
+    const ld = document.getElementById('loader');
+    if (ld) {
+      ld.classList.add('out');
+      ld.remove();
+    }
+    document.body.classList.remove('before-start');
+  }
+
   function initSplash() {
     const splash = document.getElementById('kymeet-splash');
     if (!splash) return;
@@ -99,7 +108,7 @@
       }
     } catch (e) {}
     splash.querySelector('#kymeet-splash-go')?.addEventListener('click', dismissSplash);
-    setTimeout(dismissSplash, 12000);
+    setTimeout(dismissSplash, 2500);
   }
 
   function injectCheckoutSteps() {
@@ -153,6 +162,7 @@
 
   function init() {
     markReducedMotion();
+    killKayanLoader();
     initSplash();
     injectCategoryRail();
     injectWishlistSection();
@@ -164,6 +174,11 @@
     });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  window.addEventListener('load', killKayanLoader);
+  setTimeout(killKayanLoader, 1500);
 })();

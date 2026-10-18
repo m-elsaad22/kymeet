@@ -10,22 +10,17 @@ require_once __DIR__ . '/includes/shell.php';
 require_once __DIR__ . '/includes/homepage.php';
 require_once __DIR__ . '/widgets.php';
 
+add_action( 'template_redirect', 'kymeet_homepage_takeover_early', -2 );
 add_action( 'BeforeBlade_index', 'kymeet_homepage_takeover', -1 );
 add_action( 'BeforeBlade_page', 'kymeet_homepage_takeover', -1 );
 
 add_action(
-	'wp',
+	'init',
 	static function () {
-		if ( ! function_exists( 'kymeet_use_store_homepage' ) || ! kymeet_use_store_homepage() ) {
+		if ( ! function_exists( 'yc_option_key' ) || ! function_exists( 'kymeet_filter_kayan_v3_disable' ) ) {
 			return;
 		}
-		$opt_key = function_exists( 'yc_option_key' ) ? yc_option_key( 'kayan_homepage_v3_disable' ) : 'kayan_homepage_v3_disable';
-		add_filter(
-			'option_' . $opt_key,
-			static function () {
-				return '1';
-			}
-		);
+		add_filter( 'option_' . yc_option_key( 'kayan_homepage_v3_disable' ), 'kymeet_filter_kayan_v3_disable', 5 );
 	},
 	0
 );
@@ -76,7 +71,7 @@ add_action(
 		if ( ! kymeet_store_active() ) {
 			return;
 		}
-		$ver = '2.1.1';
+		$ver = '2.1.2';
 		wp_enqueue_style(
 			'kymeet-fonts',
 			'https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700&family=Cinzel:wght@500;700&display=swap',
@@ -135,6 +130,9 @@ add_action(
 	'yc_hook_body_start',
 	static function () {
 		if ( ! kymeet_store_active() ) {
+			return;
+		}
+		if ( function_exists( 'kymeet_use_store_homepage' ) && kymeet_use_store_homepage() && did_action( 'yc_hook_body_start' ) ) {
 			return;
 		}
 		echo '<div class="kymeet-chrome-root">';

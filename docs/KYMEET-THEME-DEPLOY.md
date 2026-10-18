@@ -5,6 +5,7 @@
 - التصميم والتفاعلات أصبحت داخل **حزمة القالب** `components/packs/kymeet-store/` (ملفات PHP + `assets/kymeet.css` + `assets/kymeet-luxury.css` + **`assets/kymeet-egypt.css`** + `kymeet.js` / `kymeet-ui.js`).
 - من **1.7.0**: واجهة تطبيق **KYMEET Egypt** (خلفية داكنة، شاشة افتتاحية، بطاقات بيضاء للصور، شرائح تصفية، إخفاء هيدر KAYAN المكرر).
 - من **1.7.1**: تعطيل **KAYAN Homepage v3** (قالب خدمات/إمارات) على الرئيسية واستبداله بأقسام KYMEET تلقائيًا — **لا حاجة لتعديل `wp-config.php` للتصميم**.
+- من **1.7.2**: إيقاف **شاشة التحميل الزرقاء** (`#loader`) — كان v3 يُفعَّل عبر `template_redirect` قبل KYMEET؛ الرئيسية الآن مستند KYMEET فقط (هيرو + عطور + براندات).
 - **لا تعتمد** على إضافة `kymeet-perfumes-ui` لتحميل CSS/JS (الإضافة على الإنتاج كانت ناقصة — ملفات `assets` تُرجع 404).
 
 ## التثبيت

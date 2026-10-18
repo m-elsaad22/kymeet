@@ -17,9 +17,30 @@ html:has(body.kymeet-store-active) {
 }
 
 body.kymeet-store-active,
-body.kymeet-store-active[mode="light"] {
+body.kymeet-store-active[mode="light"],
+body.kymeet-doc {
   background: var(--eg-navy) !important;
   color: var(--eg-ink) !important;
+}
+
+/* KAYAN v3 full-screen loader — must never block KYMEET */
+body.kymeet-store-active #loader,
+body.kymeet-doc #loader,
+body.kymeet-store-active.before-start #loader {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.kymeet-store-active.before-start,
+body.kymeet-doc.before-start {
+  overflow: auto !important;
+}
+
+body.kymeet-doc > root,
+body.kymeet-home > root {
+  display: none !important;
 }
 
 body.kymeet-store-active .kymeet-chrome-root {
