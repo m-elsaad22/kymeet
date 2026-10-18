@@ -1,3 +1,8 @@
+# 1.6.5 — KYMEET App UI Phase 1
+- `components/styles/kymeet-app.css` — tokens داكن/فاتح + `body.kymeet-app`
+- `components/packs/#footer/js/kymeet-app.js` — `html[data-theme]` + `localStorage` + `theme-color`
+- تحميل من `Enqueues/setup.php` + الهيدر/الفوتر؛ `viewport-fit=cover`؛ أيقونة Apple Touch
+
 # 1.6.4 — إصلاح فتح وحذف أقسام الرئيسية في الإعدادات
 - إصلاح فتح تعديل القسم (كان يفشل صامتًا في حالات شائعة)
 - إصلاح حذف القسم بزر X مع قراءة القائمة من الخيار مباشرة

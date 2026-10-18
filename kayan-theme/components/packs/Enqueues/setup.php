@@ -1,4 +1,63 @@
-<?php 
+<?php
+
+/**
+ * KYMEET App UI layer (Phase 1+) — active when kymeet-store is on.
+ */
+function kymeet_app_ui_active() {
+	return function_exists( 'kymeet_store_active' ) && kymeet_store_active() && ! is_admin();
+}
+
+function kymeet_app_ui_asset_ver( $relative_path ) {
+	$path = get_template_directory() . '/' . ltrim( $relative_path, '/' );
+	return file_exists( $path ) ? (string) filemtime( $path ) : '1.0.0';
+}
+
+add_filter(
+	'body_class',
+	static function ( $classes ) {
+		if ( kymeet_app_ui_active() ) {
+			$classes[] = 'kymeet-app';
+		}
+		return $classes;
+	}
+);
+
+add_action(
+	'wp_enqueue_scripts',
+	static function () {
+		if ( ! kymeet_app_ui_active() ) {
+			return;
+		}
+		$theme_uri = get_template_directory_uri();
+		wp_enqueue_style(
+			'kymeet-app',
+			$theme_uri . '/components/styles/kymeet-app.css',
+			array(),
+			kymeet_app_ui_asset_ver( 'components/styles/kymeet-app.css' )
+		);
+		wp_enqueue_script(
+			'kymeet-app',
+			$theme_uri . '/components/packs/' . rawurlencode( '#footer' ) . '/js/kymeet-app.js',
+			array(),
+			kymeet_app_ui_asset_ver( 'components/packs/#footer/js/kymeet-app.js' ),
+			true
+		);
+	},
+	25
+);
+
+add_action(
+	'wp_head',
+	static function () {
+		if ( ! kymeet_app_ui_active() ) {
+			return;
+		}
+		$icon = get_template_directory_uri() . '/assets/branding/apple-touch-icon.png';
+		echo '<link rel="apple-touch-icon" href="' . esc_url( $icon ) . '" />' . "\n";
+	},
+	2
+);
+
 add_action( 'wp_enqueue_scripts', function(){
 } );
 add_action( 'wp_footer', function(){
@@ -51,6 +110,7 @@ function kayan_is_protected_asset_handle( $handle ) {
         'rank_math',
         'seo-by-rank-math',
         'kayan-',
+        'kymeet-app',
         'yourcolor-',
         // تبعيات Rank Math / WP الأساسية التي يعتمد عليها الإضافة
         'wp-i18n',
@@ -77,7 +137,7 @@ function kayan_is_protected_asset_src( $src ) {
     if ( ! is_string( $src ) || '' === $src ) {
         return false;
     }
-    $needles = array( 'rank-math', 'seo-by-rank-math', '/kayan-', 'fa-free-fixes' );
+    $needles = array( 'rank-math', 'seo-by-rank-math', '/kayan-', 'kymeet-app', 'fa-free-fixes' );
     foreach ( $needles as $needle ) {
         if ( false !== strpos( $src, $needle ) ) {
             return true;

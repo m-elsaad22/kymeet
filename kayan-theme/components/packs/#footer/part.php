@@ -4,6 +4,11 @@ if ( function_exists( 'kymeet_store_active' ) && kymeet_store_active() ) {
 	kymeet_store_tpl( 'footer' );
 	echo kymeet_store_appnav(); // phpcs:ignore
 	kymeet_store_cfg_script();
+	$footer_js = get_template_directory_uri() . '/components/packs/' . rawurlencode( '#footer' ) . '/js/';
+	$kapp_js   = get_template_directory() . '/components/packs/#footer/js/kymeet-app.js';
+	if ( is_readable( $kapp_js ) ) {
+		echo '<script src="' . esc_url( $footer_js . 'kymeet-app.js?v=' . (int) filemtime( $kapp_js ) ) . '"></script>';
+	}
 	echo '<script src="' . esc_url( kymeet_store_url() . 'assets/kymeet.js' ) . '?v=' . (int) @filemtime( kymeet_store_dir() . 'assets/kymeet.js' ) . '"></script>';
 	if ( ! isset( $_GET['ajax'] ) ) {
 		wp_footer();

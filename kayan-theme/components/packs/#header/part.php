@@ -14,9 +14,16 @@ if( !isset($_GET['ajax']) ) {
 	echo '<!DOCTYPE html>';
 	echo '<html ' . ( function_exists( 'kayan_i18n_get_html_attrs' ) ? kayan_i18n_get_html_attrs() : 'lang="ar" dir="rtl"' ) . '>';
 	echo '<head>';
-		echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
-		echo '<meta charset="utf-8">';
-		echo '<meta name="theme-color" content="#014098">';
+		if ( $kymeet_mode ) {
+			echo '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">';
+			echo '<meta charset="utf-8">';
+			echo '<meta name="theme-color" content="#050E24">';
+			echo '<script>(function(){try{var t=localStorage.getItem("kymeet_theme");document.documentElement.setAttribute("data-theme",t==="light"?"light":"dark");}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();</script>';
+		} else {
+			echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+			echo '<meta charset="utf-8">';
+			echo '<meta name="theme-color" content="#014098">';
+		}
 // ═══ KAYAN v1.4.8+ — SEO عبر KAYAN (بيانات من Rank Math للتخزين) ═══
 // meta description يطبعها kayan-seo عبر wp_head (الجسر يقرأ rank_math_description)
 // العنوان عبر title-tag + pre_get_document_title من الجسر (rank_math_title)
@@ -94,6 +101,10 @@ if ( empty( $hide__theme_seo ) && class_exists( 'ThemeSeo' ) ) {
 			echo '</style>';
 			if ( $kymeet_mode ) {
 				echo '<link rel="stylesheet" data-style-ajax="kymeet" type="text/css" href="'.$this->StylesURL.'kymeet.css?v='.filemtime( $this->StylesPath.'kymeet.css' ).'" />';
+				$kapp_css = $this->StylesPath . 'kymeet-app.css';
+				if ( is_readable( $kapp_css ) ) {
+					echo '<link rel="stylesheet" data-style-ajax="kymeet-app" type="text/css" href="' . esc_url( $this->StylesURL . 'kymeet-app.css?v=' . filemtime( $kapp_css ) ) . '" />';
+				}
 				$Styles = array();
 			}
 			if(isset($Styles)){
@@ -113,6 +124,10 @@ if ( empty( $hide__theme_seo ) && class_exists( 'ThemeSeo' ) ) {
 				$this->Part('fonts');
 				if ( $kymeet_mode ) {
 					require ($this->StylesPath."/kymeet.css");
+					$kapp_css = $this->StylesPath . 'kymeet-app.css';
+					if ( is_readable( $kapp_css ) ) {
+						echo '</style><link rel="stylesheet" href="' . esc_url( $this->StylesURL . 'kymeet-app.css?v=' . filemtime( $kapp_css ) ) . '" /><style>';
+					}
 				} else {
 				if(isset($Styles)){
 					foreach ($Styles as $skey => $meky) {
@@ -146,7 +161,8 @@ if ( empty( $hide__theme_seo ) && class_exists( 'ThemeSeo' ) ) {
 		echo '</style>';
 	echo '</head>';
 	$kayan_lang_class = ( function_exists( 'kayan_i18n_is_english' ) && kayan_i18n_is_english() ) ? ' kayan-lang-en' : ' kayan-lang-ar';
-	echo '<body mode="light" class="before-start '.$bodyClass.$kayan_lang_class.'">';
+	$kymeet_app_class = $kymeet_mode ? ' kymeet-app' : '';
+	echo '<body mode="light" class="before-start '.$bodyClass.$kayan_lang_class.$kymeet_app_class.'">';
 	do_action('yc_hook_body_start');
 }
 

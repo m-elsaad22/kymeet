@@ -37,7 +37,7 @@ README.md
 | مصدر المنتجات | **WooCommerce `product`** إن WC مفعّل؛ وإلا CPT **`perfumes`** (`kayan-cpt`) |
 | إصدار `style.css` | **1.6.0** (سجل `KYMEET-CHANGELOG.md` حتى 1.6.4) |
 
-**Phase 1 (البرومبت):** `kymeet-app.css` + `kymeet-app.js` + `body.kymeet-app` — لم يُنفَّذ بعد.
+**Phase 1 (البرومبت):** ✅ `kymeet-app.css` + `kymeet-app.js` + `body.kymeet-app` (v1.6.5). Phase 2: شريط علوي/سفلي + «المزيد».
 
 ## النشر على kymeet-perfumes.com
 
