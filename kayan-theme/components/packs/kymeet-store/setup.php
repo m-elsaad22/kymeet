@@ -295,6 +295,7 @@ if ( ! function_exists( 'kymeet_store_clean_widget_list' ) ) {
 
 require_once dirname( __FILE__ ) . '/includes/fixes.php';
 require_once dirname( __FILE__ ) . '/includes/shell-v3.php';
+require_once dirname( __FILE__ ) . '/includes/home-app.php';
 require_once dirname( __FILE__ ) . '/admin.php';
 
 # شريط التنقل: kymeet_store_appnav() في includes/shell-v3.php

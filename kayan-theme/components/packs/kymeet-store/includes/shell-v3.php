@@ -179,29 +179,11 @@ add_action(
 				)
 			);
 		}
-		if ( 'men' === $chip ) {
-			$query->set( 'kymeet_title_like', 'رجال' );
-		}
-		if ( 'women' === $chip ) {
-			$query->set( 'kymeet_title_like', 'نسا' );
+		if ( ( 'men' === $chip || 'women' === $chip ) && function_exists( 'kymeet_audience_product_ids' ) ) {
+			$query->set( 'post__in', kymeet_audience_product_ids( $chip ) );
 		}
 	},
 	20
-);
-
-add_filter(
-	'posts_where',
-	static function ( $where, $query ) {
-		$like = $query->get( 'kymeet_title_like' );
-		if ( ! $like ) {
-			return $where;
-		}
-		global $wpdb;
-		$where .= $wpdb->prepare( " AND {$wpdb->posts}.post_title LIKE %s", '%' . $wpdb->esc_like( $like ) . '%' );
-		return $where;
-	},
-	10,
-	2
 );
 
 function kymeet_render_app_footer() {

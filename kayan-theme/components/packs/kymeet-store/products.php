@@ -65,6 +65,17 @@ function kymeet_product_box( $post ) {
 	foreach ( $flags as $k => $label ) {
 		echo '<tr><th>' . esc_html( $label ) . '</th><td><label><input type="checkbox" name="' . esc_attr( $k ) . '" value="1" ' . checked( get_post_meta( $post->ID, $k, true ), '1', false ) . '> نعم</label></td></tr>';
 	}
+	$aud = get_post_meta( $post->ID, '_kymeet_audience', true );
+	echo '<tr><th>' . esc_html( 'الجمهور' ) . '</th><td><select name="_kymeet_audience">';
+	foreach ( array(
+		''       => 'غير مصنّف (يظهر في «الكل» فقط)',
+		'men'    => 'رجالي (men)',
+		'women'  => 'نسائي (women)',
+		'unisex' => 'للجنسين (unisex)',
+	) as $val => $label ) {
+		echo '<option value="' . esc_attr( $val ) . '" ' . selected( $aud, $val, false ) . '>' . esc_html( $label ) . '</option>';
+	}
+	echo '</select><p class="description">بديل: وسم منتج (product tag) بالـ slug: men أو women أو unisex. الحقل هنا يتقدّم على الوسم.</p></td></tr>';
 	echo '</table>';
 	if ( 'product' === $post->post_type ) {
 		echo '<p>السعر والمخزون والمتغيرات من لوحة بيانات المنتج (WooCommerce). «الأكثر طلبًا» = ضع نجمة على المنتج (مميّز). العلامة التجارية من مربع «العلامات التجارية».</p>';
@@ -95,6 +106,48 @@ function kymeet_product_save( $post_id ) {
 	foreach ( $flags as $k ) {
 		update_post_meta( $post_id, $k, empty( $_POST[ $k ] ) ? '' : '1' );
 	}
+	$aud = isset( $_POST['_kymeet_audience'] ) ? sanitize_key( wp_unslash( $_POST['_kymeet_audience'] ) ) : '';
+	if ( ! in_array( $aud, array( 'men', 'women', 'unisex' ), true ) ) {
+		$aud = '';
+	}
+	update_post_meta( $post_id, '_kymeet_audience', $aud );
+}
+
+function kymeet_product_audience( $post_id ) {
+	$meta = get_post_meta( $post_id, '_kymeet_audience', true );
+	if ( in_array( $meta, array( 'men', 'women', 'unisex' ), true ) ) {
+		return $meta;
+	}
+	if ( taxonomy_exists( 'product_tag' ) ) {
+		$slugs = wp_get_post_terms( $post_id, 'product_tag', array( 'fields' => 'slugs' ) );
+		if ( is_array( $slugs ) ) {
+			foreach ( array( 'men', 'women', 'unisex' ) as $slug ) {
+				if ( in_array( $slug, $slugs, true ) ) {
+					return $slug;
+				}
+			}
+		}
+	}
+	return '';
+}
+
+function kymeet_audience_product_ids( $chip ) {
+	$wanted = 'men' === $chip ? array( 'men', 'unisex' ) : array( 'women', 'unisex' );
+	$posts  = get_posts(
+		array(
+			'post_type'      => 'product',
+			'post_status'    => 'publish',
+			'fields'         => 'ids',
+			'posts_per_page' => 200,
+		)
+	);
+	$ids = array();
+	foreach ( (array) $posts as $id ) {
+		if ( in_array( kymeet_product_audience( $id ), $wanted, true ) ) {
+			$ids[] = (int) $id;
+		}
+	}
+	return $ids ? $ids : array( 0 );
 }
 
 # صف بيانات منتج واحد

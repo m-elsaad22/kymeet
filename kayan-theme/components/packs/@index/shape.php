@@ -64,12 +64,8 @@ $this->Part('header',array('Styles'=>$Styles,'IntroPage'=>true,'Widgets__list'=>
 	if( $ShowIntro == true && ! $kymeet_mode ) $YC__WidgetsMachine->widgets__model__UI( array( 'model__value'=> $HomeIntro) );
 
 	# WIDGETS UI
-	if( $kymeet_mode ){
-		$has_kymeet = false;
-		$home_widgets = function_exists( 'kymeet_store_clean_widget_list' ) ? kymeet_store_clean_widget_list( $home_widgets ) : $home_widgets;
-		foreach ( $home_widgets as $hw ) { if ( isset( $hw['widget_id'] ) && strpos( $hw['widget_id'], 'kymeet_' ) === 0 ) { $has_kymeet = true; break; } }
-		if ( $has_kymeet ) { $YC__WidgetsMachine->widgets___UI( array('Widgets_data'=>$home_widgets,'WidgetID'=>'home_widgets') ); }
-		else { kymeet_store_render_defaults(); }
+	if( $kymeet_mode && function_exists( 'kymeet_render_home_app' ) ){
+		kymeet_render_home_app();
 	}elseif( !empty( $home_widgets ) )  $YC__WidgetsMachine->widgets___UI( array('Widgets_data'=>$home_widgets,'WidgetID'=>'home_widgets') );
 
 $this->Part('footer',array('Styles'=>$Styles,'IntroPage'=>true,'Widgets__list'=>$Widgets__list));

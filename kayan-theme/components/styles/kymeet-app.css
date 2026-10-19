@@ -320,6 +320,151 @@ body.kymeet-app footer:not(.kymeet-site-footer) {
   border-color: transparent;
 }
 
+.kapp-hero {
+  display: grid;
+  gap: 16px;
+  margin: 16px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: var(--royal-metal);
+  color: #fff;
+}
+
+.kapp-hero h1,
+.kapp-hero p,
+.kapp-hero a {
+  color: #fff;
+}
+
+.kapp-hero__media {
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+  min-height: 180px;
+  display: grid;
+  place-items: center;
+}
+
+.kapp-hero__media img,
+.kapp-card__img {
+  width: 100%;
+  max-height: 280px;
+  object-fit: contain;
+  aspect-ratio: 4 / 5;
+}
+
+.kapp-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.kapp-btn {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding-inline: 18px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.kapp-btn--primary {
+  background: #fff;
+  color: var(--royal-900) !important;
+}
+
+.kapp-btn--ghost {
+  border: 1px solid #fff;
+  color: #fff !important;
+}
+
+.kapp-sec {
+  padding: 24px 16px;
+  background: var(--bg);
+}
+
+.kapp-sec--soft {
+  background: var(--bg-soft);
+}
+
+.kapp-sec__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.kapp-sec h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(22px, 4vw, 32px);
+}
+
+.kapp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.kapp-card a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 44px;
+  color: var(--text);
+  text-decoration: none;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 8px;
+}
+
+.kapp-card__media {
+  background: var(--bg-soft);
+  border-radius: var(--radius-sm);
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.kapp-ph {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: var(--bg-soft);
+}
+
+.kapp-trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.kapp-trust li {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding-inline: 12px;
+  box-shadow: var(--shadow-1);
+}
+
+@media (min-width: 768px) {
+  .kapp-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+  }
+
+  .kapp-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (min-width: 1024px) {
   body.kymeet-app {
     padding-bottom: 0;

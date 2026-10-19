@@ -1,3 +1,8 @@
+# 1.6.8 — Step 4 home + audience field
+- الجمهور: حقل `_kymeet_audience` أو وسم men/women/unisex (بدون فلتر العنوان)
+- الرئيسية من منتجات WooCommerce بالترتيب المطلوب
+- ZIP: `dist/kayan-theme-kymeet-ui.zip` (المجلد الداخلي ما زال `kayan-theme`)
+
 # 1.6.7 — Step 3 app chrome
 - هيدر أبيض 56px موحّد (شعار + بحث + سلة Pepsi)
 - شريط سفلي 5 تبويبات، مخفي ≥1024، حسابي → /my-account/
