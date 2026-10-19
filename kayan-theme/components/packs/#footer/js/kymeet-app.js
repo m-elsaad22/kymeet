@@ -1,10 +1,11 @@
 /**
- * KYMEET app chrome — Step 3
+ * KYMEET app chrome — Step 3 + 4.1
  */
 (function () {
   'use strict';
 
   var WISH_KEY = 'kymeet_wish_v1';
+  var LANG = document.documentElement.lang && document.documentElement.lang.indexOf('en') === 0 ? 'en' : 'ar';
 
   function setThemeColor() {
     var meta = document.querySelector('meta[name="theme-color"]');
@@ -48,27 +49,56 @@
     });
   }
 
+  function esc(t) {
+    return String(t || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function brandInName(name, brand) {
+    if (!name || !brand) return false;
+    return name.toLowerCase().indexOf(brand.toLowerCase()) !== -1;
+  }
+
+  function formatPrice(p) {
+    if (!p || p.price == null || p.price === '') return '';
+    var n = Number(p.price);
+    if (isNaN(n)) return '';
+    var cur = LANG === 'en' ? ' EGP' : ' ج.م';
+    return n.toLocaleString('en-US') + cur;
+  }
+
+  function resultItem(p) {
+    var href = p.url || '#';
+    var name = p.name || '';
+    var brand = p.brand && !brandInName(name, p.brand) ? p.brand : '';
+    var img = p.image
+      ? '<img class="kapp-hit__img" src="' + esc(p.image) + '" alt="" loading="lazy" width="48" height="48">'
+      : '<span class="kapp-hit__ph" aria-hidden="true"></span>';
+    var price = formatPrice(p);
+    return (
+      '<a class="kapp-hit" href="' +
+      esc(href) +
+      '">' +
+      img +
+      '<span class="kapp-hit__body"><span class="kapp-hit__name">' +
+      esc(name) +
+      '</span>' +
+      (brand ? '<small class="kapp-hit__brand">' + esc(brand) + '</small>' : '') +
+      (price ? '<span class="kapp-hit__price">' + esc(price) + '</span>' : '') +
+      '</span></a>'
+    );
+  }
+
   function renderResults(list, target) {
     if (!target) return;
+    var emptyMsg = LANG === 'en' ? 'No results found.' : 'لا توجد نتائج.';
     if (!list.length) {
-      target.innerHTML = '<p class="kapp-muted">لا توجد نتائج.</p>';
+      target.innerHTML = '<p class="kapp-muted kapp-empty">' + emptyMsg + '</p>';
       return;
     }
-    target.innerHTML = list
-      .slice(0, 12)
-      .map(function (p) {
-        var href = p.url || '#';
-        return (
-          '<a href="' +
-          href +
-          '"><span>' +
-          (p.name || '') +
-          '</span><small>' +
-          (p.brand || '') +
-          '</small></a>'
-        );
-      })
-      .join('');
+    target.innerHTML = list.map(resultItem).join('');
   }
 
   function onSearchInput() {

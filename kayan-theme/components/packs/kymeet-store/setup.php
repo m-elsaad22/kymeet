@@ -294,6 +294,7 @@ if ( ! function_exists( 'kymeet_store_clean_widget_list' ) ) {
 }
 
 require_once dirname( __FILE__ ) . '/includes/fixes.php';
+require_once dirname( __FILE__ ) . '/includes/content-settings.php';
 require_once dirname( __FILE__ ) . '/includes/shell-v3.php';
 require_once dirname( __FILE__ ) . '/includes/home-app.php';
 require_once dirname( __FILE__ ) . '/admin.php';
@@ -305,13 +306,35 @@ function kymeet_store_logo_url() {
 	$m   = kymeet_store_manifest();
 	$opt = get_option( 'kymeet_hf', array() );
 	$opt = is_array( $opt ) ? $opt : array();
-	if ( empty( $m['header'] ) ) {
-		return '';
-	}
-	foreach ( $m['header'] as $t ) {
-		if ( 'img' === $t['kind'] && 'header_img4' === $t['k'] ) {
-			return kymeet_store_img_url( kymeet_store_val( $t, $opt ) );
+	if ( ! empty( $m['header'] ) ) {
+		foreach ( $m['header'] as $t ) {
+			if ( 'img' === $t['kind'] && 'header_img4' === $t['k'] ) {
+				$url = kymeet_store_img_url( kymeet_store_val( $t, $opt ) );
+				if ( $url && 0 !== strpos( $url, 'data:image/' ) ) {
+					return $url;
+				}
+			}
 		}
+	}
+	$logo__data = get_option( 'logo__data' );
+	if ( is_array( $logo__data ) && isset( $logo__data['logo__mode'] ) && 'Image' === $logo__data['logo__mode'] && ! empty( $logo__data['Image'] ) ) {
+		$box = $logo__data['Image'];
+		if ( ! empty( $box['image_logo_id'] ) ) {
+			$u = wp_get_attachment_url( (int) $box['image_logo_id'] );
+			if ( $u ) {
+				return esc_url( $u );
+			}
+		}
+		if ( ! empty( $box['image_logo']['url'] ) && is_string( $box['image_logo']['url'] ) ) {
+			return esc_url( $box['image_logo']['url'] );
+		}
+		if ( ! empty( $box['image_logo'] ) && is_string( $box['image_logo'] ) && preg_match( '#^https?://#', $box['image_logo'] ) ) {
+			return esc_url( $box['image_logo'] );
+		}
+	}
+	$theme_logo = get_template_directory_uri() . '/assets/branding/kymeet-logo.png';
+	if ( file_exists( get_template_directory() . '/assets/branding/kymeet-logo.png' ) ) {
+		return esc_url( $theme_logo );
 	}
 	return '';
 }

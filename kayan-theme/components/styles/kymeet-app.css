@@ -27,13 +27,27 @@ body.kymeet-app .k-hero-card {
 }
 
 body.kymeet-app .btn-gold,
-body.kymeet-app .btn.btn-gold {
+body.kymeet-app .btn.btn-gold,
+body.kymeet-app .prod-actions .add,
+body.kymeet-app .kx-wc .button,
+body.kymeet-app .kx-filters button,
+body.kymeet-app .kx-filters .button {
   background: var(--royal-metal) !important;
   color: #fff !important;
   border: none !important;
   border-radius: var(--radius-pill) !important;
   min-height: 44px;
   box-shadow: var(--shadow-btn);
+}
+
+body.kymeet-app .kx-filters input[type='number'],
+body.kymeet-app .kx-filters select,
+body.kymeet-app .woocommerce .star-rating,
+body.kymeet-app .comment-form input,
+body.kymeet-app .comment-form textarea {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
 }
 
 body.kymeet-app #hdr,
@@ -150,8 +164,9 @@ body.kymeet-app footer:not(.kymeet-site-footer) {
 
 .kapp-count {
   position: absolute;
-  margin-inline-start: 18px;
-  margin-top: -18px;
+  top: 2px;
+  inset-inline-end: 2px;
+  margin: 0;
   min-width: 18px;
   height: 18px;
   padding: 0 4px;
@@ -159,6 +174,7 @@ body.kymeet-app footer:not(.kymeet-site-footer) {
   font-size: 11px;
   line-height: 18px;
   text-align: center;
+  pointer-events: none;
 }
 
 .kapp-icon-btn {
@@ -240,12 +256,97 @@ body.kymeet-app footer:not(.kymeet-site-footer) {
   padding: 0;
 }
 
-.kapp-suggest a,
-.kapp-results a {
+.kapp-hit {
   display: flex;
-  min-height: 44px;
   align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 0;
   color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.kapp-hit__img,
+.kapp-hit__ph {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  border-radius: var(--radius-sm);
+  object-fit: contain;
+  background: var(--bg-soft);
+}
+
+.kapp-hit__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.kapp-hit__name {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.kapp-hit__brand {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kapp-hit__price {
+  font-size: 13px;
+  color: var(--royal-700);
+}
+
+.kapp-empty {
+  padding: 16px 0;
+}
+
+/* Inner page title bars — readable on white (no dark-on-navy) */
+body.kymeet-app .phero,
+body.kymeet-app .phero.compact {
+  background: var(--bg-soft) !important;
+  color: var(--text) !important;
+  padding: 88px 0 28px !important;
+  text-align: start;
+}
+
+body.kymeet-app .phero::before,
+body.kymeet-app .phero::after {
+  display: none !important;
+}
+
+body.kymeet-app .phero h1 {
+  color: var(--text) !important;
+  font-weight: 700;
+}
+
+body.kymeet-app .phero .crumb,
+body.kymeet-app .phero .crumb a,
+body.kymeet-app .phero .crumb span {
+  color: var(--muted) !important;
+}
+
+body.kymeet-app .phero .crumb a:hover {
+  color: var(--royal-700) !important;
+}
+
+body.kymeet-app .kapp-card__media {
+  aspect-ratio: auto;
+  min-height: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+body.kymeet-app .kapp-card a {
+  padding-top: 8px;
+}
+
+body.kymeet-app .kapp-card__img {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-sm);
 }
 
 .kymeet-site-footer {

@@ -18,6 +18,24 @@ function kymeet_fix_product_main_query( $query ) {
 add_action( 'pre_get_posts', 'kymeet_fix_product_main_query', 6 );
 
 /**
+ * Hide default Uncategorized from product meta / lists.
+ */
+function kymeet_filter_product_cat_terms( $terms, $post_id, $taxonomy ) {
+	if ( is_admin() || 'product_cat' !== $taxonomy || ! is_array( $terms ) ) {
+		return $terms;
+	}
+	$out = array();
+	foreach ( $terms as $term ) {
+		if ( $term instanceof WP_Term && 'uncategorized' === $term->slug ) {
+			continue;
+		}
+		$out[] = $term;
+	}
+	return $out;
+}
+add_filter( 'get_the_terms', 'kymeet_filter_product_cat_terms', 10, 3 );
+
+/**
  * WC template compatibility marker (ThemeStatic still renders @single/product.php).
  */
 function kymeet_wc_single_product_template_path() {

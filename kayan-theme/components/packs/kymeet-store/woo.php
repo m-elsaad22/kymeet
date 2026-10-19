@@ -501,7 +501,8 @@ function kymeet_wc_create_attributes() {
 function kymeet_wc_filter_bar() {
 	$en  = kymeet_store_is_en();
 	$out = '';
-	if ( taxonomy_exists( 'product_brand' ) ) {
+	// Brand chips rendered via kapp-chips (shell-v3) on app shop — avoid duplicate row.
+	if ( ! ( function_exists( 'kymeet_store_active' ) && kymeet_store_active() ) && taxonomy_exists( 'product_brand' ) ) {
 		$terms = get_terms( array( 'taxonomy' => 'product_brand', 'hide_empty' => true, 'orderby' => 'term_id' ) );
 		if ( ! is_wp_error( $terms ) && $terms ) {
 			$out .= '<div class="kx-brands"><a class="chip" href="' . esc_url( wc_get_page_permalink( 'shop' ) ) . '">' . esc_html( $en ? 'All' : 'الكل' ) . '</a>';

@@ -29,10 +29,13 @@ function kymeet_app_en() {
 }
 
 function kymeet_render_announce() {
-	$en = kymeet_app_en();
-	$text = $en
-		? '[Placeholder] Announcement — replace this text in the theme when you have a real offer.'
-		: '[نص تجريبي] شريط إعلان — استبدله بنص حقيقي من المتجر عند توفر العرض.';
+	$en   = kymeet_app_en();
+	$text = function_exists( 'kymeet_app_content_get' )
+		? kymeet_app_content_get( 'announce_ar', 'announce_en' )
+		: '';
+	if ( '' === $text ) {
+		return;
+	}
 	echo '<div class="kapp-announce" id="kapp-announce" role="region" aria-label="' . esc_attr( $en ? 'Announcement' : 'إعلان' ) . '">';
 	echo '<p>' . esc_html( $text ) . '</p>';
 	echo '<button type="button" class="kapp-announce__x" data-kapp-announce-close aria-label="' . esc_attr( $en ? 'Dismiss' : 'إغلاق' ) . '"><i class="fas fa-xmark" aria-hidden="true"></i></button>';
@@ -44,10 +47,12 @@ function kymeet_render_app_header() {
 	$home = home_url( '/' );
 	$logo = function_exists( 'kymeet_store_logo_url' ) ? kymeet_store_logo_url() : '';
 	$name = get_bloginfo( 'name' );
+	$alt  = $name ? $name : 'KYMEET';
 	echo '<header class="kapp-hdr" id="kapp-hdr">';
 	echo '<a class="kapp-brand" href="' . esc_url( $home ) . '">';
 	if ( $logo ) {
-		echo '<img class="kapp-brand__img" src="' . esc_url( $logo ) . '" alt="" width="36" height="36">';
+		echo '<img class="kapp-brand__img" src="' . esc_url( $logo ) . '" alt="' . esc_attr( $alt ) . '" width="36" height="36" decoding="async" onerror="this.hidden=true;var s=this.nextElementSibling;if(s){s.hidden=false;}">';
+		echo '<span class="kapp-brand__mark" hidden aria-hidden="true"><i class="fas fa-crown"></i></span>';
 	} else {
 		echo '<span class="kapp-brand__mark" aria-hidden="true"><i class="fas fa-crown"></i></span>';
 	}
@@ -90,9 +95,12 @@ function kymeet_render_shop_chips() {
 		return '';
 	}
 	$en   = kymeet_app_en();
-	$base = kymeet_app_shop_url();
-	$cur  = isset( $_GET['kymeet_chip'] ) ? sanitize_key( wp_unslash( $_GET['kymeet_chip'] ) ) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$base  = remove_query_arg( array( 'kymeet_chip', 'kymeet_brand' ), kymeet_app_shop_url() );
+	$cur   = isset( $_GET['kymeet_chip'] ) ? sanitize_key( wp_unslash( $_GET['kymeet_chip'] ) ) : 'all'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 	$brand = isset( $_GET['kymeet_brand'] ) ? sanitize_title( wp_unslash( $_GET['kymeet_brand'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( '' === $cur || 'all' === $cur ) {
+		$cur = 'all';
+	}
 	$chips = array(
 		array( 'all', $en ? 'All' : 'الكل', $base ),
 		array( 'men', $en ? 'Men' : 'رجالي', add_query_arg( 'kymeet_chip', 'men', $base ) ),
@@ -145,46 +153,49 @@ add_action(
 	4
 );
 
-add_action(
-	'pre_get_posts',
-	static function ( $query ) {
-		if ( is_admin() || ! $query->is_main_query() || ! function_exists( 'is_shop' ) ) {
-			return;
-		}
-		if ( ! is_shop() && ! ( function_exists( 'is_product_taxonomy' ) && is_product_taxonomy() ) ) {
-			return;
-		}
-		$chip = isset( $_GET['kymeet_chip'] ) ? sanitize_key( wp_unslash( $_GET['kymeet_chip'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( 'feat' === $chip ) {
-			$query->set(
-				'tax_query',
-				array(
-					array(
-						'taxonomy' => 'product_visibility',
-						'field'    => 'name',
-						'terms'    => array( 'featured' ),
-					),
-				)
-			);
-		}
-		if ( 'brand' === $chip && ! empty( $_GET['kymeet_brand'] ) && function_exists( 'kymeet_store_brand_tax' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$query->set(
-				'tax_query',
-				array(
-					array(
-						'taxonomy' => kymeet_store_brand_tax(),
-						'field'    => 'slug',
-						'terms'    => sanitize_title( wp_unslash( $_GET['kymeet_brand'] ) ),
-					),
-				)
-			);
-		}
-		if ( ( 'men' === $chip || 'women' === $chip ) && function_exists( 'kymeet_audience_product_ids' ) ) {
-			$query->set( 'post__in', kymeet_audience_product_ids( $chip ) );
-		}
-	},
-	20
-);
+function kymeet_shop_chip_from_request() {
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	if ( ! isset( $_GET['kymeet_chip'] ) ) {
+		return '';
+	}
+	$chip = sanitize_key( wp_unslash( $_GET['kymeet_chip'] ) );
+	return in_array( $chip, array( 'all', '' ), true ) ? '' : $chip;
+}
+
+function kymeet_apply_shop_chip_query( $query ) {
+	if ( is_admin() || ! $query instanceof WP_Query ) {
+		return;
+	}
+	$chip = kymeet_shop_chip_from_request();
+	if ( '' === $chip ) {
+		return;
+	}
+	if ( 'feat' === $chip && taxonomy_exists( 'product_visibility' ) ) {
+		$tax_query   = (array) $query->get( 'tax_query' );
+		$tax_query[] = array(
+			'taxonomy' => 'product_visibility',
+			'field'    => 'name',
+			'terms'    => array( 'featured' ),
+			'operator' => 'IN',
+		);
+		$query->set( 'tax_query', $tax_query );
+	}
+	if ( 'brand' === $chip && ! empty( $_GET['kymeet_brand'] ) && function_exists( 'kymeet_store_brand_tax' ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$tax_query   = (array) $query->get( 'tax_query' );
+		$tax_query[] = array(
+			'taxonomy' => kymeet_store_brand_tax(),
+			'field'    => 'slug',
+			'terms'    => sanitize_title( wp_unslash( $_GET['kymeet_brand'] ) ),
+		);
+		$query->set( 'tax_query', $tax_query );
+	}
+	if ( ( 'men' === $chip || 'women' === $chip ) && function_exists( 'kymeet_audience_product_ids' ) ) {
+		$ids = kymeet_audience_product_ids( $chip );
+		$query->set( 'post__in', $ids ? $ids : array( 0 ) );
+	}
+}
+
+add_action( 'woocommerce_product_query', 'kymeet_apply_shop_chip_query', 30 );
 
 function kymeet_render_app_footer() {
 	$en   = kymeet_app_en();
@@ -192,7 +203,12 @@ function kymeet_render_app_footer() {
 	$acc  = kymeet_app_account_url();
 	echo '<footer class="kymeet-site-footer">';
 	echo '<div class="wrap kapp-foot">';
-	echo '<div><p class="kapp-foot__brand">KYMEET</p><p>' . esc_html( $en ? '[Placeholder] Short store description — replace with the real about text.' : '[نص تجريبي] تعريف مختصر بالمتجر — استبدله بالنص الحقيقي.' ) . '</p></div>';
+	$blurb = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'footer_blurb_ar', 'footer_blurb_en' ) : '';
+	echo '<div><p class="kapp-foot__brand">KYMEET</p>';
+	if ( $blurb ) {
+		echo '<p>' . esc_html( $blurb ) . '</p>';
+	}
+	echo '</div>';
 	echo '<div><h2>' . esc_html( $en ? 'Customer service' : 'خدمة العملاء' ) . '</h2><ul>';
 	echo '<li><a href="' . esc_url( $acc ) . '">' . esc_html( $en ? 'My account' : 'حسابي' ) . '</a></li>';
 	echo '<li><a href="' . esc_url( $acc ) . '">' . esc_html( $en ? 'Orders' : 'طلباتي' ) . '</a></li>';
@@ -207,12 +223,15 @@ function kymeet_render_app_footer() {
 	echo '<li><a href="#">' . esc_html( $en ? '[Placeholder] Privacy' : '[رابط تجريبي] الخصوصية' ) . '</a></li>';
 	echo '<li><a href="#">' . esc_html( $en ? '[Placeholder] Shipping & returns' : '[رابط تجريبي] الشحن والإرجاع' ) . '</a></li>';
 	echo '</ul></div>';
-	echo '<form class="kapp-news" action="#" method="post" onsubmit="return false;">';
-	echo '<h2>' . esc_html( $en ? 'Newsletter' : 'النشرة البريدية' ) . '</h2>';
-	echo '<p>' . esc_html( $en ? '[Placeholder] Newsletter is not connected yet.' : '[تجريبي] النشرة غير مربوطة بعد.' ) . '</p>';
-	echo '<label><span class="screen-reader-text">Email</span><input type="email" name="kapp_news" placeholder="name@example.com" autocomplete="email"></label>';
-	echo '<button type="submit" class="kapp-news__btn">' . esc_html( $en ? 'Subscribe' : 'اشتراك' ) . '</button>';
-	echo '</form>';
+	$news = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'newsletter_ar', 'newsletter_en' ) : '';
+	if ( $news ) {
+		echo '<form class="kapp-news" action="#" method="post" onsubmit="return false;">';
+		echo '<h2>' . esc_html( $en ? 'Newsletter' : 'النشرة البريدية' ) . '</h2>';
+		echo '<p>' . esc_html( $news ) . '</p>';
+		echo '<label><span class="screen-reader-text">' . esc_html( $en ? 'Email address' : 'البريد الإلكتروني' ) . '</span><input type="email" name="kapp_news" placeholder="' . esc_attr( $en ? 'name@example.com' : 'name@example.com' ) . '" autocomplete="email"></label>';
+		echo '<button type="submit" class="kapp-news__btn">' . esc_html( $en ? 'Subscribe' : 'اشتراك' ) . '</button>';
+		echo '</form>';
+	}
 	echo '</div></footer>';
 }
 

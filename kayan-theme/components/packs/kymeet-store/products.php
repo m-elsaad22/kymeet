@@ -131,6 +131,22 @@ function kymeet_product_audience( $post_id ) {
 	return '';
 }
 
+function kymeet_brand_in_product_name( $name, $brand ) {
+	if ( ! $brand || ! $name ) {
+		return false;
+	}
+	$nb = preg_replace( '/\s+/u', ' ', trim( wp_strip_all_tags( $brand ) ) );
+	$nn = preg_replace( '/\s+/u', ' ', trim( wp_strip_all_tags( $name ) ) );
+	if ( '' === $nb || '' === $nn ) {
+		return false;
+	}
+	return ( false !== stripos( $nn, $nb ) );
+}
+
+function kymeet_product_brand_label( $name, $brand ) {
+	return kymeet_brand_in_product_name( $name, $brand ) ? '' : $brand;
+}
+
 function kymeet_audience_product_ids( $chip ) {
 	$wanted = 'men' === $chip ? array( 'men', 'unisex' ) : array( 'women', 'unisex' );
 	$posts  = get_posts(
@@ -179,7 +195,7 @@ function kymeet_store_row( $p ) {
 		'id'    => $p->post_name,
 		'pid'   => (int) $p->ID,
 		'name'  => $name,
-		'brand' => $brand,
+		'brand' => kymeet_product_brand_label( $name, $brand ),
 		'price' => 0,
 		'image' => $img ? $img : '',
 		'url'   => get_permalink( $p ),
