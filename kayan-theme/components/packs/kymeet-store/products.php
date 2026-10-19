@@ -154,11 +154,17 @@ function kymeet_audience_product_ids( $chip ) {
 function kymeet_store_row( $p ) {
 	$en    = function_exists( 'kymeet_store_is_en' ) && kymeet_store_is_en();
 	$brand = '';
-	$terms = get_the_terms( $p->ID, kymeet_store_brand_tax() );
-	if ( is_array( $terms ) && $terms ) {
-		$brand = $terms[0]->name;
+	$brand_tax = function_exists( 'kymeet_store_brand_tax' ) ? kymeet_store_brand_tax() : '';
+	if ( $brand_tax && taxonomy_exists( $brand_tax ) ) {
+		$terms = get_the_terms( $p->ID, $brand_tax );
+		if ( is_array( $terms ) && $terms ) {
+			$brand = $terms[0]->name;
+		}
 	}
-	$img = get_the_post_thumbnail_url( $p->ID, 'large' );
+	$img = get_the_post_thumbnail_url( $p->ID, 'woocommerce_thumbnail' );
+	if ( ! $img ) {
+		$img = get_the_post_thumbnail_url( $p->ID, 'medium' );
+	}
 	if ( ! $img ) {
 		$img = get_post_meta( $p->ID, '_kymeet_image_url', true );
 	}

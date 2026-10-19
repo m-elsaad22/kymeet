@@ -47,10 +47,17 @@ function kymeet_home_img( $row, $priority = false ) {
 	if ( $html ) {
 		return $html;
 	}
-	if ( ! empty( $row['image'] ) ) {
-		return '<img class="kapp-card__img" src="' . esc_url( $row['image'] ) . '" alt="' . esc_attr( $alt ) . '" loading="lazy" width="300" height="375">';
+	$external = ! empty( $row['image'] ) ? esc_url( $row['image'] ) : '';
+	if ( $external ) {
+		return '<img class="kapp-card__img" src="' . $external . '" alt="' . esc_attr( $alt ) . '" loading="lazy" width="300" height="375">';
 	}
-	$src = function_exists( 'wc_placeholder_img_src' ) ? wc_placeholder_img_src( 'woocommerce_thumbnail' ) : '';
+	$src = '';
+	if ( function_exists( 'wc_placeholder_img_src' ) ) {
+		$src = wc_placeholder_img_src( 'woocommerce_thumbnail' );
+		if ( ! $src ) {
+			$src = wc_placeholder_img_src();
+		}
+	}
 	if ( $src ) {
 		return '<img class="kapp-card__img" src="' . esc_url( $src ) . '" alt="" loading="lazy" width="300" height="375">';
 	}
@@ -58,8 +65,9 @@ function kymeet_home_img( $row, $priority = false ) {
 }
 
 function kymeet_home_cards( $rows ) {
+	$en = function_exists( 'kymeet_app_en' ) && kymeet_app_en();
 	if ( ! $rows ) {
-		echo '<p class="kapp-muted">' . esc_html( kymeet_app_en() ? 'No products yet.' : 'لا توجد منتجات بعد.' ) . '</p>';
+		echo '<p class="kapp-muted">' . esc_html( $en ? 'No products yet.' : 'لا توجد منتجات بعد.' ) . '</p>';
 		return;
 	}
 	echo '<div class="kapp-row">';
@@ -113,8 +121,9 @@ function kymeet_render_home_app() {
 
 	echo '<section class="kapp-sec kapp-sec--soft">';
 	kymeet_home_head( $en ? 'Bestsellers' : 'الأكثر مبيعًا', add_query_arg( 'kymeet_chip', 'feat', $shop ) );
-	kymeet_home_cards(
-		kymeet_home_query(
+	$best = array();
+	if ( taxonomy_exists( 'product_visibility' ) ) {
+		$best = kymeet_home_query(
 			array(
 				'tax_query' => array(
 					array(
@@ -124,8 +133,9 @@ function kymeet_render_home_app() {
 					),
 				),
 			)
-		)
-	);
+		);
+	}
+	kymeet_home_cards( $best );
 	echo '</section>';
 
 	echo '<section class="kapp-sec">';
@@ -152,13 +162,22 @@ function kymeet_render_home_app() {
 
 	echo '<section class="kapp-sec">';
 	kymeet_home_head( $en ? 'Gifts' : 'الهدايا', $shop );
-	$gifts = taxonomy_exists( 'product_tag' ) ? kymeet_home_query(
+	$gift_slugs = array();
+	if ( taxonomy_exists( 'product_tag' ) ) {
+		foreach ( array( 'gift', 'gifts' ) as $slug ) {
+			$term = get_term_by( 'slug', $slug, 'product_tag' );
+			if ( $term instanceof WP_Term ) {
+				$gift_slugs[] = $slug;
+			}
+		}
+	}
+	$gifts = $gift_slugs ? kymeet_home_query(
 		array(
 			'tax_query' => array(
 				array(
 					'taxonomy' => 'product_tag',
 					'field'    => 'slug',
-					'terms'    => array( 'gift', 'gifts' ),
+					'terms'    => $gift_slugs,
 				),
 			),
 		)
