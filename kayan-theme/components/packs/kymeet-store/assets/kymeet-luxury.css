@@ -1,0 +1,455 @@
+/* KYMEET App UI — luxury navy + gold overlay (mobile-first) */
+:root {
+  --kymeet-navy: #050d1f;
+  --kymeet-navy-2: #0a1628;
+  --kymeet-navy-3: #101f38;
+  --kymeet-gold: #c9a227;
+  --kymeet-gold-2: #e4c76b;
+  --kymeet-ink: #f4f6fb;
+  --kymeet-muted: #9fb0cc;
+  --kymeet-line: rgba(201, 162, 39, 0.22);
+  --kymeet-r: 16px;
+  --kymeet-nav-h: 64px;
+  --kymeet-safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+body.kymeet-store-active {
+  background: var(--kymeet-navy) !important;
+  color: var(--kymeet-ink);
+  font-family: "Alexandria", "Tajawal", system-ui, sans-serif;
+  padding-bottom: calc(var(--kymeet-nav-h) + var(--kymeet-safe-b) + 12px);
+}
+
+@media (min-width: 1024px) {
+  body.kymeet-store-active {
+    padding-bottom: 0;
+  }
+}
+
+.kymeet-sr-h1 {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Header */
+body.kymeet-store-active #hdr,
+body.kymeet-store-active #kymeet-hdr {
+  background: linear-gradient(180deg, rgba(5, 13, 31, 0.96), rgba(5, 13, 31, 0.72)) !important;
+  border-bottom: 1px solid var(--kymeet-line);
+  backdrop-filter: blur(12px);
+}
+
+body.kymeet-store-active #hdr .logo,
+body.kymeet-store-active #kymeet-hdr .logo,
+body.kymeet-store-active #hdr .btn-icon,
+body.kymeet-store-active #kymeet-hdr .btn-icon {
+  color: var(--kymeet-gold-2) !important;
+}
+
+body.kymeet-store-active .btn-gold {
+  background: linear-gradient(135deg, var(--kymeet-gold), #a88418) !important;
+  color: #0a1020 !important;
+  border: none !important;
+  border-radius: 999px !important;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.25);
+}
+
+body.kymeet-store-active .btn-outline-royal,
+body.kymeet-store-active .btn-outline-light,
+body.kymeet-store-active .btn-ghost-w {
+  border-color: var(--kymeet-line) !important;
+  color: var(--kymeet-ink) !important;
+}
+
+/* Sections */
+body.kymeet-store-active .sec,
+body.kymeet-store-active .hero,
+body.kymeet-store-active .story,
+body.kymeet-store-active #bestsellers,
+body.kymeet-store-active #catalog,
+body.kymeet-store-active #discover,
+body.kymeet-store-active #new {
+  background: var(--kymeet-navy) !important;
+}
+
+body.kymeet-store-active .sec[style*="FFFFFF"],
+body.kymeet-store-active .sec[style*="F4F7FD"],
+body.kymeet-store-active .sec[style*="F8FAFE"] {
+  background: var(--kymeet-navy) !important;
+}
+
+body.kymeet-store-active .sec .shead h2,
+body.kymeet-store-active .hero h2,
+body.kymeet-store-active .phero h1 {
+  color: var(--kymeet-ink) !important;
+  font-family: "Cinzel", "Alexandria", serif;
+}
+
+body.kymeet-store-active .sec .shead p,
+body.kymeet-store-active .tag.en {
+  color: var(--kymeet-muted) !important;
+}
+
+body.kymeet-store-active .tag.en {
+  letter-spacing: 0.35em;
+  font-size: 11px;
+}
+
+/* Hero */
+body.kymeet-store-active .hero {
+  background: radial-gradient(120% 80% at 50% 0%, var(--kymeet-navy-3), var(--kymeet-navy)) !important;
+}
+
+body.kymeet-store-active .hero-c .hcb {
+  background: var(--kymeet-navy-2) !important;
+  border: 1px solid var(--kymeet-line);
+  border-radius: var(--kymeet-r);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+}
+
+body.kymeet-store-active .hv-slide img,
+body.kymeet-store-active .hero-c img {
+  object-fit: cover;
+  width: 100%;
+  max-height: min(52vh, 420px);
+}
+
+body.kymeet-store-active .hcb-price b {
+  color: var(--kymeet-gold-2) !important;
+}
+
+/* Product cards */
+body.kymeet-store-active .prod,
+body.kymeet-store-active article.prod {
+  background: var(--kymeet-navy-2) !important;
+  border: 1px solid var(--kymeet-line) !important;
+  border-radius: var(--kymeet-r) !important;
+  overflow: hidden;
+}
+
+body.kymeet-store-active .prod-img {
+  aspect-ratio: 3 / 4;
+  background: var(--kymeet-navy-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.kymeet-store-active .prod-img img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  padding: 10px;
+}
+
+body.kymeet-store-active .prod-name,
+body.kymeet-store-active .kbrand b,
+body.kymeet-store-active .brand-chip-x {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+body.kymeet-store-active .prod-name,
+body.kymeet-store-active .prod-brand {
+  color: var(--kymeet-ink) !important;
+}
+
+body.kymeet-store-active .prod-price .now {
+  color: var(--kymeet-gold-2) !important;
+}
+
+body.kymeet-store-active .prod .add {
+  background: rgba(201, 162, 39, 0.12) !important;
+  color: var(--kymeet-gold-2) !important;
+  border: 1px solid var(--kymeet-line) !important;
+  border-radius: 999px !important;
+}
+
+body.kymeet-store-active .prod-wish {
+  position: absolute;
+  top: 10px;
+  inset-inline-start: 10px;
+  z-index: 3;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--kymeet-line);
+  background: rgba(5, 13, 31, 0.65);
+  color: var(--kymeet-gold-2);
+}
+
+body.kymeet-store-active .prod-wish.active {
+  background: var(--kymeet-gold);
+  color: #0a1020;
+}
+
+/* Brand cards */
+body.kymeet-store-active .kbrand {
+  background: var(--kymeet-navy-2) !important;
+  border: 1px solid var(--kymeet-line) !important;
+  border-radius: 14px !important;
+}
+
+body.kymeet-store-active .brand-chip-x {
+  background: var(--kymeet-navy-3) !important;
+  border: 1px solid var(--kymeet-line) !important;
+  color: var(--kymeet-ink) !important;
+}
+
+/* Category rail (plugin) */
+.kymeet-cats-sec {
+  padding: 48px 0;
+}
+
+.kymeet-cat-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+}
+
+.kcat {
+  flex: 0 0 140px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 14px;
+  border-radius: 14px;
+  background: var(--kymeet-navy-2);
+  border: 1px solid var(--kymeet-line);
+  color: var(--kymeet-ink);
+  text-decoration: none;
+  min-height: 120px;
+}
+
+.kcat-ico {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(201, 162, 39, 0.12);
+  color: var(--kymeet-gold-2);
+}
+
+.kcat b {
+  font-size: 14px;
+}
+
+.kcat small {
+  color: var(--kymeet-muted);
+  font-size: 12px;
+}
+
+/* Bottom app nav */
+body.kymeet-store-active nav.appnav {
+  position: fixed !important;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 900;
+  height: calc(var(--kymeet-nav-h) + var(--kymeet-safe-b));
+  padding-bottom: var(--kymeet-safe-b);
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-top: 1px solid var(--kymeet-line) !important;
+  backdrop-filter: blur(14px);
+  display: flex !important;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  body.kymeet-store-active nav.appnav {
+    display: none !important;
+  }
+
+  body.kymeet-store-active #hdr .hdr-actions,
+  body.kymeet-store-active #hdr .mob-only {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+body.kymeet-store-active .kslider,
+body.kymeet-store-active .kslider-track,
+body.kymeet-store-active .kbrand-row {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.kymeet-store-active .kslider-track {
+  scroll-padding-inline: 16px;
+}
+
+body.kymeet-store-active nav.appnav {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2px;
+  padding-inline: 4px;
+}
+
+body.kymeet-store-active nav.appnav .an-i {
+  color: var(--kymeet-muted) !important;
+  font-size: 10px;
+  gap: 3px;
+  min-width: 0;
+  padding-inline: 2px;
+}
+
+body.kymeet-store-active nav.appnav .an-i span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 390px) {
+  body.kymeet-store-active nav.appnav .an-i {
+    font-size: 9px;
+  }
+}
+
+body.kymeet-store-active nav.appnav button.an-i {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+body.kymeet-store-active nav.appnav .an-i.on,
+body.kymeet-store-active nav.appnav .an-i.on i {
+  color: var(--kymeet-gold-2) !important;
+}
+
+body.kymeet-store-active nav.appnav .an-badge {
+  background: var(--kymeet-gold) !important;
+  color: #0a1020 !important;
+}
+
+/* Cart drawer */
+body.kymeet-store-active .cart-drawer,
+body.kymeet-store-active #cartDrawer {
+  background: var(--kymeet-navy-2) !important;
+  color: var(--kymeet-ink) !important;
+  border-inline-start: 1px solid var(--kymeet-line);
+}
+
+/* WooCommerce pages */
+body.kymeet-store-active .kx-wc,
+body.kymeet-store-active .woocommerce {
+  color: var(--kymeet-ink);
+}
+
+body.kymeet-store-active .kx-wc .prod,
+body.kymeet-store-active .woocommerce ul.products li.product {
+  background: var(--kymeet-navy-2) !important;
+  border: 1px solid var(--kymeet-line) !important;
+  border-radius: var(--kymeet-r) !important;
+}
+
+body.kymeet-store-active .phero.compact {
+  background: linear-gradient(180deg, var(--kymeet-navy-2), var(--kymeet-navy)) !important;
+}
+
+body.kymeet-store-active .phero h1 {
+  font-family: Cinzel, Alexandria, serif;
+}
+
+/* Sticky buy bar — single product mobile */
+.kymeet-sticky-buy {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--kymeet-nav-h) + var(--kymeet-safe-b));
+  z-index: 850;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  background: rgba(5, 13, 31, 0.96);
+  border-top: 1px solid var(--kymeet-line);
+  backdrop-filter: blur(12px);
+}
+
+@media (max-width: 1023px) {
+  body.single-product .kymeet-sticky-buy {
+    display: flex;
+  }
+}
+
+.kymeet-sticky-buy__price {
+  font-weight: 700;
+  color: var(--kymeet-gold-2);
+  font-size: 15px;
+}
+
+.kymeet-sticky-buy__btn {
+  flex: 1;
+  text-align: center;
+  max-width: 220px;
+  padding: 12px 16px !important;
+}
+
+/* FAQ / story dark */
+body.kymeet-store-active .story {
+  background: linear-gradient(180deg, var(--kymeet-navy-2), var(--kymeet-navy)) !important;
+}
+
+body.kymeet-store-active .faq-item {
+  border-color: var(--kymeet-line) !important;
+  background: var(--kymeet-navy-2) !important;
+}
+
+body.kymeet-store-active .toolbar,
+body.kymeet-store-active .tsearch input,
+body.kymeet-store-active select {
+  background: var(--kymeet-navy-3) !important;
+  color: var(--kymeet-ink) !important;
+  border-color: var(--kymeet-line) !important;
+}
+
+body.kymeet-store-active .empty {
+  color: var(--kymeet-muted) !important;
+}
+
+/* Reduce motion */
+.kymeet-reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+body.kymeet-store-active root > header.kayan-site-header,
+body.kymeet-store-active > root > header#hdr.kayan-site-header {
+  display: none !important;
+}
+
+body.kymeet-store-active .prod-price .was {
+  text-decoration: line-through;
+  opacity: 0.55;
+  margin-inline-end: 8px;
+  font-size: 0.9em;
+}
+
+body.kymeet-store-active .hero-luxury {
+  min-height: min(92vh, 820px);
+}
+
+body.kymeet-store-active .hero-luxury .hcb-img img {
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.35));
+}
