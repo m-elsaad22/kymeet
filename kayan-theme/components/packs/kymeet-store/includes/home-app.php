@@ -64,25 +64,37 @@ function kymeet_home_img( $row, $priority = false ) {
 	return '<span class="kapp-ph"></span>';
 }
 
-function kymeet_home_cards( $rows ) {
+function kymeet_home_card_inner( $row ) {
+	$url = ! empty( $row['url'] ) ? $row['url'] : '#';
+	$out = '<a href="' . esc_url( $url ) . '">';
+	$out .= '<span class="kapp-card__media">' . kymeet_home_img( $row ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	$out .= '<span class="kapp-card__name">' . esc_html( $row['name'] ) . '</span>';
+	if ( ! empty( $row['brand'] ) ) {
+		$out .= '<span class="kapp-card__brand">' . esc_html( $row['brand'] ) . '</span>';
+	}
+	if ( isset( $row['price'] ) && function_exists( 'wc_price' ) ) {
+		$out .= '<span class="kapp-card__price">' . wp_kses_post( wc_price( $row['price'] ) ) . '</span>';
+	}
+	return $out . '</a>';
+}
+
+function kymeet_home_cards( $rows, $slider = true ) {
 	$en = function_exists( 'kymeet_app_en' ) && kymeet_app_en();
 	if ( ! $rows ) {
 		echo '<p class="kapp-muted">' . esc_html( $en ? 'No products yet.' : 'لا توجد منتجات بعد.' ) . '</p>';
 		return;
 	}
+	if ( $slider && count( $rows ) > 1 ) {
+		echo '<div class="kslider kapp-slider" data-auto="4500"><div class="kslider-track">';
+		foreach ( $rows as $row ) {
+			echo '<article class="kapp-card kapp-slider__item">' . kymeet_home_card_inner( $row ) . '</article>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
+		echo '</div></div>';
+		return;
+	}
 	echo '<div class="kapp-row">';
 	foreach ( $rows as $row ) {
-		$url = ! empty( $row['url'] ) ? $row['url'] : '#';
-		echo '<article class="kapp-card"><a href="' . esc_url( $url ) . '">';
-		echo '<span class="kapp-card__media">' . kymeet_home_img( $row ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<span class="kapp-card__name">' . esc_html( $row['name'] ) . '</span>';
-		if ( ! empty( $row['brand'] ) ) {
-			echo '<span class="kapp-card__brand">' . esc_html( $row['brand'] ) . '</span>';
-		}
-		if ( isset( $row['price'] ) && function_exists( 'wc_price' ) ) {
-			echo '<span class="kapp-card__price">' . wp_kses_post( wc_price( $row['price'] ) ) . '</span>';
-		}
-		echo '</a></article>';
+		echo '<article class="kapp-card">' . kymeet_home_card_inner( $row ) . '</article>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	echo '</div>';
 }
@@ -98,23 +110,25 @@ function kymeet_home_head( $title, $link = '' ) {
 function kymeet_render_home_app() {
 	$en   = function_exists( 'kymeet_app_en' ) && kymeet_app_en();
 	$shop = function_exists( 'kymeet_app_shop_url' ) ? kymeet_app_shop_url() : home_url( '/shop/' );
-	$hero = kymeet_home_query( array( 'posts_per_page' => 1, 'orderby' => 'date', 'order' => 'DESC' ) );
-	$hero = $hero ? $hero[0] : array();
-
-	echo '<section class="kapp-hero">';
-	echo '<div class="kapp-hero__copy">';
-	echo '<p class="kapp-hero__kicker">KYMEET</p>';
-	echo '<h1>' . esc_html( ! empty( $hero['name'] ) ? $hero['name'] : ( $en ? 'Luxury scents' : 'عطور فاخرة' ) ) . '</h1>';
+	$kicker = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'hero_kicker_ar', 'hero_kicker_en' ) : '';
+	if ( '' === $kicker ) {
+		$kicker = 'KYMEET';
+	}
 	$hero_line = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'hero_line_ar', 'hero_line_en' ) : '';
+
+	echo '<section class="kapp-hero kapp-hero--slide">';
+	echo '<div class="kapp-hero__intro">';
+	echo '<p class="kapp-hero__kicker">' . esc_html( $kicker ) . '</p>';
 	if ( $hero_line ) {
-		echo '<p>' . esc_html( $hero_line ) . '</p>';
+		echo '<p class="kapp-hero__tagline">' . esc_html( $hero_line ) . '</p>';
 	}
 	echo '<div class="kapp-hero__actions">';
-	$primary = ! empty( $hero['url'] ) ? $hero['url'] : $shop;
-	echo '<a class="kapp-btn kapp-btn--primary" href="' . esc_url( $primary ) . '">' . esc_html( $en ? 'Shop now' : 'تسوق الآن' ) . '</a>';
+	echo '<a class="kapp-btn kapp-btn--primary" href="' . esc_url( $shop ) . '">' . esc_html( $en ? 'Shop now' : 'تسوق الآن' ) . '</a>';
 	echo '<a class="kapp-btn kapp-btn--ghost" href="' . esc_url( $shop ) . '">' . esc_html( $en ? 'All perfumes' : 'كل العطور' ) . '</a>';
 	echo '</div></div>';
-	echo '<div class="kapp-hero__media">' . ( $hero ? kymeet_home_img( $hero, true ) : '<span class="kapp-ph"></span>' ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	if ( function_exists( 'kymeet_store_hero_slider' ) ) {
+		echo '<div class="kapp-hero__slider">' . kymeet_store_hero_slider() . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	}
 	echo '</section>';
 
 	echo '<section class="kapp-sec">';

@@ -195,7 +195,36 @@ function kymeet_apply_shop_chip_query( $query ) {
 	}
 }
 
+add_action(
+	'woocommerce_product_query',
+	static function ( $query ) {
+		if ( '' === kymeet_shop_chip_from_request() ) {
+			$post_in = $query->get( 'post__in' );
+			if ( is_array( $post_in ) && 1 === count( $post_in ) && 0 === (int) $post_in[0] ) {
+				$query->set( 'post__in', array() );
+			}
+		}
+	},
+	5
+);
 add_action( 'woocommerce_product_query', 'kymeet_apply_shop_chip_query', 30 );
+
+function kymeet_render_cart_chrome() {
+	$en = kymeet_app_en();
+	echo '<span id="cartCount" class="screen-reader-text" aria-hidden="true">0</span>';
+	echo '<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>';
+	echo '<aside class="cart-drawer" id="cartDrawer" aria-label="' . esc_attr( $en ? 'Cart' : 'السلة' ) . '">';
+	echo '<div class="cart-head"><h3>' . esc_html( $en ? 'Your cart' : 'سلتك' ) . '</h3>';
+	echo '<button type="button" onclick="closeCart()" aria-label="' . esc_attr( $en ? 'Close' : 'إغلاق' ) . '"><i class="fas fa-xmark"></i></button></div>';
+	echo '<div class="cart-body" id="cartBody"><div class="cart-empty"><i class="fas fa-bag-shopping"></i><p>' . esc_html( $en ? 'Your cart is empty.' : 'سلتك فارغة.' ) . '</p></div></div>';
+	echo '<div class="cart-foot"><div class="cart-total"><span>' . esc_html( $en ? 'Subtotal' : 'المجموع' ) . '</span><b id="cartTotal">0</b></div>';
+	echo '<a href="#" class="btn btn-gold" onclick="checkout(event)">' . esc_html( $en ? 'Checkout' : 'إتمام الطلب' ) . ' <i class="fas fa-arrow-left"></i></a></div></aside>';
+	echo '<div class="toast" id="toast" role="status" aria-live="polite"><i class="fas fa-check"></i><div><b id="toastTitle">' . esc_html( $en ? 'Added' : 'تمت الإضافة' ) . '</b><small id="toastMsg"></small></div></div>';
+	$wa = preg_replace( '/\D+/', '', (string) get_option( 'whatsapp_number' ) );
+	if ( $wa ) {
+		echo '<a href="https://wa.me/' . esc_attr( $wa ) . '" class="fab cfg-wa" id="fab" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>';
+	}
+}
 
 function kymeet_render_app_footer() {
 	$en   = kymeet_app_en();
@@ -212,7 +241,6 @@ function kymeet_render_app_footer() {
 	echo '<div><h2>' . esc_html( $en ? 'Customer service' : 'خدمة العملاء' ) . '</h2><ul>';
 	echo '<li><a href="' . esc_url( $acc ) . '">' . esc_html( $en ? 'My account' : 'حسابي' ) . '</a></li>';
 	echo '<li><a href="' . esc_url( $acc ) . '">' . esc_html( $en ? 'Orders' : 'طلباتي' ) . '</a></li>';
-	echo '<li><a href="#">' . esc_html( $en ? '[Placeholder] Contact page' : '[رابط تجريبي] صفحة تواصل' ) . '</a></li>';
 	echo '</ul></div>';
 	echo '<div><h2>' . esc_html( $en ? 'Shop' : 'الأقسام' ) . '</h2><ul>';
 	echo '<li><a href="' . esc_url( $shop ) . '">' . esc_html( $en ? 'All perfumes' : 'كل العطور' ) . '</a></li>';
@@ -220,8 +248,6 @@ function kymeet_render_app_footer() {
 	echo '<li><a href="' . esc_url( add_query_arg( 'kymeet_chip', 'women', $shop ) ) . '">' . esc_html( $en ? 'Women' : 'نسائي' ) . '</a></li>';
 	echo '</ul></div>';
 	echo '<div><h2>' . esc_html( $en ? 'Policies' : 'السياسات' ) . '</h2><ul>';
-	echo '<li><a href="#">' . esc_html( $en ? '[Placeholder] Privacy' : '[رابط تجريبي] الخصوصية' ) . '</a></li>';
-	echo '<li><a href="#">' . esc_html( $en ? '[Placeholder] Shipping & returns' : '[رابط تجريبي] الشحن والإرجاع' ) . '</a></li>';
 	echo '</ul></div>';
 	$news = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'newsletter_ar', 'newsletter_en' ) : '';
 	if ( $news ) {

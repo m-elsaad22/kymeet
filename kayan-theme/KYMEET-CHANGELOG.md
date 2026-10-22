@@ -1,3 +1,10 @@
+# 1.6.11 — سلاiderات + تنظيف واجهة App
+- هيرو متحرك (`data-hv`) + أقسام منتجات `.kslider` أفقية
+- فوتر App فقط + درج السلة (`kymeet_render_cart_chrome`) بدون فوتر `#catalog` القديم
+- `kymeet.js`: لا كتالوج/ودجات قديمة على `body.kymeet-app`
+- إخفاء TOC RUKN و«طلب الخدمات» وبقايا services على واجهة KYMEET
+- إعدادات: `hero_kicker`؛ روابط الهيرو → `/shop/`
+
 # 1.6.10 — Step 4.1 إصلاحات (قبل Step 5)
 - المتجر `/shop/`: فلتر chips عبر `woocommerce_product_query` فقط (الكل افتراضيًا بدون `post__in` فارغ)
 - شريط عنوان الصفحات الداخلية: أبيض/`--bg-soft` + `--text` / `--muted` (لا dark-on-dark)

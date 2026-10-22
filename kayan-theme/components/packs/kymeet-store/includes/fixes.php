@@ -36,6 +36,21 @@ function kymeet_filter_product_cat_terms( $terms, $post_id, $taxonomy ) {
 add_filter( 'get_the_terms', 'kymeet_filter_product_cat_terms', 10, 3 );
 
 /**
+ * KYMEET app: suppress legacy services / RUKN chrome on the storefront.
+ */
+function kymeet_app_suppress_legacy_chrome() {
+	if ( ! function_exists( 'kymeet_store_active' ) || ! kymeet_store_active() ) {
+		return;
+	}
+	echo '<style id="kymeet-app-legacy-hide">';
+	echo 'body.kymeet-app #rukn-toc-tab,body.kymeet-app #rukn-toc-panel,body.kymeet-app #rukn-toc-backdrop{display:none!important}';
+	echo 'body.kymeet-app .order-services-phonenumber,body.kymeet-app .order-services--overlay,body.kymeet-app .-order-services--single--popoover,body.kymeet-app .services-grid{display:none!important}';
+	echo 'body.kymeet-app footer:not(.kymeet-site-footer){display:none!important}';
+	echo '</style>';
+}
+add_action( 'wp_head', 'kymeet_app_suppress_legacy_chrome', 99 );
+
+/**
  * WC template compatibility marker (ThemeStatic still renders @single/product.php).
  */
 function kymeet_wc_single_product_template_path() {

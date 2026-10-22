@@ -431,6 +431,64 @@ body.kymeet-app .kapp-card__img {
   color: #fff;
 }
 
+.kapp-hero--slide {
+  grid-template-columns: 1fr;
+}
+
+.kapp-hero__intro {
+  text-align: center;
+}
+
+.kapp-hero__tagline {
+  margin: 0 0 12px;
+  opacity: 0.92;
+}
+
+.kapp-hero__slider {
+  min-width: 0;
+}
+
+.kapp-hero__slider .hv-slider {
+  position: relative;
+  inset: auto;
+  min-height: 300px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+body.kymeet-app .kapp-hero__slider .hv-slider ~ .hv-disc {
+  display: block;
+}
+
+.kapp-slider {
+  margin-inline: -4px;
+}
+
+.kapp-slider .kslider-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.kapp-slider__item {
+  flex: 0 0 min(72vw, 220px);
+  scroll-snap-align: start;
+}
+
+body.kymeet-app .cart-drawer,
+body.kymeet-app .cart-overlay,
+body.kymeet-app .toast {
+  z-index: 60;
+}
+
+body.kymeet-app .fab.cfg-wa {
+  bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 12px);
+}
+
 .kapp-hero h1,
 .kapp-hero p,
 .kapp-hero a {

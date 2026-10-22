@@ -5,6 +5,7 @@ const products=KD.products;
 const BR=KD.BR,BEST=KD.BEST,NEW=KD.NEW;
 products.forEach((p,i)=>p.n=i);
 const HOME=(window.KYMEET_CFG&&window.KYMEET_CFG.HOME)||'/';
+const KYMEET_APP=document.body.classList.contains('kymeet-app');
 const HAS_HERO=!!document.querySelector('.hero,.phero');
 const $=id=>document.getElementById(id)||document.createElement('input');
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -35,8 +36,8 @@ function renderProducts(){
   document.querySelectorAll('#bsGrid .rv,#newGrid .rv').forEach(el=>io.observe(el));
 }
 /* ══ الكتالوج: بحث وتصفية وترتيب ══ */
-const fb=$('fb');
-BR.forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;fb.appendChild(o)});
+const fb=document.getElementById('fb');
+if(fb) BR.forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;fb.appendChild(o)});
 function renderCatalog(){
   const q=$('q').value.trim().toLowerCase(),b=fb.value,mx=+$('mx').value,so=$('so').value;
   $('mv').textContent='حتى '+money(mx)+' ج.م';
@@ -141,7 +142,7 @@ function faqT(q){
   if(!o){it.classList.add('faq-open');a.style.maxHeight=a.scrollHeight+'px'}
 }
 /* ══ تمرير سلس للروابط ══ */
-document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+if(!KYMEET_APP) document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
   const id=a.getAttribute('href');if(!id||id==='#'||id.length<2)return;
   if(document.querySelector(id)){e.preventDefault();goTo(id)}
 }));
@@ -150,7 +151,7 @@ document.addEventListener('click',e=>{
   const r=document.createElement('span');r.className='rp';const rc=b.getBoundingClientRect(),s=Math.max(rc.width,rc.height);
   r.style.cssText=`width:${s}px;height:${s}px;left:${e.clientX-rc.left-s/2}px;top:${e.clientY-rc.top-s/2}px`;b.appendChild(r);setTimeout(()=>r.remove(),650);
 });
-try{renderProducts();renderCatalog()}catch(e){console.error('KYMEET render error:',e)}
+if(!KYMEET_APP){try{if(document.getElementById('bsGrid'))renderProducts();if(document.getElementById('catGrid'))renderCatalog()}catch(e){console.error('KYMEET render error:',e)}}
 updateCart();
 if(WC)wcCall('get');
 

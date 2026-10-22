@@ -4,7 +4,11 @@ if ( function_exists( 'kymeet_store_active' ) && kymeet_store_active() ) {
 	if ( function_exists( 'kymeet_render_app_footer' ) ) {
 		kymeet_render_app_footer();
 	}
-	kymeet_store_tpl( 'footer' );
+	if ( function_exists( 'kymeet_render_cart_chrome' ) ) {
+		kymeet_render_cart_chrome();
+	} else {
+		kymeet_store_tpl( 'footer' );
+	}
 	echo kymeet_store_appnav(); // phpcs:ignore
 	kymeet_store_cfg_script();
 	$footer_js = get_template_directory_uri() . '/components/packs/' . rawurlencode( '#footer' ) . '/js/';

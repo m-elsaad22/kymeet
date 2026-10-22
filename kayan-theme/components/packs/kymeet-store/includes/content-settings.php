@@ -89,6 +89,8 @@ function kymeet_app_content_field_defs() {
 	return array(
 		'announce_ar'       => array( 'label' => 'شريط الإعلان — عربي (فارغ = مخفي)' ),
 		'announce_en'       => array( 'label' => 'Announcement — English (empty = hidden)' ),
+		'hero_kicker_ar'    => array( 'label' => 'عنوان الهيرو (KYMEET) — عربي (فارغ = KYMEET)' ),
+		'hero_kicker_en'    => array( 'label' => 'Hero kicker — English (empty = KYMEET)' ),
 		'hero_line_ar'      => array( 'label' => 'سطر الهيرو — عربي' ),
 		'hero_line_en'      => array( 'label' => 'Hero line — English' ),
 		'story_ar'          => array( 'label' => 'قصة العلامة — عربي' ),

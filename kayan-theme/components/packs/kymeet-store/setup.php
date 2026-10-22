@@ -231,10 +231,12 @@ if ( ! function_exists( 'kymeet_store_active' ) ) {
 	function kymeet_store_cfg_script() {
 		$wa  = preg_replace( '/\D+/', '', (string) get_option( 'whatsapp_number' ) );
 		$tel = preg_replace( '/\D+/', '', (string) get_option( 'phonenumber' ) );
+		$shop = function_exists( 'kymeet_app_shop_url' ) ? kymeet_app_shop_url() : home_url( '/shop/' );
 		echo '<script>window.KYMEET_CFG=' . wp_json_encode( array(
 			'WA'   => $wa,
 			'TEL'  => $tel,
 			'HOME' => home_url( '/' ),
+			'SHOP' => $shop,
 			'WC'   => kymeet_wc_active(),
 			'AJAX' => kymeet_wc_active() ? add_query_arg( 'wc-ajax', 'kymeet_cart', home_url( '/' ) ) : '',
 		) ) . ';</script>';
@@ -345,7 +347,7 @@ function kymeet_store_pwa_head() {
 	if ( ! kymeet_store_active() ) {
 		return;
 	}
-	echo '<meta name="theme-color" content="#0A1F5C"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">';
+	echo '<meta name="theme-color" content="#FFFFFF"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default">';
 	echo '<link rel="manifest" href="' . esc_url( add_query_arg( 'kymeet-manifest', '1', home_url( '/' ) ) ) . '">';
 }
 add_action( 'template_redirect', 'kymeet_store_manifest_json' );

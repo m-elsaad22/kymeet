@@ -418,7 +418,7 @@ function kymeet_store_hero_slider() {
 	$out = '<div class="hv-slider" data-hv>';
 	foreach ( $rows as $i => $r ) {
 		$img = ! empty( $r['image'] ) ? '<img src="' . esc_url( $r['image'] ) . '" alt="' . esc_attr( $r['name'] ) . '" data-brand="' . esc_attr( $r['brand'] ) . '" onerror="imgErr(this)">' : '';
-		$url = ! empty( $r['url'] ) ? $r['url'] : '#catalog';
+		$url = ! empty( $r['url'] ) ? $r['url'] : ( function_exists( 'kymeet_app_shop_url' ) ? kymeet_app_shop_url() : home_url( '/shop/' ) );
 		$out .= '<div class="hv-slide' . ( 0 === $i ? ' on' : '' ) . '">';
 		$out .= '<span class="hv-new"><i class="fas fa-star"></i> ' . esc_html( $en ? 'Just arrived' : 'وصل حديثًا' ) . '</span>';
 		$out .= '<a class="hv-disc" href="' . esc_url( $url ) . '">' . $img . '</a>';
