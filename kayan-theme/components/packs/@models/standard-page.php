@@ -12,9 +12,11 @@ if ( empty( $hide__sidebar__single ) ) {
 
 $this->Part( 'header', array( 'Styles' => $Styles ) );
 
+$kymeet_app = function_exists( 'kymeet_store_active' ) && kymeet_store_active();
 $kx_auth_page = function_exists( 'is_account_page' ) && is_account_page() && ! is_user_logged_in();
 if ( ! $kx_auth_page ) {
-	kayan_kit_hero( $post->post_title, kayan_kit_page_excerpt( $post ) );
+	$sub = $kymeet_app ? '' : kayan_kit_page_excerpt( $post );
+	kayan_kit_hero( $post->post_title, $sub );
 }
 
 ob_start();
@@ -29,6 +31,11 @@ if ( $kx_auth_page ) {
 }
 if ( $kx_wc_page ) {
 	echo '<section class="sec"><div class="wrap"><div class="woocommerce kx-wc kx-page">' . $body . '</div></div></section>';
+	$this->Part( 'footer', array( 'Styles' => $Styles ) );
+	return;
+}
+if ( $kymeet_app ) {
+	echo '<section class="sec"><div class="wrap"><div class="article-body prose kx-page">' . $body . '</div></div></section>';
 	$this->Part( 'footer', array( 'Styles' => $Styles ) );
 	return;
 }

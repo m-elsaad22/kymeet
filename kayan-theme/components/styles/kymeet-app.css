@@ -489,6 +489,40 @@ body.kymeet-app .fab.cfg-wa {
   bottom: calc(72px + env(safe-area-inset-bottom, 0px) + 12px);
 }
 
+/* WooCommerce inner pages (shop, product, cart, checkout, account) */
+body.kymeet-app .kx-wc .single_add_to_cart_button,
+body.kymeet-app .kx-wc #place_order,
+body.kymeet-app .kx-wc a.checkout-button,
+body.kymeet-app .kx-wc .button:not(.is-link) {
+  background: var(--royal-metal) !important;
+  color: #fff !important;
+  box-shadow: var(--shadow-btn);
+}
+
+body.kymeet-app .kx-wc div.product {
+  gap: 24px;
+}
+
+body.kymeet-app .kx-wc .product_meta a {
+  color: var(--royal-700);
+}
+
+body.kymeet-app .sec .article-body,
+body.kymeet-app .sec .kx-page {
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+@media (max-width: 768px) {
+  body.kymeet-app .kx-wc div.product {
+    grid-template-columns: 1fr;
+  }
+
+  body.kymeet-app .phero.compact {
+    padding: 72px 0 20px !important;
+  }
+}
+
 .kapp-hero h1,
 .kapp-hero p,
 .kapp-hero a {
