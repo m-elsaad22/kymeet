@@ -46,6 +46,8 @@ function kymeet_app_suppress_legacy_chrome() {
 	echo 'body.kymeet-app #rukn-toc-tab,body.kymeet-app #rukn-toc-panel,body.kymeet-app #rukn-toc-backdrop{display:none!important}';
 	echo 'body.kymeet-app .order-services-phonenumber,body.kymeet-app .order-services--overlay,body.kymeet-app .-order-services--single--popoover,body.kymeet-app .services-grid{display:none!important}';
 	echo 'body.kymeet-app footer:not(.kymeet-site-footer){display:none!important}';
+	echo 'body.kymeet-app #loader{display:none!important;pointer-events:none!important}';
+	echo 'body.kymeet-app.before-start{opacity:1!important;visibility:visible!important}';
 	echo '</style>';
 }
 add_action( 'wp_head', 'kymeet_app_suppress_legacy_chrome', 99 );

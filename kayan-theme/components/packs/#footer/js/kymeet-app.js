@@ -120,6 +120,37 @@
     renderResults(list, document.getElementById('kapp-wish-grid'));
   }
 
+  function toggleWishButton(btn, on) {
+    if (!btn) return;
+    btn.classList.toggle('active', on);
+    var i = btn.querySelector('i');
+    if (i) {
+      i.classList.toggle('far', !on);
+      i.classList.toggle('fas', on);
+    }
+  }
+
+  function syncWishButtons() {
+    var ids = wishIds();
+    document.querySelectorAll('.prod-wish[data-id], .kapp-card__wish[data-id]').forEach(function (btn) {
+      var id = btn.getAttribute('data-id');
+      toggleWishButton(btn, ids.indexOf(String(id)) !== -1);
+    });
+  }
+
+  function toggleWish(id) {
+    if (!id) return;
+    var ids = wishIds();
+    var key = String(id);
+    var i = ids.indexOf(key);
+    if (i === -1) ids.push(key);
+    else ids.splice(i, 1);
+    saveWish(ids);
+    syncWishButtons();
+  }
+
+  var sliderTap = { x: 0, y: 0, t: 0 };
+
   function syncCartBadge() {
     var src = document.getElementById('cartCount');
     var dst = document.getElementById('kappCartCount');
@@ -145,13 +176,58 @@
 
   function init() {
     setThemeColor();
+    document.body.classList.remove('before-start');
+    var loader = document.getElementById('loader');
+    if (loader) {
+      loader.classList.add('out');
+      loader.setAttribute('aria-hidden', 'true');
+    }
     initAnnounce();
     syncCartBadge();
+    syncWishButtons();
     var src = document.getElementById('cartCount');
     if (src && window.MutationObserver) {
       new MutationObserver(syncCartBadge).observe(src, { childList: true, characterData: true, subtree: true });
     }
+    document.addEventListener(
+      'touchstart',
+      function (e) {
+        if (!e.target.closest('.kapp-slider')) return;
+        sliderTap.x = e.touches[0].clientX;
+        sliderTap.y = e.touches[0].clientY;
+        sliderTap.t = Date.now();
+      },
+      { passive: true }
+    );
+
+    document.addEventListener(
+      'touchend',
+      function (e) {
+        var link = e.target.closest('.kapp-slider a.kapp-card__link[href]');
+        if (!link || !e.changedTouches || !e.changedTouches[0]) return;
+        var dx = Math.abs(e.changedTouches[0].clientX - sliderTap.x);
+        var dy = Math.abs(e.changedTouches[0].clientY - sliderTap.y);
+        if (dx > 14 || dy > 14 || Date.now() - sliderTap.t > 600) return;
+        var href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        e.preventDefault();
+        window.location.assign(link.href);
+      },
+      { passive: false }
+    );
+
     document.addEventListener('click', function (e) {
+      var heart = e.target.closest('.prod-wish, .kapp-card__wish');
+      if (heart) {
+        e.preventDefault();
+        e.stopPropagation();
+        var card = heart.closest('[data-id], .prod, .kapp-card');
+        var id =
+          heart.getAttribute('data-id') ||
+          (card && (card.getAttribute('data-id') || card.getAttribute('data-pid')));
+        toggleWish(id);
+        return;
+      }
       var open = e.target.closest('[data-kapp-open]');
       if (open) {
         e.preventDefault();
@@ -169,17 +245,6 @@
       }
       if (e.target.closest('[data-kapp-close]')) {
         closeSheets();
-      }
-      var heart = e.target.closest('.prod-wish');
-      if (heart) {
-        var card = heart.closest('[data-id], .prod');
-        var id = heart.getAttribute('data-id') || (card && card.getAttribute('data-id'));
-        if (!id) return;
-        var ids = wishIds();
-        var i = ids.indexOf(String(id));
-        if (i === -1) ids.push(String(id));
-        else ids.splice(i, 1);
-        saveWish(ids);
       }
     });
     var q = document.getElementById('kapp-q');

@@ -343,7 +343,10 @@ function kymeet_store_card( $p ) {
 		$lbl = ( isset( $r['stock'] ) && ! $r['stock'] ) ? ( $en ? 'Details' : 'التفاصيل' ) : ( $en ? 'Choose options' : 'اختر الخيارات' );
 		$btn = '<a class="add" href="' . $url . '"><i class="fas fa-sliders"></i> ' . esc_html( $lbl ) . '</a>';
 	}
-	$out  = '<article class="prod"><a class="prod-img" href="' . $url . '">' . $tag . $img . '</a>';
+	$wish_lbl = $en ? 'Add to favorites' : 'المفضلة';
+	$out      = '<article class="prod" data-id="' . $id . '">';
+	$out     .= '<button type="button" class="prod-wish" data-id="' . $id . '" aria-label="' . esc_attr( $wish_lbl ) . '"><i class="far fa-heart" aria-hidden="true"></i></button>';
+	$out     .= '<a class="prod-img" href="' . $url . '">' . $tag . $img . '</a>';
 	$out .= '<div class="prod-info"><span class="prod-brand">' . esc_html( $r['brand'] ) . '</span>';
 	$out .= '<h3 class="prod-name"><a href="' . $url . '">' . esc_html( $r['name'] ) . '</a></h3>';
 	$out .= '<div class="prod-price"><span class="now">' . esc_html( kymeet_store_money( $r['price'] ) ) . '<small>' . esc_html( $en ? 'EGP' : 'ج.م' ) . '</small></span>' . $old . '</div>';

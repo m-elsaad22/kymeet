@@ -64,9 +64,9 @@ function kymeet_home_img( $row, $priority = false ) {
 	return '<span class="kapp-ph"></span>';
 }
 
-function kymeet_home_card_inner( $row ) {
+function kymeet_home_card_link( $row ) {
 	$url = ! empty( $row['url'] ) ? $row['url'] : '#';
-	$out = '<a href="' . esc_url( $url ) . '">';
+	$out = '<a class="kapp-card__link" href="' . esc_url( $url ) . '">';
 	$out .= '<span class="kapp-card__media">' . kymeet_home_img( $row ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	$out .= '<span class="kapp-card__name">' . esc_html( $row['name'] ) . '</span>';
 	if ( ! empty( $row['brand'] ) ) {
@@ -78,6 +78,23 @@ function kymeet_home_card_inner( $row ) {
 	return $out . '</a>';
 }
 
+function kymeet_home_card( $row, $extra_class = '' ) {
+	$en     = function_exists( 'kymeet_app_en' ) && kymeet_app_en();
+	$pid    = ! empty( $row['pid'] ) ? (int) $row['pid'] : 0;
+	$wish_id = ! empty( $row['id'] ) ? (string) $row['id'] : ( $pid ? (string) $pid : '' );
+	$label  = $en ? 'Add to favorites' : 'المفضلة';
+	$out    = '<article class="kapp-card' . esc_attr( $extra_class ) . '"';
+	if ( $wish_id ) {
+		$out .= ' data-id="' . esc_attr( $wish_id ) . '" data-pid="' . esc_attr( (string) $pid ) . '"';
+	}
+	$out .= '>';
+	if ( $wish_id ) {
+		$out .= '<button type="button" class="prod-wish kapp-card__wish" data-id="' . esc_attr( $wish_id ) . '" aria-label="' . esc_attr( $label ) . '"><i class="far fa-heart" aria-hidden="true"></i></button>';
+	}
+	$out .= kymeet_home_card_link( $row ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	return $out . '</article>';
+}
+
 function kymeet_home_cards( $rows, $slider = true ) {
 	$en = function_exists( 'kymeet_app_en' ) && kymeet_app_en();
 	if ( ! $rows ) {
@@ -87,14 +104,14 @@ function kymeet_home_cards( $rows, $slider = true ) {
 	if ( $slider && count( $rows ) > 1 ) {
 		echo '<div class="kslider kapp-slider" data-auto="4500"><div class="kslider-track">';
 		foreach ( $rows as $row ) {
-			echo '<article class="kapp-card kapp-slider__item">' . kymeet_home_card_inner( $row ) . '</article>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo kymeet_home_card( $row, ' kapp-slider__item' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 		echo '</div></div>';
 		return;
 	}
 	echo '<div class="kapp-row">';
 	foreach ( $rows as $row ) {
-		echo '<article class="kapp-card">' . kymeet_home_card_inner( $row ) . '</article>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo kymeet_home_card( $row ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 	echo '</div>';
 }
