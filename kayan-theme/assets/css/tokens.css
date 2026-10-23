@@ -4,8 +4,11 @@
 :root {
   --bg: #ffffff;
   --bg-soft: #f4f8ff;
+  --bg-top: linear-gradient(180deg, #eef4ff 0%, #ffffff 220px);
+  --tile-bg: #f0f2f5;
   --surface: #ffffff;
-  --border: #dce6f7;
+  --border: #e8ecf2;
+  --link: #0a7bff;
 
   --royal-900: #061a5c;
   --royal-700: #0b2d8f;
