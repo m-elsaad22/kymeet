@@ -1,0 +1,82 @@
+<!-- ═══════════════ KEMET Emblem SVG (reusable) ═══════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5E5A8"/>
+      <stop offset="50%" stop-color="#C9A227"/>
+      <stop offset="100%" stop-color="#8B6B10"/>
+    </linearGradient>
+  </defs>
+  <symbol id="kemet-emblem" viewBox="0 0 100 100">
+    <!-- crown / papyrus / lotus cluster — matches the logo -->
+    <g fill="url(#goldGrad)" stroke="url(#goldGrad)" stroke-width=".5" stroke-linejoin="round">
+      <!-- center crown spikes -->
+      <path d="M50 14 L54 30 L48 30 Z"/>
+      <path d="M42 18 L46 34 L40 34 Z"/>
+      <path d="M58 18 L60 34 L54 34 Z"/>
+      <path d="M34 24 L40 38 L33 38 Z"/>
+      <path d="M66 24 L67 38 L60 38 Z"/>
+      <!-- bowl -->
+      <path d="M30 40 Q50 52 70 40 L68 46 Q50 56 32 46 Z"/>
+      <!-- base -->
+      <rect x="42" y="48" width="16" height="6" rx="1.5"/>
+      <rect x="44" y="56" width="12" height="3" rx="1"/>
+      <!-- side leaves (lotus) -->
+      <path d="M22 62 Q32 58 38 66 Q30 74 22 68 Z"/>
+      <path d="M78 62 Q68 58 62 66 Q70 74 78 68 Z"/>
+      <path d="M26 74 Q36 70 40 78 Q32 84 26 78 Z"/>
+      <path d="M74 74 Q64 70 60 78 Q68 84 74 78 Z"/>
+      <!-- center base glyph -->
+      <path d="M46 68 Q50 64 54 68 L52 84 L48 84 Z"/>
+      <rect x="50" y="82" width="1" height="8"/>
+    </g>
+  </symbol>
+</svg>
+
+<!-- ═══════════════ Header ═══════════════ -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#" class="logo">
+      <img class="logo-img" src="{{header_img4}}" alt="{{header_a5}}">
+      <span class="logo-text">{{header_t6}}<b>.</b></span>
+    </a>
+    <nav class="menu">
+      <a href="https://kymeet-perfumes.com/shop/">{{header_t7}}</a>
+      <a href="#bestsellers">{{header_t8}}</a>
+      <a href="#new">{{header_t9}}</a>
+      <a href="#brands">{{header_t10}}</a>
+      <a href="#story">{{header_t11}}</a>
+      <a href="#contact">{{header_t12}}</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="btn btn-icon kymeet-search" aria-label="بحث" onclick="goSearch()"><i class="fas fa-magnifying-glass"></i></button>
+      {{account_btn}}
+      <button class="btn btn-icon cart-btn" aria-label="السلة" onclick="openCart()">
+        <i class="{{header_ic14}}"></i>
+        <span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="ham" onclick="toggleMob(true)" aria-label="القائمة">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ Mobile menu ═══════════════ -->
+<div class="mob" id="mob">
+  <button class="mob-close" onclick="toggleMob(false)" aria-label="إغلاق"><i class="{{header_ic15}}"></i></button>
+  <a class="mlink" href="https://kymeet-perfumes.com/shop/" onclick="toggleMob(false)">{{header_t16}}</a>
+  <a class="mlink" href="#bestsellers" onclick="toggleMob(false)">{{header_t17}}</a>
+  <a class="mlink" href="#new" onclick="toggleMob(false)">{{header_t18}}</a>
+  <a class="mlink" href="#brands" onclick="toggleMob(false)">{{header_t19}}</a>
+  <a class="mlink" href="#story" onclick="toggleMob(false)">{{header_t20}}</a>
+  <a class="mlink" href="#faq" onclick="toggleMob(false)">{{header_t21}}</a>
+  <a class="mlink" href="#contact" onclick="toggleMob(false)">{{header_t22}}</a>
+  {{account_link}}
+  <div class="mcta">
+    <a href="#" data-cfg="wa" class="btn btn-wa cfg-wa"><i class="{{header_ic23}}"></i> {{header_t24}}</a>
+    <a href="#" data-cfg="tel" class="btn btn-gold cfg-tel"><i class="{{header_ic25}}"></i> {{header_t26}}</a>
+  </div>
+</div>
+
+<!-- ═══════════════ Hero ═══════════════ -->
