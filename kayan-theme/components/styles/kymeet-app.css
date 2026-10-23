@@ -67,8 +67,11 @@ body.kymeet-app nav.appnav {
 }
 
 body.kymeet-app nav.appnav .an-i.on,
-body.kymeet-app nav.appnav .an-i.on i {
-  color: var(--royal-700) !important;
+body.kymeet-app nav.appnav .an-i.on i,
+body.kymeet-app .kapp-tabbar .an-i.on,
+body.kymeet-app .kapp-tabbar .an-i.on i {
+  color: var(--pepsi-500) !important;
+  box-shadow: none !important;
 }
 
 body.kymeet-app nav.appnav .an-badge,
@@ -349,53 +352,59 @@ body.kymeet-app .phero .crumb a:hover {
 }
 
 body.kymeet-app .kapp-card__media {
-  aspect-ratio: auto;
+  aspect-ratio: 1;
   min-height: 0;
-  padding: 0;
+  padding: 10px;
   line-height: 0;
-}
-
-body.kymeet-app .kapp-card a {
-  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tile-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 body.kymeet-app .kapp-card__img {
   display: block;
-  width: 100%;
-  border-radius: var(--radius-sm);
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0;
 }
 
-.kymeet-site-footer {
-  background: var(--royal-900);
-  color: #fff;
-  padding: 32px 0 24px;
-  margin-top: 24px;
+.kymeet-site-footer--app {
+  background: var(--bg);
+  color: var(--muted);
+  padding: 20px 16px calc(88px + env(safe-area-inset-bottom, 0px));
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  text-align: center;
 }
 
-.kymeet-site-footer a {
-  color: #fff;
+.kapp-foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  margin-bottom: 10px;
 }
 
-.kapp-foot {
-  display: grid;
-  gap: 20px;
-}
-
-.kapp-foot h2 {
-  font-size: 16px;
-  margin: 0 0 8px;
-}
-
-.kapp-foot ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.kapp-foot li a {
-  display: inline-flex;
+.kapp-foot-links a {
+  color: var(--link);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
   min-height: 44px;
+  display: inline-flex;
   align-items: center;
+}
+
+.kapp-foot-copy {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
 }
 
 .kapp-news__btn {
@@ -482,20 +491,21 @@ body.kymeet-app .kapp-hero__slider .hv-slider ~ .hv-disc {
 }
 
 .kapp-slider {
-  margin-inline: -4px;
+  margin-inline: 0;
 }
 
 .kapp-slider .kslider-track {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 4px 4px 12px;
+  padding: 4px 16px 12px;
+  scroll-padding-inline: 16px;
   -webkit-overflow-scrolling: touch;
 }
 
 .kapp-slider__item {
-  flex: 0 0 min(72vw, 220px);
+  flex: 0 0 128px;
   scroll-snap-align: start;
 }
 
@@ -714,9 +724,6 @@ body.kymeet-app .sec .kx-page {
     display: none !important;
   }
 
-  .kapp-foot {
-    grid-template-columns: 1.4fr repeat(4, 1fr);
-  }
 }
 
 body.kymeet-app :focus-visible {
@@ -819,10 +826,35 @@ body.kymeet-app :focus-visible {
 .kapp-banner .hv-slider {
   position: relative !important;
   inset: auto !important;
-  min-height: 160px;
+  height: 152px;
+  max-height: 38vw;
+  min-height: 0;
   border-radius: var(--radius);
   background: var(--tile-bg);
   overflow: hidden;
+}
+
+.kapp-banner .hv-slide {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.kapp-banner .hv-slide .hv-disc {
+  width: auto !important;
+  max-width: 92%;
+  height: 100%;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.kapp-banner .hv-slide .hv-disc img {
+  max-height: 120px;
+  max-width: 100%;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
 
 body.kymeet-app .kapp-banner .hv-new,
@@ -858,8 +890,8 @@ body.kymeet-app .kapp-banner .hv-slide .hv-disc {
 
 .kapp-cat-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 8px;
 }
 
 .kapp-cat-tile {
@@ -905,11 +937,12 @@ body.kymeet-app .kapp-banner .hv-slide .hv-disc {
 
 .kapp-slider .kslider-track {
   gap: 10px;
-  padding-inline: 0;
+  padding-inline: 16px;
+  scroll-padding-inline: 16px;
 }
 
 .kapp-slider__item {
-  flex: 0 0 132px;
+  flex: 0 0 128px;
 }
 
 .kapp-card a,
@@ -928,8 +961,10 @@ body.kymeet-app .kapp-banner .hv-slide .hv-disc {
 }
 
 .kapp-card__img {
-  max-height: none !important;
-  aspect-ratio: 1 !important;
+  width: auto !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: auto !important;
   object-fit: contain !important;
 }
 
@@ -1033,12 +1068,88 @@ body.kymeet-app .kapp-chip {
   border-radius: var(--radius-pill);
 }
 
+.kapp-shop-head {
+  padding: 12px 16px 4px;
+  background: var(--bg);
+}
+
+.kapp-shop-head__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.kapp-shop-head__crumb {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.kapp-shop-head__crumb a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+body.kymeet-app.kymeet-shop .phero {
+  display: none !important;
+}
+
+body.kymeet-app.kymeet-shop ul.products li.product-category,
+body.kymeet-app.kymeet-shop .woocommerce-subcategories,
+body.kymeet-app.kymeet-shop .term-description img,
+body.kymeet-app.kymeet-shop .woocommerce-archive-description img,
+body.kymeet-app.kymeet-shop .kx-wc .wp-block-image,
+body.kymeet-app.kymeet-shop .kx-wc > figure,
+body.kymeet-app.kymeet-shop .kx-wc .wp-block-gallery {
+  display: none !important;
+}
+
+body.kymeet-app.kymeet-shop ul.products {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  width: 100% !important;
+  float: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.kymeet-app.kymeet-shop ul.products::before,
+body.kymeet-app.kymeet-shop ul.products::after {
+  display: none !important;
+}
+
+body.kymeet-app.kymeet-shop ul.products > li {
+  width: 100% !important;
+  max-width: none !important;
+  float: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.kymeet-app.kymeet-shop .kapp-shop-body {
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+}
+
+body.kymeet-app.kymeet-shop .kx-filters {
+  display: none;
+}
+
+body.kymeet-app .kapp-main {
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+}
+
 @media (min-width: 640px) {
   .kapp-cat-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .kapp-slider__item {
-    flex-basis: 156px;
+    flex-basis: 148px;
+  }
+
+  body.kymeet-app.kymeet-shop ul.products {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 }

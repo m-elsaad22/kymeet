@@ -404,9 +404,11 @@ function kymeet_wc_render_archive() {
 	if ( isset( $_GET['kx_offers'] ) ) {
 		$title = $en ? 'Offers' : 'العروض';
 	}
-	echo '<section class="phero compact"><div class="wrap"><div class="crumb"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( $en ? 'Home' : 'الرئيسية' ) . '</a><span>/</span><span>' . esc_html( $title ) . '</span></div>';
-	echo '<h1>' . esc_html( $title ) . '</h1></div></section>';
-	echo '<section class="sec"><div class="wrap"><div class="woocommerce kx-wc">';
+	echo '<section class="kapp-shop-head"><div class="wrap">';
+	echo '<h1 class="kapp-shop-head__title">' . esc_html( $title ) . '</h1>';
+	echo '<p class="kapp-shop-head__crumb"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( $en ? 'Home' : 'الرئيسية' ) . '</a><span aria-hidden="true"> / </span><span>' . esc_html( $title ) . '</span></p>';
+	echo '</div></section>';
+	echo '<section class="sec kapp-shop-body"><div class="wrap"><div class="woocommerce kx-wc">';
 	echo kymeet_wc_filter_bar(); // phpcs:ignore
 	woocommerce_content();
 	echo '</div></div></section>';

@@ -327,33 +327,5 @@ function kymeet_render_home_app() {
 		echo '</section>';
 	}
 
-	$story = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'story_ar', 'story_en' ) : '';
-	if ( $story ) {
-		echo '<section class="kapp-sec kapp-sec--soft">';
-		kymeet_home_head( $en ? 'Our story' : 'قصة العلامة' );
-		echo '<p class="kapp-muted">' . esc_html( $story ) . '</p>';
-		echo '</section>';
-	}
-
-	$trust = function_exists( 'kymeet_app_content_lines' ) ? kymeet_app_content_lines( 'trust_ar', 'trust_en' ) : array();
-	if ( $trust ) {
-		echo '<section class="kapp-sec kapp-trust">';
-		kymeet_home_head( $en ? 'Trust' : 'عناصر الثقة' );
-		echo '<ul class="kapp-trust">';
-		foreach ( $trust as $line ) {
-			echo '<li>' . esc_html( $line ) . '</li>';
-		}
-		echo '</ul></section>';
-	}
-
-	$news = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'newsletter_ar', 'newsletter_en' ) : '';
-	if ( $news ) {
-		echo '<section class="kapp-sec kapp-sec--soft">';
-		kymeet_home_head( $en ? 'Newsletter' : 'النشرة البريدية' );
-		echo '<p class="kapp-muted">' . esc_html( $news ) . '</p>';
-		echo '<form class="kapp-news" action="#" method="post" onsubmit="return false;"><label><span class="screen-reader-text">' . esc_html( $en ? 'Email address' : 'البريد الإلكتروني' ) . '</span><input type="email" placeholder="name@example.com"></label><button type="submit" class="kapp-news__btn">' . esc_html( $en ? 'Subscribe' : 'اشتراك' ) . '</button></form>';
-		echo '</section>';
-	}
-
 	echo '</main>';
 }

@@ -17,6 +17,9 @@ add_filter(
 	static function ( $classes ) {
 		if ( kymeet_app_ui_active() ) {
 			$classes[] = 'kymeet-app';
+			if ( function_exists( 'is_shop' ) && ( is_shop() || is_product_taxonomy() ) ) {
+				$classes[] = 'kymeet-shop';
+			}
 		}
 		return $classes;
 	}

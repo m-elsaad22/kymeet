@@ -230,35 +230,15 @@ function kymeet_render_app_footer() {
 	$en   = kymeet_app_en();
 	$shop = kymeet_app_shop_url();
 	$acc  = kymeet_app_account_url();
-	echo '<footer class="kymeet-site-footer">';
-	echo '<div class="wrap kapp-foot">';
-	$blurb = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'footer_blurb_ar', 'footer_blurb_en' ) : '';
-	echo '<div><p class="kapp-foot__brand">KYMEET</p>';
-	if ( $blurb ) {
-		echo '<p>' . esc_html( $blurb ) . '</p>';
-	}
-	echo '</div>';
-	echo '<div><h2>' . esc_html( $en ? 'Customer service' : 'خدمة العملاء' ) . '</h2><ul>';
-	echo '<li><a href="' . esc_url( $acc ) . '">' . esc_html( $en ? 'My account' : 'حسابي' ) . '</a></li>';
-	echo '<li><a href="' . esc_url( $acc ) . '">' . esc_html( $en ? 'Orders' : 'طلباتي' ) . '</a></li>';
-	echo '</ul></div>';
-	echo '<div><h2>' . esc_html( $en ? 'Shop' : 'الأقسام' ) . '</h2><ul>';
-	echo '<li><a href="' . esc_url( $shop ) . '">' . esc_html( $en ? 'All perfumes' : 'كل العطور' ) . '</a></li>';
-	echo '<li><a href="' . esc_url( add_query_arg( 'kymeet_chip', 'men', $shop ) ) . '">' . esc_html( $en ? 'Men' : 'رجالي' ) . '</a></li>';
-	echo '<li><a href="' . esc_url( add_query_arg( 'kymeet_chip', 'women', $shop ) ) . '">' . esc_html( $en ? 'Women' : 'نسائي' ) . '</a></li>';
-	echo '</ul></div>';
-	echo '<div><h2>' . esc_html( $en ? 'Policies' : 'السياسات' ) . '</h2><ul>';
-	echo '</ul></div>';
-	$news = function_exists( 'kymeet_app_content_get' ) ? kymeet_app_content_get( 'newsletter_ar', 'newsletter_en' ) : '';
-	if ( $news ) {
-		echo '<form class="kapp-news" action="#" method="post" onsubmit="return false;">';
-		echo '<h2>' . esc_html( $en ? 'Newsletter' : 'النشرة البريدية' ) . '</h2>';
-		echo '<p>' . esc_html( $news ) . '</p>';
-		echo '<label><span class="screen-reader-text">' . esc_html( $en ? 'Email address' : 'البريد الإلكتروني' ) . '</span><input type="email" name="kapp_news" placeholder="' . esc_attr( $en ? 'name@example.com' : 'name@example.com' ) . '" autocomplete="email"></label>';
-		echo '<button type="submit" class="kapp-news__btn">' . esc_html( $en ? 'Subscribe' : 'اشتراك' ) . '</button>';
-		echo '</form>';
-	}
-	echo '</div></footer>';
+	$home = home_url( '/' );
+	echo '<footer class="kymeet-site-footer kymeet-site-footer--app">';
+	echo '<nav class="kapp-foot-links" aria-label="' . esc_attr( $en ? 'Footer' : 'روابط' ) . '">';
+	echo '<a href="' . esc_url( $home ) . '">' . esc_html( $en ? 'Home' : 'الرئيسية' ) . '</a>';
+	echo '<a href="' . esc_url( $shop ) . '">' . esc_html( $en ? 'Shop' : 'المتجر' ) . '</a>';
+	echo '<a href="' . esc_url( $acc ) . '">' . esc_html( $en ? 'Account' : 'حسابي' ) . '</a>';
+	echo '</nav>';
+	echo '<p class="kapp-foot-copy">© ' . esc_html( gmdate( 'Y' ) ) . ' KYMEET</p>';
+	echo '</footer>';
 }
 
 function kymeet_store_appnav() {

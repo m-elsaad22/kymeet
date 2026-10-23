@@ -53,6 +53,36 @@ function kymeet_app_suppress_legacy_chrome() {
 add_action( 'wp_head', 'kymeet_app_suppress_legacy_chrome', 99 );
 
 /**
+ * Shop/archive: no giant Woo category tiles or banner images (chips + grid on home cover categories).
+ */
+function kymeet_wc_app_shop_layout() {
+	if ( ! function_exists( 'kymeet_store_active' ) || ! kymeet_store_active() || ! function_exists( 'kymeet_wc_active' ) || ! kymeet_wc_active() ) {
+		return;
+	}
+	if ( ! function_exists( 'is_shop' ) || ( ! is_shop() && ! is_product_taxonomy() ) ) {
+		return;
+	}
+	remove_filter( 'woocommerce_product_loop_start', 'woocommerce_maybe_show_product_subcategories', 10 );
+	remove_action( 'woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10 );
+	remove_action( 'woocommerce_archive_description', 'woocommerce_product_archive_description', 10 );
+}
+add_action( 'wp', 'kymeet_wc_app_shop_layout', 20 );
+
+function kymeet_wc_strip_archive_banner_images( $html ) {
+	if ( ! function_exists( 'kymeet_app_ui_active' ) || ! kymeet_app_ui_active() ) {
+		return $html;
+	}
+	if ( ! is_string( $html ) || '' === $html ) {
+		return $html;
+	}
+	$html = preg_replace( '/<img[^>]*>/i', '', $html );
+	$html = preg_replace( '/<figure[^>]*>\\s*<\\/figure>/i', '', $html );
+	return $html;
+}
+add_filter( 'woocommerce_taxonomy_archive_description', 'kymeet_wc_strip_archive_banner_images' );
+add_filter( 'woocommerce_product_archive_description', 'kymeet_wc_strip_archive_banner_images' );
+
+/**
  * WC template compatibility marker (ThemeStatic still renders @single/product.php).
  */
 function kymeet_wc_single_product_template_path() {
