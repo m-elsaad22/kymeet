@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>كيان | تسوّق كل شيء</title>
+<meta name="description" content="كيان — متجرك الشامل للإلكترونيات والأزياء والمنزل والجمال والألعاب والرياضة والبقالة وأكثر">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== TOKENS ===== */
+:root{
+  --ink:#0a0a0a;--dark:#1a1a1a;--muted:#686677;--line:#e6e6e6;--bg:#fff;--soft:#f5f5f5;
+  --brand:#0f4ca8;--brand-2:#2f6fe0;--tag:#ff5a5f;--green:#09b83f;--gold:#c9a24a;
+  --flash:#ff6d00;--r:14px;--max:1280px;
+}
+/* ===== RESET ===== */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.4}
+[dir=rtl] body{font-family:'Cairo','Montserrat',sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+ul{list-style:none}
+
+/* ===== TOP BAR ===== */
+.topbar{background:var(--dark);color:#fff;font-size:12.5px;font-weight:500}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;height:34px}
+.topbar-l,.topbar-r{display:flex;align-items:center;gap:18px}
+.topbar a,.topbar button{white-space:nowrap;flex:none;display:flex;align-items:center;gap:5px;opacity:.9;transition:.2s}
+.topbar a:hover,.topbar button:hover{opacity:1}
+.tsep{width:1px;height:14px;background:rgba(255,255,255,.2)}
+.flag{width:18px;height:12px;border-radius:2px;background:linear-gradient(#ce1126 33%,#fff 33% 66%,#000 66%);position:relative;overflow:hidden;flex:none}
+.flag:before{content:"";position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;background:#c09300}
+
+/* ===== HEADER ===== */
+header.main{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line);transition:box-shadow .3s,background .3s}
+header.main.scrolled{box-shadow:0 8px 30px rgba(20,10,60,.1);background:rgba(255,255,255,.95);backdrop-filter:blur(12px)}
+header.main .wrap{display:flex;align-items:center;gap:20px;height:78px;transition:height .3s}
+header.main.scrolled .wrap{height:66px}
+.logo{display:flex;flex-direction:column;line-height:1;align-items:flex-start;flex:none}
+.logo b{font-size:26px;font-weight:700;letter-spacing:.26em;background:linear-gradient(100deg,var(--ink) 40%,var(--brand-2) 50%,var(--ink) 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo b i{font-style:normal;-webkit-text-fill-color:var(--brand)}
+.logo:hover b{background-position:-100% 0;transition:background-position .8s}
+.logo small{font-size:8px;letter-spacing:.45em;color:var(--muted);font-weight:600;margin-top:4px;text-transform:uppercase}
+.newsbar .logo b{background:none;color:#fff;-webkit-text-fill-color:#fff}.newsbar .logo b i{-webkit-text-fill-color:#9dc0ff}
+.newsbar .logo small{color:#aaa}
+
+/* search */
+.search-wrap{flex:1;display:flex;align-items:center;border:2px solid var(--brand);border-radius:12px;overflow:hidden;height:48px;min-width:0}
+.search-cat{height:100%;padding:0 12px;background:var(--soft);border-inline-end:1px solid var(--line);font-size:12px;font-weight:600;white-space:nowrap;display:flex;align-items:center;gap:5px;flex:none}
+.search-wrap input{flex:1;border:0;outline:0;padding:0 14px;font:inherit;font-size:14px;background:none;min-width:0}
+.search-btn{height:100%;padding:0 20px;background:var(--brand);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px;border-radius:0 8px 8px 0;transition:.2s;flex:none}
+[dir=rtl] .search-btn{border-radius:8px 0 0 8px}
+.search-btn:hover{background:var(--brand-2)}
+
+/* actions */
+.actions{display:flex;align-items:center;gap:2px;flex:none}
+.act{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;font-weight:500;padding:0 12px;position:relative;transition:.2s;white-space:nowrap}
+.act + .act{border-inline-start:1px solid var(--line)}
+.act:last-child{padding-inline-end:0}
+.act .ico{transition:.25s}.act:hover .ico{transform:translateY(-3px) scale(1.12);color:var(--brand)}
+.badge{position:absolute;top:-4px;inset-inline-end:6px;background:var(--tag);color:#fff;font-size:10px;font-weight:700;min-width:17px;height:17px;border-radius:9px;display:grid;place-items:center;padding:0 3px}
+.badge[hidden]{display:none}
+.badge.bump{animation:bump .45s}
+.ico{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.burger{display:none;width:40px;height:40px;border-radius:10px;align-items:center;justify-content:center;border:1px solid var(--line)}
+
+/* ===== NAV BAR ===== */
+.nav-bar{background:var(--brand);color:#fff;position:sticky;top:78px;z-index:49;transition:top .3s}
+header.main.scrolled ~ .nav-bar{top:66px}
+.nav-bar .wrap{display:flex;align-items:stretch;height:44px;overflow-x:auto;scrollbar-width:none}
+.nav-bar .wrap::-webkit-scrollbar{display:none}
+.nav-item{position:relative;flex:none}
+.nav-item>a,.nav-item>button{display:flex;align-items:center;gap:6px;height:44px;padding:0 15px;font-size:13px;font-weight:600;color:rgba(255,255,255,.92);white-space:nowrap;transition:.2s}
+.nav-item>a:hover,.nav-item>button:hover{background:rgba(255,255,255,.12);color:#fff}
+.nav-item.all>button{background:rgba(0,0,0,.2);gap:8px}
+.nav-item.all>button:hover{background:rgba(0,0,0,.35)}
+.nav-item.flash-nav>a{color:#ffce21}
+.nav-item.flash-nav>a:after{content:" 🔥";font-size:12px}
+/* mega drop */
+.mega{position:absolute;top:100%;inset-inline-start:0;min-width:620px;background:#fff;border-radius:0 0 16px 16px;box-shadow:0 20px 60px rgba(0,0,0,.2);display:none;z-index:40;color:var(--ink)}
+.nav-item:hover .mega,.nav-item:focus-within .mega{display:flex}
+.mega-col{padding:18px 22px;min-width:160px;border-inline-end:1px solid var(--line)}
+.mega-col:last-child{border:0;flex:1;background:var(--soft);border-radius:0 0 16px 0}
+[dir=rtl] .mega-col:last-child{border-radius:0 0 0 16px}
+.mega-col h6{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.mega-col a{display:block;padding:6px 0;font-size:13px;color:var(--ink);transition:.2s}
+.mega-col a:hover{color:var(--brand);padding-inline-start:6px}
+
+/* ===== MOBILE BOTTOM NAV ===== */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:60;background:#fff;border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav nav{display:flex}
+.bot-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px;font-size:11px;font-weight:600;color:var(--muted);position:relative;transition:.2s}
+.bot-tab.active,.bot-tab:hover{color:var(--brand)}
+.bot-tab .ico{width:24px;height:24px}
+.bot-tab:after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--brand);border-radius:0 0 3px 3px;transition:.3s}
+.bot-tab.active:after{width:36px}
+.bot-badge{position:absolute;top:6px;left:50%;margin-inline-start:6px;background:var(--tag);color:#fff;font-size:9px;font-weight:800;min-width:15px;height:15px;border-radius:8px;display:grid;place-items:center;padding:0 3px}
+
+/* ===== CATEGORY ICONS STRIP ===== */
+.cat-strip{padding:16px 0 0}
+.cat-strip-inner{display:flex;gap:6px;overflow-x:auto;padding-bottom:14px;scrollbar-width:none}
+.cat-strip-inner::-webkit-scrollbar{display:none}
+.catbtn{display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:600;font-size:13px;text-align:center;flex:none;padding:0 6px}
+.catbtn .ci{width:72px;height:72px;border-radius:18px;display:grid;place-items:center;transition:.3s;border:2px solid transparent;animation:bob2 4.2s ease-in-out infinite;animation-delay:calc(var(--i,0)*-.6s)}
+.catbtn:hover .ci{transform:translateY(-4px);border-color:var(--brand);box-shadow:0 8px 20px rgba(15,76,168,.18);animation-play-state:paused}
+.catbtn svg{width:52%;height:52%}
+
+/* ===== HERO ===== */
+.hero{margin-top:12px;position:relative;border-radius:20px;overflow:hidden;aspect-ratio:1240/380}
+.slides{display:flex;height:100%;transition:transform .6s cubic-bezier(.7,0,.2,1)}
+[dir=rtl] .slides{flex-direction:row-reverse}
+.slide{flex:0 0 100%;height:100%;display:flex;align-items:center;padding:0 7%;color:#fff;position:relative;overflow:hidden;cursor:grab;background-size:140% 140%;animation:bgmove 14s ease-in-out infinite alternate}
+.slide:active{cursor:grabbing}
+.slide h2{font-size:clamp(22px,3.4vw,48px);font-weight:700;line-height:1.1;max-width:520px}
+.slide p{margin:10px 0 20px;font-size:clamp(13px,1.2vw,16px);opacity:.9}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 28px;border-radius:12px;background:#fff;color:var(--ink);font-weight:700;font-size:14px;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.slide .deco{position:absolute;inset-inline-end:5%;bottom:-5%;height:112%;opacity:.95;z-index:1;transition:transform .35s}
+.slide>div:first-child{position:relative;z-index:2}
+.slide>div:first-child>*{opacity:0}
+.slide.active>div:first-child>*{opacity:1;animation:up .9s cubic-bezier(.2,.7,.2,1) backwards}
+.slide.active>div:first-child>:nth-child(1){animation-delay:.1s}
+.slide.active>div:first-child>:nth-child(2){animation-delay:.25s}
+.slide.active>div:first-child>:nth-child(3){animation-delay:.4s}
+.slide.active .deco{animation:decoIn 1s .1s cubic-bezier(.2,.7,.2,1) backwards}
+.s1{background:radial-gradient(120% 140% at 80% 10%,#2f7bff,#0f4ca8 55%,#062a63)}
+.s2{background:radial-gradient(120% 140% at 80% 10%,#e8607a,#9c1e4a 60%,#3b0a1d)}
+.s3{background:radial-gradient(120% 140% at 80% 10%,#ff9e21,#c95900 55%,#5a2000)}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.85);display:grid;place-items:center;box-shadow:0 4px 14px rgba(0,0,0,.12);z-index:3;transition:.2s}
+.arrow:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
+.arrow.prev{left:20px}.arrow.next{right:20px}
+.dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:3}
+.dots button{width:8px;height:8px;border-radius:4px;background:rgba(255,255,255,.5);transition:.3s;position:relative;overflow:hidden}
+.dots button.on{width:26px;background:rgba(255,255,255,.4)}
+.dots button.on:after{content:"";position:absolute;inset:0;background:#fff;transform-origin:left;animation:fill 5.5s linear forwards}
+[dir=rtl] .dots button.on:after{transform-origin:right}
+.hero:hover .dots button.on:after{animation-play-state:paused}
+
+/* ===== DEPT GRID ===== */
+.dept-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:24px 0 8px}
+.dept{border-radius:20px;overflow:hidden;position:relative;display:flex;align-items:flex-end;transition:.3s;cursor:pointer;color:#fff;min-height:160px}
+.dept.large{grid-column:span 2;min-height:230px}
+.dept:hover{transform:translateY(-4px);box-shadow:0 16px 36px rgba(0,0,0,.22)}
+.dept:after{content:"";position:absolute;inset:0;background:linear-gradient(0,rgba(0,0,0,.7) 0%,rgba(0,0,0,.2) 50%,transparent 100%);z-index:1;transition:.3s}
+.dept:hover:after{background:linear-gradient(0,rgba(0,0,0,.8) 0%,rgba(0,0,0,.3) 60%,transparent 100%)}
+.dept .dtext{position:relative;z-index:2;padding:16px 18px;width:100%}
+.dept .dtext h3{font-size:16px;font-weight:700;margin-bottom:3px}
+.dept.large .dtext h3{font-size:20px;margin-bottom:5px}
+.dept .dtext p{font-size:12px;opacity:.85}
+.dept .dtext .dtag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;margin-top:8px}
+.dept .dicon{position:absolute;inset-inline-end:10%;top:50%;transform:translateY(-55%);z-index:1;opacity:.88}
+.dept.large .dicon{inset-inline-end:8%;top:50%;transform:translateY(-50%)}
+.dept.d-elec{background:linear-gradient(135deg,#2f7bff,#0f4ca8 55%,#062a63)}
+.dept.d-fashion{background:linear-gradient(135deg,#e8607a,#9c1e4a 60%,#3b0a1d)}
+.dept.d-home{background:linear-gradient(135deg,#c9820a,#5a3800)}
+.dept.d-beauty{background:linear-gradient(135deg,#9c27b0,#4a0070)}
+.dept.d-kids{background:linear-gradient(135deg,#2e7d32,#0d3b11)}
+.dept.d-sports{background:linear-gradient(135deg,#e65100,#7a2800)}
+.dept.d-grocery{background:linear-gradient(135deg,#1b5e20,#0a2810)}
+.dept.d-books{background:linear-gradient(135deg,#4527a0,#1a0070)}
+
+/* ===== FLASH DEALS ===== */
+.flash-sec{background:var(--dark);color:#fff;padding:28px 0;border-radius:20px;overflow:hidden;position:relative;margin:20px 0}
+.flash-sec>.wrap{position:relative;z-index:1}
+.flash-sec:before,.flash-sec:after{content:"";position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:orb 14s ease-in-out infinite}
+.flash-sec:before{width:300px;height:300px;background:var(--flash);top:-120px;left:-80px}
+.flash-sec:after{width:250px;height:250px;background:var(--brand);bottom:-80px;right:-60px;animation-delay:-6s}
+.flash-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.flash-title{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.flash-badge{background:var(--flash);color:#fff;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:999px;letter-spacing:.06em;text-transform:uppercase;animation:pulse2 1.8s infinite}
+.flash-label{font-size:clamp(18px,2.6vw,28px);font-weight:700}
+.flash-label span{color:var(--gold)}
+.timer2{display:flex;gap:7px;align-items:center}
+.timer2 div{background:rgba(255,255,255,.12);border-radius:9px;padding:6px 10px;text-align:center;min-width:50px;backdrop-filter:blur(4px)}
+.timer2 b{display:block;font-size:19px;font-variant-numeric:tabular-nums;font-weight:700}
+.timer2 span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.timer2 .sep{font-size:20px;font-weight:700;opacity:.5;align-self:center;padding-bottom:4px}
+.flash-more{color:var(--gold);font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.flash-more:hover{text-decoration:underline}
+.flash-sec .track .card{background:#1e1e2e;border:1px solid rgba(255,255,255,.08)}
+.flash-sec .card .info *{color:#fff!important}
+.flash-sec .card .info .bn{color:rgba(255,255,255,.5)!important}
+.flash-sec .card .price s{color:rgba(255,255,255,.45)!important}
+.flash-sec .card .add{border-color:rgba(255,255,255,.4);color:#fff}
+.flash-sec .card .add:hover{background:#fff;color:var(--ink);border-color:#fff}
+.flash-sec .card:hover{box-shadow:0 14px 36px rgba(255,109,0,.25)}
+.flash-sec .card.more-tile{border:2px dashed rgba(255,255,255,.25)!important;color:#fff;background:rgba(255,255,255,.05)}
+.flash-sec .card.more-tile .circ{background:#fff;color:var(--ink)}
+
+/* ===== PRODUCTS / CARDS ===== */
+.sec{padding:40px 0 8px;scroll-margin-top:88px}
+.sec.alt{background:#f5f8ff}
+.sec-wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.sec-h{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.sec h2{font-size:clamp(20px,2.6vw,30px);font-weight:700}
+.sec .sub{color:var(--muted);font-size:13.5px;margin-top:4px}
+.more-btn{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 18px;border-radius:12px;border:1.5px solid currentColor;font-weight:700;font-size:13px;white-space:nowrap;transition:.25s;flex:none}
+.more-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rail{position:relative}
+.track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 2px 10px;cursor:grab}
+.track::-webkit-scrollbar{display:none}
+.track.drag{cursor:grabbing;scroll-snap-type:none;user-select:none}
+.card{flex:0 0 calc((100% - 64px)/5);scroll-snap-align:start;background:#fff;border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;position:relative;transition:.3s;border:1px solid var(--line)}
+.card:hover{transform:translateY(-4px);box-shadow:0 14px 32px rgba(0,0,0,.14)}
+.card .tag{position:absolute;top:0;inset-inline-start:0;background:var(--tag);color:#fff;font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:0 0 11px 0;z-index:2;animation:bob2 3.2s ease-in-out infinite}
+[dir=rtl] .card .tag{border-radius:0 0 0 11px}
+.card .tag.nt{background:var(--brand)}
+.card .tag.ft{background:var(--flash)}
+.fav{position:absolute;top:10px;inset-inline-end:10px;z-index:2;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.88);transition:.2s;backdrop-filter:blur(4px)}
+.fav:hover{background:#fff}
+.fav.on svg{fill:var(--tag);stroke:var(--tag)}
+.card .img{height:210px;display:grid;place-items:center;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#f4f8ff);position:relative;overflow:hidden}
+.card .img svg{height:150px;width:auto;transition:.4s}
+.card:hover .img svg{transform:scale(1.07)}
+.card .img:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.8) 50%,transparent 65%);transform:translateX(-120%);transition:transform .8s}
+.card:hover .img:after{transform:translateX(120%)}
+.card .info{padding:12px 13px 13px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card .bn{font-size:11px;letter-spacing:.1em;color:var(--brand);font-weight:700}
+.card h4{font-size:12.5px;font-weight:500;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.5}
+.price{display:flex;align-items:baseline;gap:4px 8px;flex-wrap:wrap;min-height:24px}
+.price b{font-size:16.5px;font-weight:700;color:var(--brand)}
+.price s{font-size:12px;color:#aaa}
+.price em{font-style:normal;color:var(--tag);font-size:11.5px;font-weight:700;flex-basis:100%}
+.stars{display:flex;align-items:center;gap:2px}
+.stars svg{width:12px;height:12px;fill:var(--gold);stroke:none}
+.stars .cnt{color:var(--muted);font-size:11px;margin-inline-start:3px}
+.add{display:flex;align-items:center;justify-content:center;gap:7px;height:40px;border:1.5px solid var(--ink);border-radius:10px;font-weight:600;font-size:13px;margin-top:auto;transition:.2s}
+.add:hover{background:var(--brand);border-color:var(--brand);color:#fff}
+.add:hover svg{animation:shake .5s}
+.add.done{background:var(--green);border-color:var(--green);color:#fff}
+.rail .arrow{width:44px;height:44px;background:rgba(255,255,255,.92);position:absolute;top:50%;margin-top:-32px;border:1px solid var(--line)}
+.rail .prev{left:-22px}.rail .next{right:-22px}
+.card.more-tile{justify-content:center;align-items:center;text-align:center;gap:14px;background:transparent;border:2px dashed rgba(15,76,168,.3)!important;color:var(--brand);font-size:14px;min-height:260px}
+.card.more-tile .circ{width:58px;height:58px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;transition:.35s}
+.card.more-tile:hover{background:rgba(15,76,168,.05);box-shadow:none!important;transform:none}
+.card.more-tile:hover .circ{transform:scale(1.12)}
+.flash-sec .more-tile .circ{background:#fff;color:var(--ink)}
+
+/* ===== DEAL BANNERS ===== */
+.deal-banners{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:12px 0}
+.deal-ban{border-radius:20px;min-height:280px;padding:32px 36px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;transition:.3s}
+.deal-ban:hover{transform:translateY(-4px)}
+.deal-ban small{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;opacity:.8;font-weight:600}
+.deal-ban h3{font-size:clamp(22px,2.8vw,36px);font-weight:700;line-height:1.05;margin:8px 0 16px;max-width:280px;position:relative;z-index:2}
+.deal-ban .btn{align-self:flex-start;position:relative;z-index:2}
+.deal-ban .deco-ban{position:absolute;inset-inline-end:4%;bottom:-4%;height:94%;opacity:.9;z-index:1}
+.deal-ban:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.12) 50%,transparent 65%);transform:translateX(-120%);transition:transform 1s}
+.deal-ban:hover:after{transform:translateX(120%)}
+.db1{background:radial-gradient(120% 140% at 90% 0,#4d8dff,#0f4ca8 55%,#04204d)}
+.db2{background:radial-gradient(120% 140% at 90% 0,#ff6060,#c8000a 55%,#550003)}
+.db2 .btn{background:var(--gold);color:#1a1200}
+.db3{background:radial-gradient(120% 140% at 90% 0,#c9a24a,#7a5800 55%,#2a1a00)}
+.db4{background:radial-gradient(120% 140% at 90% 0,#2e7d32,#0d3b11 55%,#030f04)}
+
+/* ===== BRAND STRIP ===== */
+.brand-strip{padding:36px 0 20px}
+.brand-strip h2{font-size:clamp(18px,2.4vw,26px);font-weight:700;margin-bottom:18px}
+.brands-row{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.brands-row::-webkit-scrollbar{display:none}
+.brand-logo{flex:none;min-width:110px;height:65px;border:1.5px solid var(--line);border-radius:14px;display:grid;place-items:center;background:#fff;transition:.25s;font-weight:800;font-size:13px;letter-spacing:.04em;color:var(--muted);padding:0 16px;text-align:center}
+.brand-logo:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-3px);box-shadow:0 8px 20px rgba(15,76,168,.12)}
+
+/* ===== STRIP + MARQUEE ===== */
+.strip{margin:20px 0;border-radius:var(--r);background:linear-gradient(90deg,#062a63,#0f4ca8 50%,#2f7bff);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 32px;overflow:hidden;position:relative}
+.strip h3{font-size:clamp(16px,2.2vw,26px);font-weight:700}
+.strip p{opacity:.85;font-size:13.5px;margin-top:4px}
+.strip .btn{background:#ffce21;flex:none;color:#1a1200;animation:pulse3 2s infinite}
+.strip>*{position:relative;z-index:1}
+.strip:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.12) 50%,transparent 70%);animation:sheen 4.5s ease-in-out infinite}
+.timer{display:flex;gap:8px}
+.timer div{background:rgba(255,255,255,.14);border-radius:10px;padding:7px 10px;text-align:center;min-width:50px;backdrop-filter:blur(4px)}
+.timer b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+.timer span{font-size:9px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.marquee{background:#0a0a0a;color:#fff;overflow:hidden;white-space:nowrap;padding:12px 0;border-block:1px solid #222}
+.mq-track{display:inline-flex;width:max-content;animation:mq 32s linear infinite}
+[dir=rtl] .mq-track{animation-name:mqr}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-track span{display:inline-flex;align-items:center;gap:24px;padding-inline-end:24px;font-size:13.5px;font-weight:600;letter-spacing:.03em}
+.mq-track span:after{content:"✦";color:var(--gold);font-size:11px}
+
+/* ===== APP SECTION ===== */
+.app-sec{background:linear-gradient(135deg,#0f4ca8,#062a63);color:#fff;border-radius:24px;padding:44px 48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;margin:12px 0 32px;overflow:hidden;position:relative}
+.app-sec:before{content:"";position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,.06);top:-200px;right:-100px}
+.app-sec .text h2{font-size:clamp(20px,2.8vw,34px);font-weight:700;line-height:1.2;margin-bottom:12px}
+.app-sec .text p{opacity:.85;font-size:14px;line-height:1.75;margin-bottom:22px}
+.app-badges{display:flex;flex-wrap:wrap;gap:12px}
+.app-badge{display:flex;align-items:center;gap:10px;border:1.5px solid rgba(255,255,255,.35);border-radius:12px;padding:9px 16px;font-size:11.5px;line-height:1.3;transition:.2s}
+.app-badge:hover{background:rgba(255,255,255,.12);border-color:#fff}
+.app-badge b{display:block;font-size:15px}
+.app-phones{display:flex;gap:18px;position:relative;z-index:1}
+.app-phone-wrap{width:88px;height:170px;border-radius:20px;background:rgba(255,255,255,.12);backdrop-filter:blur(4px);border:2px solid rgba(255,255,255,.2);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.app-phone-wrap:first-child{transform:translateY(14px)}
+
+/* ===== USP ===== */
+.usp{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:36px 0 20px}
+.usp div{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:14px;padding:18px 20px;transition:.3s;background:#fff}
+.usp div:hover{border-color:var(--brand);box-shadow:0 8px 24px rgba(15,76,168,.1);transform:translateY(-3px)}
+.usp .ico{width:36px;height:36px;flex:none;stroke-width:1.4}
+.usp b{display:block;font-size:15px;font-weight:600}
+.usp span{font-size:13px;color:var(--muted)}
+
+/* ===== FOOTER ===== */
+footer{background:#0a0a0a;color:#fff;margin-top:16px}
+.newsbar{background:#111;padding:38px 0}
+.newsbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.social{display:flex;align-items:center;gap:12px;margin-top:16px;font-weight:600;font-size:13.5px}
+.social a{width:32px;height:32px;border-radius:50%;border:1px solid #444;display:grid;place-items:center;transition:.25s}
+.social a:hover{background:#fff;color:#000;transform:translateY(-3px) rotate(8deg)}
+.social .ico{width:16px;height:16px}
+.news{max-width:370px;width:100%}
+.news form{display:flex;background:#fff;border-radius:12px;padding:5px;height:48px}
+.news input{flex:1;border:0;outline:0;padding:0 12px;font:inherit;font-size:13.5px;min-width:0;background:none;color:#000}
+.news button{width:36px;border-radius:9px;background:#000;color:#fff;display:grid;place-items:center}
+.news p{color:#ccc;font-size:13px;margin-top:12px;font-weight:500}
+.fcols{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1.4fr;gap:32px;padding:42px 0 34px}
+.fcols h5{font-size:14.5px;font-weight:500;margin-bottom:16px}
+.fcols li{margin-bottom:11px;font-size:13.5px;color:#999}
+.fcols li a:hover{color:#fff}
+.fcols li a{display:inline-block;transition:.25s}
+.fcols li a:hover{transform:translateX(5px)}
+[dir=rtl] .fcols li a:hover{transform:translateX(-5px)}
+.fcols .contact li{color:#fff;font-size:14.5px;margin-bottom:14px}
+.fcols .app{border-inline-start:1px solid #333;padding-inline-start:32px}
+.fcols .app p{color:#ccc;font-size:13px;line-height:1.6;margin-bottom:14px}
+.stores{display:flex;flex-direction:column;gap:9px;align-items:flex-start}
+.store{display:flex;align-items:center;gap:8px;border:1px solid #555;border-radius:9px;padding:7px 13px;font-size:11.5px;line-height:1.2}
+.store b{display:block;font-size:14px}
+.copy{border-top:1px solid #222;padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;font-size:12.5px;font-weight:500}
+.pay{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pay span{height:24px;min-width:40px;padding:0 7px;border-radius:4px;display:grid;place-items:center;font-size:10.5px;font-weight:700;background:#fff;color:#000}
+.pay .tabby{background:#3bffc0;color:#000}.pay .tamara{background:linear-gradient(90deg,#ffd9b3,#f6a0b9);color:#000}
+.pay .valu{background:linear-gradient(90deg,#c9a24a,#f6d87a);color:#1a1200}
+.lang-btn{font-weight:600}
+.toast{position:fixed;bottom:84px;left:50%;transform:translate(-50%,120px);opacity:0;pointer-events:none;background:#111;color:#fff;padding:12px 20px;border-radius:12px;font-size:13.5px;font-weight:500;z-index:99;transition:.4s;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.progress{position:fixed;top:0;inset-inline-start:0;height:3px;width:0;background:linear-gradient(90deg,#2f7bff,#ff5a5f,#ffce21);z-index:120;transition:width .1s}
+
+/* ===== ANIMATIONS ===== */
+@keyframes up{from{opacity:0;transform:translateY(28px)}}
+@keyframes decoIn{from{opacity:0;transform:translateX(50px) scale(.95)}}
+@keyframes bob{0%,100%{translate:0 0;rotate:0deg}50%{translate:0 -12px;rotate:-2deg}}
+@keyframes bob2{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@keyframes rise{from{transform:translateY(0);opacity:0}15%{opacity:1}to{transform:translateY(-380px);opacity:0}}
+@keyframes bgmove{from{background-position:0% 30%}to{background-position:100% 70%}}
+@keyframes sheen{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes mq{to{transform:translateX(-50%)}}
+@keyframes mqr{to{transform:translateX(50%)}}
+@keyframes pulse2{0%{box-shadow:0 0 0 0 rgba(255,109,0,.6)}70%,100%{box-shadow:0 0 0 12px rgba(255,109,0,0)}}
+@keyframes pulse3{0%{box-shadow:0 0 0 0 rgba(255,206,33,.6)}70%,100%{box-shadow:0 0 0 14px rgba(255,206,33,0)}}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,30px) scale(1.1)}}
+@keyframes bump{40%{transform:scale(1.7)}}
+@keyframes shake{20%{rotate:-8deg}50%{rotate:8deg}80%{rotate:-4deg}}
+.rk{opacity:0}
+.rk.in{opacity:1;animation:up .8s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:var(--d,0s)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1180px){
+  .burger{display:flex}.search-cat{display:none}
+  .card{flex-basis:calc((100% - 48px)/4)}
+  .fcols{grid-template-columns:1fr 1fr 1fr}.fcols .app{border:0;padding:0}
+  .dept-grid{grid-template-columns:repeat(4,1fr)}
+  .app-sec{grid-template-columns:1fr}
+  .app-phones{display:none}
+}
+@media(max-width:900px){
+  .card{flex-basis:calc((100% - 32px)/3)}
+  .usp{grid-template-columns:1fr 1fr}
+  .deal-banners{grid-template-columns:1fr}
+  .dept-grid{grid-template-columns:repeat(2,1fr)}
+  .dept.large{grid-column:span 2}
+  .rail .prev{left:-8px}.rail .next{right:-8px}
+}
+@media(max-width:720px){
+  .wrap{padding:0 14px}
+  .topbar .wrap{gap:10px;font-size:12px}.topbar-l{display:none}
+  header.main .wrap{height:62px;gap:10px}
+  header.main.scrolled .wrap{height:62px}
+  .logo b{font-size:20px}.logo small{font-size:7px}
+  .search-wrap{height:42px}
+  .act{padding:0 8px}.act span.t{display:none}
+  .hero{aspect-ratio:16/9;border-radius:14px;margin-top:8px}
+  .slide{padding:0 6%}.slide .deco{height:68%;opacity:.4}
+  .hero>.arrow{display:none}
+  .card .img{height:175px}.card .img svg{height:120px}
+  .card{flex-basis:calc((100% - 12px)/2)}.track{gap:12px}
+  .rail .arrow{display:none}
+  .usp{grid-template-columns:1fr}
+  .dept-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .dept.large{min-height:160px}
+  .dept:not(.large){min-height:120px}
+  .fcols{grid-template-columns:1fr 1fr;gap:20px}.fcols .contact,.fcols .app{grid-column:1/-1}
+  .deal-ban{padding:22px 24px}.copy{flex-direction:column;align-items:flex-start}
+  .strip{flex-direction:column;align-items:flex-start;padding:16px 20px}
+  .bottom-nav{display:block}
+  body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+  .app-sec{padding:28px 20px;border-radius:16px}
+  .flash-sec{border-radius:14px}
+  .card.more-tile{min-height:220px}
+  .nav-bar{position:static}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.rk{opacity:1}.slide>div:first-child>*{opacity:1}}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG SPRITE ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <!-- UI icons -->
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L21 7H6"/><circle cx="9.5" cy="20.5" r="1.2"/><circle cx="17.5" cy="20.5" r="1.2"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="M21 21l-4.5-4.5"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-l" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-r" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H12L11 22L19.5 10.5H12L13 2z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 48 48"><path d="M4 12h25v21H4zM29 19h9l6 7v7H29z"/><circle cx="14" cy="35" r="4"/><circle cx="36" cy="35" r="4"/></symbol>
+  <symbol id="i-cash" viewBox="0 0 48 48"><rect x="5" y="12" width="38" height="24" rx="3"/><circle cx="24" cy="24" r="6"/><path d="M11 18v.01M37 30v.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 48 48"><path d="M24 5l16 6v12c0 10-7 17-16 20C15 40 8 33 8 23V11z"/><path d="M17 24l5 5 9-10"/></symbol>
+  <symbol id="i-support" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 12v12l8 5"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5v.01"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M3 21l1.6-4.8A8.5 8.5 0 1 1 8 19.5z"/><path d="M9 9c0 3 3 6 6 6l1-2-2-1-1 .7c-.8-.4-1.6-1.2-2-2l.7-1-1-2z"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 11.4L12.6 3.4A2 2 0 0 0 11.2 3H5a2 2 0 0 0-2 2v6.2a2 2 0 0 0 .6 1.4l8 8a2 2 0 0 0 2.8 0l6.2-6.2a2 2 0 0 0 0-2.8z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.3L22 9.3l-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1z"/></symbol>
+
+  <!-- gradient -->
+  <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".25" stop-color="#fff" stop-opacity="0"/><stop offset=".8" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/></linearGradient>
+
+  <!-- === PRODUCT ICONS === -->
+
+  <!-- Smartphone -->
+  <symbol id="p-phone" viewBox="0 0 80 160">
+    <rect x="6" y="4" width="68" height="152" rx="14" fill="var(--glass,#1a1a2e)"/>
+    <rect x="12" y="22" width="56" height="96" rx="4" fill="rgba(100,180,255,.12)"/>
+    <rect x="12" y="22" width="56" height="96" rx="4" fill="url(#shine)" opacity=".5"/>
+    <rect x="22" y="32" width="36" height="5" rx="2.5" fill="rgba(255,255,255,.3)"/>
+    <rect x="22" y="41" width="26" height="3.5" rx="1.5" fill="rgba(255,255,255,.18)"/>
+    <rect x="22" y="49" width="30" height="3.5" rx="1.5" fill="rgba(255,255,255,.12)"/>
+    <rect x="12" y="126" width="56" height="22" rx="4" fill="rgba(255,255,255,.06)"/>
+    <circle cx="40" cy="137" r="7.5" fill="rgba(255,255,255,.12)"/>
+    <rect x="27" y="11" width="26" height="6" rx="3" fill="rgba(0,0,0,.5)"/>
+    <circle cx="43" cy="14" r="2" fill="rgba(255,255,255,.2)"/>
+  </symbol>
+
+  <!-- Laptop -->
+  <symbol id="p-laptop" viewBox="0 0 200 140">
+    <rect x="18" y="6" width="164" height="102" rx="10" fill="var(--glass,#1a1a2e)"/>
+    <rect x="26" y="14" width="148" height="84" rx="6" fill="rgba(100,180,255,.1)"/>
+    <rect x="26" y="14" width="148" height="84" rx="6" fill="url(#shine)" opacity=".4"/>
+    <rect x="40" y="24" width="120" height="10" rx="3" fill="rgba(255,255,255,.18)"/>
+    <rect x="40" y="38" width="90" height="6" rx="2" fill="rgba(255,255,255,.12)"/>
+    <rect x="40" y="48" width="110" height="6" rx="2" fill="rgba(255,255,255,.08)"/>
+    <rect x="40" y="60" width="80" height="20" rx="4" fill="rgba(255,255,255,.06)"/>
+    <rect x="0" y="110" width="200" height="24" rx="6" fill="var(--glass,#2a2a3e)"/>
+    <rect x="70" y="112" width="60" height="8" rx="4" fill="rgba(0,0,0,.3)"/>
+  </symbol>
+
+  <!-- Headphones -->
+  <symbol id="p-headphone" viewBox="0 0 130 130">
+    <path d="M22 75 C22 34 108 34 108 75" fill="none" stroke="var(--glass,#1a1a2e)" stroke-width="12" stroke-linecap="round"/>
+    <rect x="6" y="68" width="30" height="44" rx="12" fill="var(--glass,#1a1a2e)"/>
+    <rect x="12" y="74" width="18" height="32" rx="9" fill="rgba(255,255,255,.12)"/>
+    <circle cx="21" cy="90" r="6" fill="rgba(255,255,255,.18)"/>
+    <rect x="94" y="68" width="30" height="44" rx="12" fill="var(--glass,#1a1a2e)"/>
+    <rect x="100" y="74" width="18" height="32" rx="9" fill="rgba(255,255,255,.12)"/>
+    <circle cx="109" cy="90" r="6" fill="rgba(255,255,255,.18)"/>
+  </symbol>
+
+  <!-- Smart TV -->
+  <symbol id="p-tv" viewBox="0 0 220 160">
+    <rect x="4" y="4" width="212" height="124" rx="12" fill="var(--glass,#1a1a2e)"/>
+    <rect x="12" y="12" width="196" height="108" rx="8" fill="rgba(100,180,255,.1)"/>
+    <rect x="12" y="12" width="196" height="108" rx="8" fill="url(#shine)" opacity=".4"/>
+    <rect x="30" y="22" width="80" height="8" rx="3" fill="rgba(255,255,255,.2)"/>
+    <rect x="30" y="34" width="130" height="6" rx="2" fill="rgba(255,255,255,.1)"/>
+    <rect x="30" y="44" width="100" height="6" rx="2" fill="rgba(255,255,255,.08)"/>
+    <rect x="88" y="130" width="44" height="10" rx="5" fill="var(--glass,#2a2a3e)"/>
+    <rect x="64" y="140" width="92" height="12" rx="4" fill="var(--glass,#333)"/>
+  </symbol>
+
+  <!-- Smart Watch -->
+  <symbol id="p-watch" viewBox="0 0 80 140">
+    <rect x="22" y="0" width="36" height="34" rx="8" fill="var(--glass,#1a1a2e)"/>
+    <rect x="22" y="106" width="36" height="34" rx="8" fill="var(--glass,#1a1a2e)"/>
+    <rect x="8" y="28" width="64" height="84" rx="18" fill="var(--glass,#2a2a4e)"/>
+    <rect x="14" y="34" width="52" height="72" rx="14" fill="rgba(255,255,255,.1)"/>
+    <rect x="22" y="46" width="36" height="9" rx="4" fill="rgba(255,255,255,.4)"/>
+    <rect x="22" y="59" width="26" height="6" rx="3" fill="rgba(255,255,255,.25)"/>
+    <rect x="22" y="69" width="20" height="5" rx="2.5" fill="rgba(255,255,255,.18)"/>
+    <circle cx="40" cy="84" r="7" fill="rgba(255,255,255,.12)"/>
+    <circle cx="40" cy="84" r="3" fill="rgba(255,255,255,.25)"/>
+  </symbol>
+
+  <!-- T-Shirt -->
+  <symbol id="p-shirt" viewBox="0 0 160 140">
+    <path d="M56 12 L12 46 L34 58 L34 128 L126 128 L126 58 L148 46 L104 12 L80 28 Z" fill="var(--glass,#1a3a6e)"/>
+    <path d="M56 12 Q80 32 104 12" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="3" stroke-linejoin="round"/>
+    <line x1="34" y1="82" x2="126" y2="82" stroke="rgba(255,255,255,.07)" stroke-width="1.5"/>
+    <line x1="34" y1="97" x2="126" y2="97" stroke="rgba(255,255,255,.07)" stroke-width="1.5"/>
+    <line x1="34" y1="112" x2="126" y2="112" stroke="rgba(255,255,255,.07)" stroke-width="1.5"/>
+    <path d="M56 12 L12 46 L34 58 L34 128 L126 128 L126 58 L148 46 L104 12 L80 28 Z" fill="url(#shine)" opacity=".25"/>
+  </symbol>
+
+  <!-- Dress / Women's fashion -->
+  <symbol id="p-dress" viewBox="0 0 130 190">
+    <path d="M44 12 L12 56 L38 68 L24 180 L106 180 L92 68 L118 56 L86 12 Q65 28 44 12Z" fill="var(--glass,#c8427a)"/>
+    <rect x="34" y="80" width="62" height="12" rx="6" fill="rgba(255,255,255,.18)"/>
+    <rect x="38" y="100" width="54" height="4" rx="2" fill="rgba(255,255,255,.12)"/>
+    <path d="M44 12 L12 56 L38 68 L24 180 L106 180 L92 68 L118 56 L86 12 Q65 28 44 12Z" fill="url(#shine)" opacity=".2"/>
+  </symbol>
+
+  <!-- Sneaker -->
+  <symbol id="p-sneaker" viewBox="0 0 200 100">
+    <path d="M12 60 C12 32 44 12 86 18 L172 22 L184 54 C184 72 172 82 150 82 L34 86 C20 86 12 76 12 60Z" fill="var(--glass,#1a3a6e)"/>
+    <path d="M16 68 L180 52 L184 54 L184 68 C184 78 172 86 152 86 L34 88 C20 88 16 80 16 68Z" fill="rgba(255,255,255,.12)"/>
+    <path d="M52 24 L52 56 M68 22 L68 54 M84 21 L84 53 M100 21 L100 53 M116 22 L116 54" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M12 60 C12 32 44 12 86 18 L172 22 L184 54 C184 72 172 82 150 82 L34 86 C20 86 12 76 12 60Z" fill="url(#shine)" opacity=".25"/>
+  </symbol>
+
+  <!-- Handbag -->
+  <symbol id="p-bag" viewBox="0 0 140 150">
+    <path d="M46 42 C46 20 94 20 94 42" fill="none" stroke="var(--glass,#1a1a2e)" stroke-width="10" stroke-linecap="round"/>
+    <rect x="12" y="40" width="116" height="96" rx="16" fill="var(--glass,#1a1a2e)"/>
+    <rect x="22" y="60" width="96" height="62" rx="10" fill="rgba(255,255,255,.08)"/>
+    <rect x="52" y="38" width="36" height="10" rx="5" fill="rgba(255,255,255,.2)"/>
+    <rect x="22" y="80" width="96" height="2" rx="1" fill="rgba(255,255,255,.18)"/>
+    <circle cx="70" cy="92" r="8" fill="rgba(255,255,255,.12)"/>
+    <rect x="12" y="40" width="116" height="96" rx="16" fill="url(#shine)" opacity=".2"/>
+  </symbol>
+
+  <!-- Sofa -->
+  <symbol id="p-sofa" viewBox="0 0 220 140">
+    <rect x="22" y="44" width="176" height="72" rx="18" fill="var(--glass,#5a3414)"/>
+    <rect x="34" y="22" width="152" height="50" rx="14" fill="rgba(255,255,255,.1)"/>
+    <rect x="34" y="72" width="70" height="36" rx="10" fill="rgba(255,255,255,.1)"/>
+    <rect x="116" y="72" width="70" height="36" rx="10" fill="rgba(255,255,255,.1)"/>
+    <rect x="4" y="42" width="24" height="58" rx="12" fill="var(--glass,#4a2810)"/>
+    <rect x="192" y="42" width="24" height="58" rx="12" fill="var(--glass,#4a2810)"/>
+    <rect x="38" y="112" width="14" height="20" rx="4" fill="#222"/>
+    <rect x="168" y="112" width="14" height="20" rx="4" fill="#222"/>
+    <rect x="22" y="44" width="176" height="72" rx="18" fill="url(#shine)" opacity=".15"/>
+  </symbol>
+
+  <!-- Kitchen Appliance (Air Fryer) -->
+  <symbol id="p-kitchen" viewBox="0 0 120 170">
+    <rect x="18" y="140" width="84" height="22" rx="8" fill="var(--glass,#2a2a3e)"/>
+    <rect x="10" y="40" width="100" height="104" rx="22" fill="var(--glass,#3a3a5e)"/>
+    <ellipse cx="60" cy="40" rx="50" ry="20" fill="var(--glass,#4a4a7e)"/>
+    <circle cx="60" cy="88" r="30" fill="rgba(255,255,255,.08)"/>
+    <circle cx="60" cy="88" r="22" fill="rgba(255,255,255,.12)"/>
+    <circle cx="60" cy="88" r="12" fill="rgba(100,180,255,.2)"/>
+    <rect x="40" y="118" width="40" height="6" rx="3" fill="rgba(255,255,255,.2)"/>
+    <circle cx="90" cy="56" r="6" fill="rgba(255,255,255,.25)"/>
+    <rect x="10" y="40" width="100" height="104" rx="22" fill="url(#shine)" opacity=".2"/>
+  </symbol>
+
+  <!-- Beauty / Cosmetic jar -->
+  <symbol id="p-beauty" viewBox="0 0 130 130">
+    <rect x="12" y="34" width="106" height="84" rx="18" fill="var(--glass,#c8427a)"/>
+    <rect x="22" y="12" width="86" height="30" rx="14" fill="rgba(255,255,255,.18)"/>
+    <rect x="22" y="12" width="86" height="30" rx="14" fill="var(--glass,#a0305e)" opacity=".6"/>
+    <rect x="26" y="58" width="78" height="42" rx="10" fill="rgba(255,255,255,.92)"/>
+    <rect x="34" y="68" width="60" height="6" rx="3" fill="#333"/>
+    <rect x="40" y="78" width="48" height="4" rx="2" fill="#999"/>
+    <rect x="12" y="34" width="106" height="84" rx="18" fill="url(#shine)" opacity=".2"/>
+  </symbol>
+
+  <!-- Toy / Game Controller -->
+  <symbol id="p-toy" viewBox="0 0 180 120">
+    <path d="M18 40 C8 40 4 56 6 72 C10 108 26 116 40 110 L60 90 L120 90 L140 110 C154 116 170 108 174 72 C176 56 172 40 162 40 Z" fill="var(--glass,#4527a0)"/>
+    <rect x="38" y="52" width="22" height="8" rx="4" fill="rgba(255,255,255,.3)"/>
+    <rect x="47" y="44" width="8" height="22" rx="4" fill="rgba(255,255,255,.3)"/>
+    <circle cx="130" cy="58" r="7" fill="rgba(255,109,0,.6)"/>
+    <circle cx="148" cy="58" r="7" fill="rgba(255,109,0,.6)"/>
+    <circle cx="139" cy="47" r="7" fill="rgba(255,109,0,.6)"/>
+    <circle cx="139" cy="69" r="7" fill="rgba(255,109,0,.6)"/>
+    <path d="M18 40 C8 40 4 56 6 72 C10 108 26 116 40 110 L60 90 L120 90 L140 110 C154 116 170 108 174 72 C176 56 172 40 162 40 Z" fill="url(#shine)" opacity=".2"/>
+  </symbol>
+
+  <!-- Toy Car -->
+  <symbol id="p-toycar" viewBox="0 0 200 100">
+    <path d="M22 54 L34 24 L78 18 L128 18 L162 28 L178 54 L178 72 L22 72 Z" fill="var(--glass,#c8371a)"/>
+    <path d="M72 22 L62 50 L126 50 L128 22 Z" fill="rgba(100,200,255,.35)"/>
+    <circle cx="52" cy="72" r="22" fill="#222"/>
+    <circle cx="52" cy="72" r="14" fill="#444"/>
+    <circle cx="52" cy="72" r="6" fill="#666"/>
+    <circle cx="148" cy="72" r="22" fill="#222"/>
+    <circle cx="148" cy="72" r="14" fill="#444"/>
+    <circle cx="148" cy="72" r="6" fill="#666"/>
+    <path d="M22 54 L34 24 L78 18 L128 18 L162 28 L178 54 L178 72 L22 72 Z" fill="url(#shine)" opacity=".25"/>
+  </symbol>
+
+  <!-- Dumbbell -->
+  <symbol id="p-dumbbell" viewBox="0 0 220 80">
+    <rect x="68" y="32" width="84" height="16" rx="5" fill="var(--glass,#555)"/>
+    <rect x="10" y="18" width="34" height="44" rx="8" fill="var(--glass,#c8371a)"/>
+    <rect x="40" y="24" width="18" height="32" rx="5" fill="var(--glass,#a02810)"/>
+    <rect x="176" y="18" width="34" height="44" rx="8" fill="var(--glass,#c8371a)"/>
+    <rect x="162" y="24" width="18" height="32" rx="5" fill="var(--glass,#a02810)"/>
+    <rect x="80" y="38" width="60" height="4" rx="2" fill="rgba(255,255,255,.18)"/>
+  </symbol>
+
+  <!-- Grocery Basket -->
+  <symbol id="p-grocery" viewBox="0 0 160 150">
+    <path d="M22 68 L16 132 L144 132 L138 68 Z" fill="var(--glass,#1b5e20)"/>
+    <path d="M22 68 L16 132 L144 132 L138 68 Z" fill="url(#shine)" opacity=".25"/>
+    <path d="M44 68 C44 28 116 28 116 68" fill="none" stroke="var(--glass,#1b5e20)" stroke-width="11" stroke-linecap="round"/>
+    <circle cx="56" cy="98" r="18" fill="#c8371a"/>
+    <circle cx="90" cy="94" r="20" fill="#f4c430"/>
+    <circle cx="122" cy="98" r="16" fill="#09b83f"/>
+    <line x1="56" y1="80" x2="58" y2="72" stroke="#333" stroke-width="2.5"/>
+    <ellipse cx="56" cy="80" rx="5" ry="3" fill="#2e7d32"/>
+  </symbol>
+
+  <!-- Book -->
+  <symbol id="p-book" viewBox="0 0 120 150">
+    <rect x="12" y="10" width="96" height="130" rx="8" fill="var(--glass,#4527a0)"/>
+    <rect x="12" y="10" width="20" height="130" rx="4" fill="rgba(0,0,0,.35)"/>
+    <rect x="34" y="22" width="62" height="8" rx="3" fill="rgba(255,255,255,.8)"/>
+    <rect x="34" y="34" width="50" height="5" rx="2" fill="rgba(255,255,255,.5)"/>
+    <rect x="34" y="50" width="62" height="4" rx="2" fill="rgba(255,255,255,.25)"/>
+    <rect x="34" y="58" width="54" height="4" rx="2" fill="rgba(255,255,255,.2)"/>
+    <rect x="34" y="66" width="58" height="4" rx="2" fill="rgba(255,255,255,.18)"/>
+    <rect x="34" y="80" width="62" height="40" rx="4" fill="rgba(255,255,255,.12)"/>
+    <rect x="12" y="10" width="96" height="130" rx="8" fill="url(#shine)" opacity=".2"/>
+  </symbol>
+
+</defs>
+</svg>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-l">
+      <a href="#"><svg class="ico" style="width:14px;height:14px"><use href="#i-pin"/></svg><span data-i="deliver">الشحن إلى</span> <span class="flag"></span> <span data-i="country">مصر</span></a>
+      <div class="tsep"></div>
+      <a href="#" data-i="track">تتبع طلبك</a>
+    </div>
+    <div class="topbar-r">
+      <a href="#" data-i="sell">بيع على كيان</a>
+      <div class="tsep"></div>
+      <a href="#"><svg class="ico" style="width:14px;height:14px"><use href="#i-support"/></svg><span data-i="help">مساعدة</span></a>
+      <div class="tsep"></div>
+      <button class="lang-btn" id="langBtn">English</button>
+      <div class="tsep"></div>
+      <button><span class="flag"></span> EGP <svg class="ico" style="width:11px;height:11px"><use href="#i-chev"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="main">
+  <div class="wrap">
+    <button class="burger" aria-label="قائمة"><svg class="ico"><use href="#i-menu"/></svg></button>
+    <a href="#" class="logo" aria-label="كيان"><b>KAY<i>A</i>N</b><small data-i="tagline">تسوّق كل شيء</small></a>
+    <div class="search-wrap">
+      <div class="search">
+        <button class="search-cat"><span data-i="allCats">كل الأقسام</span> <svg class="ico" style="width:11px;height:11px"><use href="#i-chev"/></svg></button>
+        <input type="search" data-ph="search" placeholder="ابحث عن منتج، براند، أو تصنيف…">
+        <button class="search-btn"><svg class="ico" style="width:18px;height:18px"><use href="#i-search"/></svg><span class="t" data-i="searchBtn">بحث</span></button>
+      </div>
+    </div>
+    <div class="actions">
+      <a href="#" class="act"><svg class="ico"><use href="#i-heart"/></svg><span class="t" data-i="wishlist">المفضلة</span><span class="badge" id="favCount" hidden>0</span></a>
+      <a href="#" class="act"><svg class="ico"><use href="#i-cart"/></svg><span class="t" data-i="cart">سلتي</span><span class="badge" id="cartCount" hidden>0</span></a>
+      <a href="#" class="act"><svg class="ico"><use href="#i-user"/></svg><span class="t" data-i="login">حسابي</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== NAV BAR ===== -->
+<nav class="nav-bar" aria-label="أقسام المتجر">
+  <div class="wrap">
+    <!-- All Categories -->
+    <div class="nav-item all">
+      <button><svg class="ico" style="width:18px;height:18px"><use href="#i-menu"/></svg><span data-i="allCats">كل الأقسام</span></button>
+      <div class="mega">
+        <div class="mega-col">
+          <h6 data-i="elec">الإلكترونيات</h6>
+          <a href="#sec-elec" data-i="phones">الهواتف والأجهزة اللوحية</a>
+          <a href="#sec-elec" data-i="laptops">اللابتوبات والكمبيوتر</a>
+          <a href="#sec-elec" data-i="audio">الصوتيات والسماعات</a>
+          <a href="#sec-elec" data-i="tv">التلفزيون والشاشات</a>
+          <a href="#sec-elec" data-i="cameras">الكاميرات</a>
+          <a href="#sec-elec" data-i="gaming">ألعاب الفيديو</a>
+        </div>
+        <div class="mega-col">
+          <h6 data-i="fashion">الأزياء</h6>
+          <a href="#sec-fashion-m" data-i="menFashion">ملابس رجالية</a>
+          <a href="#sec-fashion-w" data-i="womenFashion">ملابس نسائية</a>
+          <a href="#sec-fashion-m" data-i="shoes">الأحذية</a>
+          <a href="#sec-fashion-w" data-i="bags">الحقائب والإكسسوارات</a>
+          <a href="#" data-i="watches">الساعات</a>
+          <a href="#" data-i="sport-wear">الملابس الرياضية</a>
+        </div>
+        <div class="mega-col">
+          <h6 data-i="home">المنزل والحديقة</h6>
+          <a href="#sec-home" data-i="furniture">الأثاث</a>
+          <a href="#sec-home" data-i="kitchen-tools">أدوات المطبخ</a>
+          <a href="#sec-home" data-i="bedding">الفراش والمفروشات</a>
+          <a href="#sec-home" data-i="decor">الديكور</a>
+          <a href="#sec-home" data-i="cleaning">التنظيف والمنظفات</a>
+        </div>
+        <div class="mega-col">
+          <h6 data-i="more">المزيد</h6>
+          <a href="#sec-beauty" data-i="beauty">الجمال والعناية</a>
+          <a href="#sec-kids" data-i="kids">الأطفال والألعاب</a>
+          <a href="#sec-sports" data-i="sports">الرياضة واللياقة</a>
+          <a href="#sec-grocery" data-i="grocery">البقالة والسوبرماركت</a>
+          <a href="#" data-i="books">الكتب والقرطاسية</a>
+          <a href="#" data-i="auto">السيارات وقطع الغيار</a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-item flash-nav"><a href="#flash" data-i="todayDeals">عروض اليوم</a></div>
+    <div class="nav-item"><a href="#sec-elec" data-i="elec">الإلكترونيات</a></div>
+    <div class="nav-item"><a href="#sec-fashion-m" data-i="fashion">الأزياء</a></div>
+    <div class="nav-item"><a href="#sec-home" data-i="home">المنزل</a></div>
+    <div class="nav-item"><a href="#sec-beauty" data-i="beauty">الجمال</a></div>
+    <div class="nav-item"><a href="#sec-kids" data-i="kids">الأطفال</a></div>
+    <div class="nav-item"><a href="#sec-sports" data-i="sports">الرياضة</a></div>
+    <div class="nav-item"><a href="#sec-grocery" data-i="grocery">البقالة</a></div>
+    <div class="nav-item"><a href="#" data-i="newArrivals">وصل حديثاً</a></div>
+  </div>
+</nav>
+
+<!-- ===== MOBILE BOTTOM NAV ===== -->
+<div class="bottom-nav" aria-label="تنقل المحمول">
+  <nav>
+    <button class="bot-tab active" data-tab="home"><svg class="ico"><use href="#i-home"/></svg><span data-i="navHome">الرئيسية</span></button>
+    <button class="bot-tab" data-tab="cats"><svg class="ico"><use href="#i-grid"/></svg><span data-i="navCats">الأقسام</span></button>
+    <button class="bot-tab" data-tab="deals"><svg class="ico"><use href="#i-bolt"/></svg><span data-i="navDeals">العروض</span></button>
+    <button class="bot-tab" data-tab="cart"><svg class="ico"><use href="#i-cart"/></svg><span data-i="cart">سلتي</span><span class="bot-badge" id="cartBotBadge" hidden>0</span></button>
+    <button class="bot-tab" data-tab="account"><svg class="ico"><use href="#i-user"/></svg><span data-i="login">حسابي</span></button>
+  </nav>
+</div>
+
+<main>
+<div class="wrap">
+
+  <!-- ===== CATEGORY ICONS STRIP ===== -->
+  <div class="cat-strip">
+    <div class="cat-strip-inner" id="catStrip"></div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero" aria-label="العروض المميزة">
+    <div class="slides" id="slides">
+      <!-- Slide 1: Electronics -->
+      <div class="slide s1">
+        <div>
+          <h2 data-i="h1">أحدث التقنية بأفضل سعر</h2>
+          <p data-i="h1p">خصومات حتى 50% على الهواتف واللابتوبات</p>
+          <a class="btn" href="#sec-elec" data-i="shopNow">تسوق الآن</a>
+        </div>
+        <svg class="deco" viewBox="0 0 320 200" style="width:38%">
+          <use href="#p-phone" x="0" y="10" width="90" height="180" style="--glass:#9dc0ff"/>
+          <use href="#p-laptop" x="96" y="40" width="210" height="145"/>
+          <use href="#p-watch" x="206" y="60" width="80" height="140" style="--glass:#ffce21"/>
+        </svg>
+      </div>
+      <!-- Slide 2: Fashion -->
+      <div class="slide s2">
+        <div>
+          <h2 data-i="h2">أزياء العيد وصلت</h2>
+          <p data-i="h2p">أحدث صيحات الموضة بخصومات حتى 70%</p>
+          <a class="btn" href="#sec-fashion-m" data-i="shopNow">تسوق الآن</a>
+        </div>
+        <svg class="deco" viewBox="0 0 320 200" style="width:36%">
+          <use href="#p-dress" x="10" y="5" width="130" height="190" style="--glass:#ffb3c1"/>
+          <use href="#p-shirt" x="140" y="30" width="160" height="145" style="--glass:#fff"/>
+          <use href="#p-sneaker" x="130" y="150" width="170" height="85" style="--glass:#ffe0b3"/>
+        </svg>
+      </div>
+      <!-- Slide 3: Flash Sale -->
+      <div class="slide s3">
+        <div>
+          <h2 data-i="h3">الجمعة البيضاء 🔥</h2>
+          <p data-i="h3p">عروض لا تُصدق على آلاف المنتجات — لفترة محدودة</p>
+          <a class="btn" href="#flash" data-i="seeDeals">شوف العروض</a>
+        </div>
+        <svg class="deco" viewBox="0 0 320 200" style="width:36%">
+          <use href="#p-tv" x="10" y="30" width="220" height="160" style="--glass:#222"/>
+          <use href="#p-headphone" x="180" y="60" width="130" height="130" style="--glass:#ff9500"/>
+        </svg>
+      </div>
+    </div>
+    <button class="arrow prev" id="hPrev" aria-label="السابق"><svg class="ico"><use href="#i-l"/></svg></button>
+    <button class="arrow next" id="hNext" aria-label="التالي"><svg class="ico"><use href="#i-r"/></svg></button>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- ===== DEPT GRID ===== -->
+  <div class="dept-grid" id="deptGrid">
+    <!-- Electronics (large) -->
+    <a class="dept d-elec large rk" href="#sec-elec">
+      <svg class="dicon" viewBox="0 0 320 200" style="width:52%;height:auto">
+        <use href="#p-phone" x="10" y="10" width="85" height="170"/>
+        <use href="#p-laptop" x="96" y="38" width="200" height="138"/>
+      </svg>
+      <div class="dtext">
+        <h3 data-i="elec">الإلكترونيات</h3>
+        <p data-i="elecSub">هواتف، لابتوبات، سماعات والمزيد</p>
+        <span class="dtag">خصم حتى 50%</span>
+      </div>
+    </a>
+    <!-- Fashion (large) -->
+    <a class="dept d-fashion large rk" href="#sec-fashion-m">
+      <svg class="dicon" viewBox="0 0 300 200" style="width:50%;height:auto">
+        <use href="#p-dress" x="10" y="5" width="120" height="190" style="--glass:#ffb3c1"/>
+        <use href="#p-shirt" x="140" y="28" width="150" height="140" style="--glass:#fff"/>
+      </svg>
+      <div class="dtext">
+        <h3 data-i="fashion">الأزياء والإكسسوارات</h3>
+        <p data-i="fashionSub">ملابس رجالية، نسائية، أحذية وحقائب</p>
+        <span class="dtag">وصل حديثاً</span>
+      </div>
+    </a>
+    <!-- Home -->
+    <a class="dept d-home rk" href="#sec-home">
+      <svg class="dicon" viewBox="0 0 220 140" style="width:70%;height:auto">
+        <use href="#p-sofa" style="--glass:#8b5e3c"/>
+      </svg>
+      <div class="dtext"><h3 data-i="home">المنزل والأثاث</h3><p data-i="homeSub">أثاث، مطبخ، ديكور</p></div>
+    </a>
+    <!-- Beauty -->
+    <a class="dept d-beauty rk" href="#sec-beauty">
+      <svg class="dicon" viewBox="0 0 130 130" style="width:65%;height:auto">
+        <use href="#p-beauty" style="--glass:#e040fb"/>
+      </svg>
+      <div class="dtext"><h3 data-i="beauty">الجمال والعناية</h3><p data-i="beautySub">مستحضرات، عطور، شعر</p></div>
+    </a>
+    <!-- Kids -->
+    <a class="dept d-kids rk" href="#sec-kids">
+      <svg class="dicon" viewBox="0 0 180 120" style="width:70%;height:auto">
+        <use href="#p-toy" style="--glass:#66bb6a"/>
+      </svg>
+      <div class="dtext"><h3 data-i="kids">الأطفال والألعاب</h3><p data-i="kidsSub">ألعاب، ملابس أطفال، لوازم</p></div>
+    </a>
+    <!-- Sports -->
+    <a class="dept d-sports rk" href="#sec-sports">
+      <svg class="dicon" viewBox="0 0 220 80" style="width:72%;height:auto">
+        <use href="#p-dumbbell" style="--glass:#ff7043"/>
+      </svg>
+      <div class="dtext"><h3 data-i="sports">الرياضة واللياقة</h3><p data-i="sportsSub">معدات، ملابس رياضية، تغذية</p></div>
+    </a>
+    <!-- Grocery -->
+    <a class="dept d-grocery rk" href="#sec-grocery">
+      <svg class="dicon" viewBox="0 0 160 150" style="width:65%;height:auto">
+        <use href="#p-grocery" style="--glass:#43a047"/>
+      </svg>
+      <div class="dtext"><h3 data-i="grocery">البقالة والسوبرماركت</h3><p data-i="grocerySub">منتجات طازجة، معلبات، مشروبات</p></div>
+    </a>
+    <!-- Books -->
+    <a class="dept d-books rk" href="#">
+      <svg class="dicon" viewBox="0 0 120 150" style="width:60%;height:auto">
+        <use href="#p-book" style="--glass:#7c4dff"/>
+      </svg>
+      <div class="dtext"><h3 data-i="books">الكتب والقرطاسية</h3><p data-i="booksSub">كتب، أدوات مكتبية، هدايا</p></div>
+    </a>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- ===== FLASH DEALS ===== -->
+<div class="wrap">
+  <section class="flash-sec" id="flash">
+    <div class="wrap">
+      <div class="flash-head rk">
+        <div class="flash-title">
+          <span class="flash-badge" data-i="flashBadge">عروض اليوم</span>
+          <span class="flash-label" data-i="flashLabel">خصومات حتى <span>80%</span></span>
+        </div>
+        <div class="timer2" id="timer2">
+          <div><b>00</b><span data-i="d">يوم</span></div>
+          <span class="sep">:</span>
+          <div><b>00</b><span data-i="h">ساعة</span></div>
+          <span class="sep">:</span>
+          <div><b>00</b><span data-i="m">دقيقة</span></div>
+          <span class="sep">:</span>
+          <div><b>00</b><span data-i="s">ثانية</span></div>
+        </div>
+        <a class="flash-more" href="#"><span data-i="viewAll">عرض الكل</span> <svg class="ico" style="width:16px;height:16px"><use href="#i-r"/></svg></a>
+      </div>
+      <div class="rail" id="flashRail">
+        <button class="arrow prev" data-rail="rl-flash" data-dir="-1" aria-label="السابق"><svg class="ico"><use href="#i-l"/></svg></button>
+        <div class="track" id="rl-flash"></div>
+        <button class="arrow next" data-rail="rl-flash" data-dir="1" aria-label="التالي"><svg class="ico"><use href="#i-r"/></svg></button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Marquee -->
+<div class="marquee" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
+
+<!-- ===== PRODUCT SECTIONS ===== -->
+<div id="sections"></div>
+
+<!-- ===== CONTENT CONTINUES ===== -->
+<div class="wrap">
+
+  <!-- Deal Banners -->
+  <section style="padding:12px 0 8px">
+    <div class="deal-banners">
+      <a class="deal-ban db1 rk" href="#sec-elec">
+        <small data-i="hotDeal">عرض ساخن</small>
+        <h3 data-i="dealT1">هواتف وأجهزة بأسعار حصرية</h3>
+        <span class="btn" data-i="shopNow">تسوق الآن</span>
+        <svg class="deco-ban" viewBox="0 0 200 240" style="width:auto">
+          <use href="#p-phone" x="10" y="30" width="90" height="180" style="--glass:#9dc0ff;--cap:#fff"/>
+          <use href="#p-watch" x="100" y="60" width="80" height="140" style="--glass:#ffce21"/>
+        </svg>
+      </a>
+      <a class="deal-ban db2 rk" style="--d:.12s" href="#sec-fashion-w">
+        <small data-i="newCollection">كولكشن جديد</small>
+        <h3 data-i="dealT2">أزياء الموسم — وصل حديثاً</h3>
+        <span class="btn" data-i="shopNow">تسوق الآن</span>
+        <svg class="deco-ban" viewBox="0 0 200 240" style="width:auto">
+          <use href="#p-dress" x="20" y="10" width="140" height="220" style="--glass:#ffb3c1"/>
+          <use href="#p-bag" x="130" y="80" width="80" height="150" style="--glass:#fff"/>
+        </svg>
+      </a>
+    </div>
+    <div class="deal-banners" style="margin-top:16px">
+      <a class="deal-ban db3 rk" href="#sec-home">
+        <small data-i="seasonSale">تخفيضات الموسم</small>
+        <h3 data-i="dealT3">المنزل والمطبخ — خصم 40%</h3>
+        <span class="btn" data-i="shopNow">تسوق الآن</span>
+        <svg class="deco-ban" viewBox="0 0 200 240" style="width:auto">
+          <use href="#p-kitchen" x="30" y="30" width="120" height="170" style="--glass:#8b5e3c"/>
+          <use href="#p-sofa" x="120" y="100" width="80" height="80" style="--glass:#c9820a"/>
+        </svg>
+      </a>
+      <a class="deal-ban db4 rk" style="--d:.12s" href="#sec-sports">
+        <small data-i="fitnessMonth">شهر اللياقة</small>
+        <h3 data-i="dealT4">معدات رياضية بأقل الأسعار</h3>
+        <span class="btn" data-i="shopNow">تسوق الآن</span>
+        <svg class="deco-ban" viewBox="0 0 200 240" style="width:auto">
+          <use href="#p-dumbbell" x="10" y="80" width="180" height="80" style="--glass:#ff7043"/>
+          <use href="#p-sneaker" x="10" y="160" width="180" height="90" style="--glass:#a5d6a7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Strip / Sale Banner -->
+  <section class="strip rk">
+    <div>
+      <h3 data-i="stripT">عروض النهارده فقط! ⚡</h3>
+      <p data-i="stripP">خصم إضافي 15% على كل شيء — استخدم الكود: KAYAN15</p>
+    </div>
+    <div class="timer" id="timer">
+      <div><b>00</b><span data-i="h">ساعة</span></div>
+      <div><b>00</b><span data-i="m">دقيقة</span></div>
+      <div><b>00</b><span data-i="s">ثانية</span></div>
+    </div>
+    <a class="btn" href="#" data-i="shopNow">تسوق الآن</a>
+  </section>
+
+  <!-- Brand Strip -->
+  <section class="brand-strip rk">
+    <h2 data-i="topBrands">أشهر الماركات</h2>
+    <div class="brands-row">
+      <a class="brand-logo" href="#">Samsung</a>
+      <a class="brand-logo" href="#">Apple</a>
+      <a class="brand-logo" href="#">Sony</a>
+      <a class="brand-logo" href="#">Nike</a>
+      <a class="brand-logo" href="#">Adidas</a>
+      <a class="brand-logo" href="#">Zara</a>
+      <a class="brand-logo" href="#">H&M</a>
+      <a class="brand-logo" href="#">IKEA</a>
+      <a class="brand-logo" href="#">Dyson</a>
+      <a class="brand-logo" href="#">Philips</a>
+      <a class="brand-logo" href="#">L'Oreal</a>
+      <a class="brand-logo" href="#">Levi's</a>
+      <a class="brand-logo" href="#">Xiaomi</a>
+      <a class="brand-logo" href="#">LG</a>
+    </div>
+  </section>
+
+  <!-- App Download -->
+  <section class="app-sec rk">
+    <div class="text">
+      <h2 data-i="appTitle">حمّل تطبيق كيان<br>وتسوق في أي وقت</h2>
+      <p data-i="appDesc">تتبع طلباتك، احصل على عروض حصرية، وتسوق بسهولة من موبايلك. متوفر على App Store وGoogle Play.</p>
+      <div class="app-badges">
+        <a class="app-badge" href="#">
+          <svg class="ico" style="width:26px;height:26px;stroke:none;fill:#fff"><path d="M17.6 13.8C16.6 13.8 16 14.6 16 15.4s.6 1.6 1.6 1.6 1.6-.8 1.6-1.6-.6-1.6-1.6-1.6zM6.4 13.8c-1 0-1.6.8-1.6 1.6s.6 1.6 1.6 1.6 1.6-.8 1.6-1.6-.6-1.6-1.6-1.6zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"/></svg>
+          <div><small>حمّل من</small><b>Google Play</b></div>
+        </a>
+        <a class="app-badge" href="#">
+          <svg class="ico" style="width:26px;height:26px;stroke:none;fill:#fff"><path d="M18.7 15.9c-.3.7-.6 1.3-1 1.9-.6.8-1 1.3-1.4 1.6-.5.5-1.1.7-1.7.7-.4 0-.9-.1-1.5-.4-.6-.2-1.1-.4-1.6-.4-.5 0-1 .1-1.6.4-.6.2-1 .4-1.4.4-.6 0-1.2-.2-1.7-.7-.4-.3-.9-.9-1.5-1.7-.6-.9-1.1-2-1.4-3.1-.4-1.3-.6-2.5-.6-3.7 0-1.4.3-2.5.9-3.5.5-.8 1.1-1.5 2-1.9.8-.5 1.7-.7 2.6-.7.5 0 1.1.1 1.8.4.7.3 1.2.4 1.4.4.2 0 .7-.2 1.5-.5.8-.3 1.4-.4 2-.4 1.4.1 2.5.7 3.3 1.8-.4.3-.8.7-1 1.1-.3.5-.4 1.1-.4 1.7 0 .7.2 1.3.5 1.8.3.5.8.9 1.3 1.1-.2.5-.4 1-.7 1.5zM15.3 2.2c0 .5-.2 1.1-.5 1.6-.4.6-.8 1-1.3 1.3-.5.3-1 .4-1.5.4 0-.5.1-1 .4-1.5.3-.6.7-1.1 1.2-1.4.5-.3 1-.5 1.5-.5.1.1.2.1.2.1z"/></svg>
+          <div><small>حمّل من</small><b>App Store</b></div>
+        </a>
+      </div>
+    </div>
+    <div class="app-phones">
+      <div class="app-phone-wrap">
+        <svg viewBox="0 0 80 160" style="width:72px;height:144px"><use href="#p-phone" style="--glass:#9dc0ff"/></svg>
+      </div>
+      <div class="app-phone-wrap">
+        <svg viewBox="0 0 80 160" style="width:72px;height:144px"><use href="#p-phone" style="--glass:#c9a24a"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP -->
+  <section class="usp">
+    <div class="rk"><svg class="ico"><use href="#i-truck"/></svg><p><b data-i="u1">شحن مجاني</b><span data-i="u1d">للطلبات فوق 500 ج.م</span></p></div>
+    <div class="rk" style="--d:.08s"><svg class="ico"><use href="#i-cash"/></svg><p><b data-i="u2">الدفع عند الاستلام</b><span data-i="u2d">لجميع المنتجات</span></p></div>
+    <div class="rk" style="--d:.16s"><svg class="ico"><use href="#i-shield"/></svg><p><b data-i="u3">ضمان استرداد الأموال</b><span data-i="u3d">استرجاع خلال 14 يوم</span></p></div>
+    <div class="rk" style="--d:.24s"><svg class="ico"><use href="#i-support"/></svg><p><b data-i="u4">دعم 24/7</b><span data-i="u4d">نجيب على كل أسئلتك</span></p></div>
+  </section>
+
+</div><!-- /wrap -->
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="newsbar">
+    <div class="wrap">
+      <div>
+        <a href="#" class="logo"><b>KAY<i>A</i>N</b><small data-i="tagline">تسوّق كل شيء</small></a>
+        <div class="social">
+          <span data-i="follow">تابعنا :</span>
+          <a href="#" aria-label="Instagram"><svg class="ico"><use href="#i-ig"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg class="ico"><use href="#i-fb"/></svg></a>
+          <a href="#" aria-label="X"><svg class="ico"><use href="#i-x"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg class="ico"><use href="#i-yt"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg class="ico"><use href="#i-wa"/></svg></a>
+        </div>
+      </div>
+      <div class="news">
+        <form onsubmit="event.preventDefault();toast(T('subOk'));this.reset()">
+          <input type="email" required data-ph="email" placeholder="أدخل بريدك الإلكتروني">
+          <button aria-label="اشترك"><svg class="ico" style="width:18px;height:18px"><use href="#i-arrow"/></svg></button>
+        </form>
+        <p data-i="stay">ابقَ على اطلاع بأحدث العروض والمنتجات</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="fcols">
+      <div class="contact">
+        <h5>كيان</h5>
+        <ul>
+          <li>support@kayan.com.eg</li>
+          <li dir="ltr">+20 15 0000 0000</li>
+          <li><a href="#" data-i="f1">من نحن</a></li>
+          <li><a href="#" data-i="f2">وظائف لدينا</a></li>
+          <li><a href="#" data-i="f3">المدونة</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-i="helpCenter">مركز المساعدة</h5>
+        <ul>
+          <li><a href="#" data-i="g1">معلومات الشحن</a></li>
+          <li><a href="#" data-i="g2">سياسة الاسترجاع</a></li>
+          <li><a href="#" data-i="g3">الأسئلة الشائعة</a></li>
+          <li><a href="#" data-i="g4">تتبع طلبك</a></li>
+          <li><a href="#" data-i="g5">فروعنا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-i="myAccount">حسابي</h5>
+        <ul>
+          <li><a href="#" data-i="wishlist">المفضلة</a></li>
+          <li><a href="#" data-i="myOrders">طلباتي</a></li>
+          <li><a href="#" data-i="myAddresses">عناويني</a></li>
+          <li><a href="#" data-i="myReviews">تقييماتي</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 data-i="sellOnKayan">البيع على كيان</h5>
+        <ul>
+          <li><a href="#" data-i="becomeSeller">سجّل كبائع</a></li>
+          <li><a href="#" data-i="sellerCenter">مركز البائعين</a></li>
+          <li><a href="#" data-i="advertise">الإعلان معنا</a></li>
+          <li><a href="#" data-i="affiliate">برنامج الشركاء</a></li>
+        </ul>
+      </div>
+      <div class="app">
+        <h5 data-i="app">حمّل التطبيق</h5>
+        <p data-i="appP">تسوق بسهولة من موبايلك — متوفر على App Store وGoogle Play.</p>
+        <div class="stores">
+          <a class="store" href="#"><span><small>GET IT ON</small><b>Google Play</b></span></a>
+          <a class="store" href="#"><span><small>Download on the</small><b>App Store</b></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 2026 Kayan. <span data-i="rights">جميع الحقوق محفوظة.</span></span>
+      <div class="pay">
+        <span>Mastercard</span>
+        <span class="tabby">tabby</span>
+        <span>VISA</span>
+        <span class="tamara">tamara</span>
+        <span>AMEX</span>
+        <span class="valu">valU</span>
+        <span>Fawry</span>
+        <span>Meeza</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</main>
+
+<div class="progress" id="prog"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ========== i18n ========== */
+const L={
+ar:{
+  deliver:"الشحن إلى",country:"مصر",track:"تتبع طلبك",sell:"بيع على كيان",help:"مساعدة",
+  tagline:"تسوّق كل شيء",allCats:"كل الأقسام",search:"ابحث عن منتج، براند، أو تصنيف…",searchBtn:"بحث",
+  elec:"الإلكترونيات",fashion:"الأزياء",home:"المنزل",beauty:"الجمال",kids:"الأطفال",sports:"الرياضة",grocery:"البقالة",books:"الكتب",
+  phones:"الهواتف والأجهزة اللوحية",laptops:"اللابتوبات والكمبيوتر",audio:"الصوتيات والسماعات",tv:"التلفزيون والشاشات",cameras:"الكاميرات",gaming:"ألعاب الفيديو",
+  menFashion:"ملابس رجالية",womenFashion:"ملابس نسائية",shoes:"الأحذية",bags:"الحقائب والإكسسوارات",watches:"الساعات","sport-wear":"الملابس الرياضية",
+  furniture:"الأثاث","kitchen-tools":"أدوات المطبخ",bedding:"الفراش والمفروشات",decor:"الديكور",cleaning:"التنظيف والمنظفات",
+  more:"المزيد",auto:"السيارات وقطع الغيار",newArrivals:"وصل حديثاً",
+  todayDeals:"عروض اليوم",navHome:"الرئيسية",navCats:"الأقسام",navDeals:"العروض",
+  wishlist:"المفضلة",cart:"سلتي",login:"حسابي",
+  h1:"أحدث التقنية بأفضل سعر",h1p:"خصومات حتى 50% على الهواتف واللابتوبات",
+  h2:"أزياء العيد وصلت",h2p:"أحدث صيحات الموضة بخصومات حتى 70%",
+  h3:"الجمعة البيضاء 🔥",h3p:"عروض لا تُصدق على آلاف المنتجات — لفترة محدودة",
+  shopNow:"تسوق الآن",seeDeals:"شوف العروض",
+  elecSub:"هواتف، لابتوبات، سماعات والمزيد",fashionSub:"ملابس رجالية، نسائية، أحذية وحقائب",
+  homeSub:"أثاث، مطبخ، ديكور",beautySub:"مستحضرات، عطور، شعر",kidsSub:"ألعاب، ملابس أطفال، لوازم",
+  sportsSub:"معدات، ملابس رياضية، تغذية",grocerySub:"منتجات طازجة، معلبات، مشروبات",booksSub:"كتب، أدوات مكتبية، هدايا",
+  flashBadge:"عروض اليوم",flashLabel:"خصومات حتى",viewAll:"عرض الكل",
+  d:"يوم",h:"ساعة",m:"دقيقة",s:"ثانية",
+  stripT:"عروض النهارده فقط! ⚡",stripP:"خصم إضافي 15% على كل شيء — استخدم الكود: KAYAN15",
+  hotDeal:"عرض ساخن",newCollection:"كولكشن جديد",seasonSale:"تخفيضات الموسم",fitnessMonth:"شهر اللياقة",
+  dealT1:"هواتف وأجهزة بأسعار حصرية",dealT2:"أزياء الموسم — وصل حديثاً",dealT3:"المنزل والمطبخ — خصم 40%",dealT4:"معدات رياضية بأقل الأسعار",
+  topBrands:"أشهر الماركات",appTitle:"حمّل تطبيق كيان\nوتسوق في أي وقت",appDesc:"تتبع طلباتك، احصل على عروض حصرية، وتسوق بسهولة من موبايلك.",
+  u1:"شحن مجاني",u1d:"للطلبات فوق 500 ج.م",u2:"الدفع عند الاستلام",u2d:"لجميع المنتجات",u3:"ضمان استرداد الأموال",u3d:"استرجاع خلال 14 يوم",u4:"دعم 24/7",u4d:"نجيب على كل أسئلتك",
+  follow:"تابعنا :",email:"أدخل بريدك الإلكتروني",stay:"ابقَ على اطلاع بأحدث العروض والمنتجات",subOk:"شكراً لاشتراكك!",
+  f1:"من نحن",f2:"وظائف لدينا",f3:"المدونة",helpCenter:"مركز المساعدة",g1:"معلومات الشحن",g2:"سياسة الاسترجاع",g3:"الأسئلة الشائعة",g4:"تتبع طلبك",g5:"فروعنا",
+  myAccount:"حسابي",myOrders:"طلباتي",myAddresses:"عناويني",myReviews:"تقييماتي",
+  sellOnKayan:"البيع على كيان",becomeSeller:"سجّل كبائع",sellerCenter:"مركز البائعين",advertise:"الإعلان معنا",affiliate:"برنامج الشركاء",
+  app:"حمّل التطبيق",appP:"تسوق بسهولة من موبايلك — متوفر على App Store وGoogle Play.",rights:"جميع الحقوق محفوظة.",
+  add:"أضف للسلة",added:"تمت الإضافة ✓",off:"خصم",toastAdd:"تمت الإضافة إلى سلتك 🛒",
+  mq:["شحن مجاني للطلبات فوق 500 ج.م","الدفع عند الاستلام","استرجاع خلال 14 يوم","أكثر من مليون منتج","وصل حديثاً كل يوم","كود KAYAN15 خصم إضافي 15%"],
+  secBest:"الأكثر مبيعاً",secBestD:"الأعلى تقييماً من عملائنا",
+  secElec:"الإلكترونيات",secElecD:"أحدث التقنيات بأفضل الأسعار",
+  secFashM:"موضة رجالية",secFashMD:"أفضل الماركات العالمية",
+  secFashW:"موضة نسائية",secFashWD:"آخر صيحات الأزياء",
+  secHome:"المنزل والمطبخ",secHomeD:"كل ما يلزم منزلك",
+  secBeauty:"الجمال والعناية",secBeautyD:"منتجات ماركة بأسعار رائعة",
+  secKids:"الأطفال والألعاب",secKidsD:"اجعل أطفالك سعداء",
+  secSports:"الرياضة واللياقة",secSportsD:"تجهيزات احترافية",
+  secGrocery:"البقالة والسوبرماركت",secGroceryD:"طازج ومتجدد يومياً"
+},
+en:{
+  deliver:"Deliver to",country:"Egypt",track:"Track Order",sell:"Sell on Kayan",help:"Help",
+  tagline:"Shop Everything",allCats:"All Departments",search:"Search products, brands & categories…",searchBtn:"Search",
+  elec:"Electronics",fashion:"Fashion",home:"Home",beauty:"Beauty",kids:"Kids",sports:"Sports",grocery:"Grocery",books:"Books",
+  phones:"Phones & Tablets",laptops:"Laptops & Computers",audio:"Audio & Speakers",tv:"TVs & Monitors",cameras:"Cameras",gaming:"Video Games",
+  menFashion:"Men's Clothing",womenFashion:"Women's Clothing",shoes:"Shoes",bags:"Bags & Accessories",watches:"Watches","sport-wear":"Sportswear",
+  furniture:"Furniture","kitchen-tools":"Kitchen Tools",bedding:"Bedding & Linen",decor:"Home Decor",cleaning:"Cleaning & Care",
+  more:"More",auto:"Automotive",newArrivals:"New Arrivals",
+  todayDeals:"Today's Deals",navHome:"Home",navCats:"Depts.",navDeals:"Deals",
+  wishlist:"Wishlist",cart:"My Cart",login:"Account",
+  h1:"Latest Tech at Best Prices",h1p:"Up to 50% off phones & laptops",
+  h2:"Eid Fashion Has Arrived",h2p:"Latest fashion trends — up to 70% off",
+  h3:"White Friday 🔥",h3p:"Unbelievable deals on thousands of products — limited time",
+  shopNow:"Shop Now",seeDeals:"See All Deals",
+  elecSub:"Phones, laptops, headphones & more",fashionSub:"Menswear, womenswear, shoes & bags",
+  homeSub:"Furniture, kitchen, decor",beautySub:"Skincare, makeup, haircare",kidsSub:"Toys, kids clothing & gear",
+  sportsSub:"Equipment, sportswear, nutrition",grocerySub:"Fresh, canned goods & drinks",booksSub:"Books, stationery & gifts",
+  flashBadge:"Today's Deals",flashLabel:"Up to",viewAll:"View All",
+  d:"Days",h:"Hrs",m:"Min",s:"Sec",
+  stripT:"Today Only! ⚡",stripP:"Extra 15% off everything — use code: KAYAN15",
+  hotDeal:"Hot Deal",newCollection:"New Collection",seasonSale:"Season Sale",fitnessMonth:"Fitness Month",
+  dealT1:"Phones & Devices — Exclusive Prices",dealT2:"Season Fashion — New Arrivals",dealT3:"Home & Kitchen — 40% Off",dealT4:"Sports Equipment at Best Prices",
+  topBrands:"Top Brands",appTitle:"Download the Kayan App\nand Shop Anytime",appDesc:"Track orders, get exclusive deals, and shop easily from your phone.",
+  u1:"Free Shipping",u1d:"On orders above EGP 500",u2:"Cash On Delivery",u2d:"Available on all products",u3:"Money Back Guarantee",u3d:"Returns within 14 days",u4:"24/7 Support",u4d:"We answer all your questions",
+  follow:"Follow Us:",email:"Enter your email address",stay:"Stay updated with our latest offers and products",subOk:"Thanks for subscribing!",
+  f1:"About Us",f2:"Careers",f3:"Blog",helpCenter:"Help Center",g1:"Shipping Info",g2:"Return Policy",g3:"FAQ",g4:"Track Order",g5:"Store Locator",
+  myAccount:"My Account",myOrders:"My Orders",myAddresses:"My Addresses",myReviews:"My Reviews",
+  sellOnKayan:"Sell on Kayan",becomeSeller:"Become a Seller",sellerCenter:"Seller Center",advertise:"Advertise with Us",affiliate:"Affiliate Program",
+  app:"Download App",appP:"Shop easily from your phone — available on App Store and Google Play.",rights:"All Rights Reserved.",
+  add:"Add to Cart",added:"Added ✓",off:"off",toastAdd:"Added to your cart 🛒",
+  mq:["Free shipping over EGP 500","Cash on delivery available","14-day returns","Over 1 million products","New arrivals daily","Use KAYAN15 for extra 15% off"],
+  secBest:"Best Sellers",secBestD:"Highest rated by our customers",
+  secElec:"Electronics",secElecD:"Latest tech at the best prices",
+  secFashM:"Men's Fashion",secFashMD:"Top international brands",
+  secFashW:"Women's Fashion",secFashWD:"Latest fashion trends",
+  secHome:"Home & Kitchen",secHomeD:"Everything your home needs",
+  secBeauty:"Beauty & Personal Care",secBeautyD:"Brand products at amazing prices",
+  secKids:"Kids & Toys",secKidsD:"Make your kids happy",
+  secSports:"Sports & Fitness",secSportsD:"Professional-grade equipment",
+  secGrocery:"Grocery & Supermarket",secGroceryD:"Fresh and restocked daily"
+}
+};
+let lang=(()=>{try{return localStorage.getItem('kayan-lang')}catch(e){return null}})()||'ar';
+const T=k=>L[lang][k]||k;
+
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-i]').forEach(e=>{const v=L[lang][e.dataset.i];if(v)e.textContent=v});
+  document.querySelectorAll('[data-ph]').forEach(e=>e.placeholder=L[lang][e.dataset.ph]||'');
+  document.getElementById('langBtn').textContent=lang==='ar'?'English':'العربية';
+  renderCatStrip();renderSections();
+  document.getElementById('mq').innerHTML=[0,1].map(()=>L[lang].mq.map(t=>`<span>${t}</span>`).join('')).join('');
+  goSlide(cur,true);
+}
+document.getElementById('langBtn').onclick=()=>{lang=lang==='en'?'ar':'en';try{localStorage.setItem('kayan-lang',lang)}catch(e){}applyLang()};
+
+/* ========== Products data ========== */
+const P=[
+  /* ---- ELECTRONICS ---- */
+  {id:1,b:'Samsung',n:{ar:'جالاكسي S25 الترا',en:'Galaxy S25 Ultra'},p:35999,o:42000,s:'p-phone',g:'#1a1a2e',c:['elec','best','flash'],r:4.8,rv:2840},
+  {id:2,b:'Apple',n:{ar:'آيفون 16 برو ماكس',en:'iPhone 16 Pro Max'},p:49999,o:55000,s:'p-phone',g:'#2a2a3e',cap:'#c9a24a',c:['elec','best'],r:4.9,rv:5120,nw:1},
+  {id:3,b:'Sony',n:{ar:'سماعات WH-1000XM6',en:'WH-1000XM6 Headphones'},p:4999,o:6500,s:'p-headphone',g:'#111',c:['elec','best','flash'],r:4.7,rv:1890},
+  {id:4,b:'Samsung',n:{ar:'تلفزيون QLED 65 بوصة',en:'65" QLED 4K TV'},p:16999,o:21000,s:'p-tv',g:'#0d0d1a',c:['elec','flash'],r:4.6,rv:980},
+  {id:5,b:'Apple',n:{ar:'آبل ووتش Series 10',en:'Apple Watch Series 10'},p:8499,o:9999,s:'p-watch',g:'#1c1c3e',c:['elec'],r:4.8,rv:3400,nw:1},
+  {id:6,b:'Dell',n:{ar:'لابتوب Dell XPS 15',en:'Dell XPS 15 Laptop'},p:28999,o:34000,s:'p-laptop',g:'#2a2a3e',c:['elec','flash'],r:4.7,rv:1250},
+  {id:7,b:'Xiaomi',n:{ar:'شاومي 14 Pro',en:'Xiaomi 14 Pro'},p:18999,o:23000,s:'p-phone',g:'#1e3a5e',c:['elec'],r:4.5,rv:760},
+  {id:8,b:'JBL',n:{ar:'سماعة JBL Charge 5',en:'JBL Charge 5 Speaker'},p:1999,o:2800,s:'p-headphone',g:'#1a3a1e',c:['elec','best'],r:4.6,rv:4200},
+
+  /* ---- FASHION MEN ---- */
+  {id:11,b:'Zara',n:{ar:'بولو كلاسيك سليم',en:'Slim Classic Polo'},p:449,o:650,s:'p-shirt',g:'#1a3a6e',c:['fashion-m','best'],r:4.3,rv:890},
+  {id:12,b:"Levi's",n:{ar:'جينز 511 سليم فيت',en:"Levi's 511 Slim Jeans"},p:699,o:950,s:'p-shirt',g:'#2a4080',c:['fashion-m'],r:4.5,rv:1340},
+  {id:13,b:'Nike',n:{ar:'حذاء Nike Air Max 270',en:'Nike Air Max 270'},p:2199,o:2900,s:'p-sneaker',g:'#1a1a2e',cap:'#ff5a5f',c:['fashion-m','best'],r:4.7,rv:2100},
+  {id:14,b:'Adidas',n:{ar:'شنطة Adidas رياضية',en:'Adidas Gym Bag'},p:599,o:850,s:'p-bag',g:'#111',c:['fashion-m'],r:4.4,rv:650},
+  {id:15,b:'H&M',n:{ar:'جاكيت كاجوال H&M',en:'H&M Casual Jacket'},p:549,o:799,s:'p-shirt',g:'#2a2a2e',c:['fashion-m','flash'],r:4.2,rv:430,nw:1},
+  {id:16,b:'Tommy',n:{ar:'تيشرت Tommy Hilfiger',en:'Tommy Hilfiger Tee'},p:799,o:1100,s:'p-shirt',g:'#0f4ca8',c:['fashion-m'],r:4.6,rv:980},
+
+  /* ---- FASHION WOMEN ---- */
+  {id:21,b:'Mango',n:{ar:'فستان صيفي زهري',en:'Mango Floral Dress'},p:549,o:799,s:'p-dress',g:'#e8607a',c:['fashion-w','best','flash'],r:4.5,rv:1890},
+  {id:22,b:'Zara',n:{ar:'بلوزة كاجوال ترندي',en:'Zara Casual Trendy Blouse'},p:349,o:499,s:'p-shirt',g:'#c8427a',c:['fashion-w'],r:4.3,rv:720,nw:1},
+  {id:23,b:'Steve Madden',n:{ar:'حذاء هيل أنيق',en:'Steve Madden Elegant Heels'},p:1299,o:1800,s:'p-sneaker',g:'#c9a24a',cap:'#1a1200',c:['fashion-w'],r:4.4,rv:580},
+  {id:24,b:'Michael Kors',n:{ar:'حقيبة يد فاخرة',en:'MK Luxury Handbag'},p:3999,o:5200,s:'p-bag',g:'#c9a24a',c:['fashion-w','best'],r:4.8,rv:3400},
+  {id:25,b:'Aldo',n:{ar:'حذاء باليرينا أنيق',en:'Aldo Ballet Flats'},p:799,o:1100,s:'p-sneaker',g:'#1a1a2e',c:['fashion-w','flash'],r:4.4,rv:460},
+  {id:26,b:'H&M',n:{ar:'جينز نسائي مريح',en:"H&M Women's Jeans"},p:399,o:599,s:'p-shirt',g:'#2a4080',c:['fashion-w'],r:4.2,rv:810,nw:1},
+
+  /* ---- HOME & LIVING ---- */
+  {id:31,b:'IKEA',n:{ar:'كنبة SÖDERHAMN',en:'IKEA SÖDERHAMN Sofa'},p:6999,o:8500,s:'p-sofa',g:'#5a3414',c:['home','best'],r:4.5,rv:1240},
+  {id:32,b:'Philips',n:{ar:'طاجن هواء Airfryer XXL',en:'Philips Airfryer XXL'},p:2999,o:3800,s:'p-kitchen',g:'#2a2a3e',c:['home','best','flash'],r:4.7,rv:3800},
+  {id:33,b:'Nespresso',n:{ar:'ماكينة قهوة Vertuo',en:'Nespresso Vertuo Coffee'},p:2499,o:3200,s:'p-kitchen',g:'#1a1a2e',c:['home'],r:4.6,rv:2100},
+  {id:34,b:'Dyson',n:{ar:'مكنسة Dyson V15',en:'Dyson V15 Vacuum'},p:8499,o:10500,s:'p-kitchen',g:'#c9a24a',c:['home','flash'],r:4.8,rv:1680},
+  {id:35,b:'IKEA',n:{ar:'سرير MALM مع دولاب',en:'IKEA MALM Bed with Wardrobe'},p:5499,o:7000,s:'p-sofa',g:'#8b5e3c',c:['home'],r:4.4,rv:960,nw:1},
+  {id:36,b:'Tefal',n:{ar:'طقم أواني Tefal',en:'Tefal Cookware Set'},p:1299,o:1800,s:'p-kitchen',g:'#c8371a',c:['home','best'],r:4.5,rv:2900},
+
+  /* ---- BEAUTY ---- */
+  {id:41,b:"L'Oreal",n:{ar:"طقم ميكاب L'Oreal",en:"L'Oreal Makeup Kit"},p:799,o:1100,s:'p-beauty',g:'#c8427a',c:['beauty','best'],r:4.5,rv:4200},
+  {id:42,b:'NIVEA',n:{ar:'كريم NIVEA للوجه',en:'NIVEA Face Cream'},p:149,o:220,s:'p-beauty',g:'#0f4ca8',c:['beauty','best','flash'],r:4.6,rv:8900},
+  {id:43,b:'Dyson',n:{ar:'مجفف شعر Dyson Supersonic',en:'Dyson Supersonic Hair Dryer'},p:4999,o:6500,s:'p-kitchen',g:'#c9a24a',c:['beauty','best'],r:4.8,rv:1900},
+  {id:44,b:'Maybelline',n:{ar:'ماسكارا Maybelline',en:'Maybelline Mascara'},p:149,o:199,s:'p-beauty',g:'#1a1a2e',c:['beauty'],r:4.3,rv:5600,nw:1},
+  {id:45,b:'Neutrogena',n:{ar:'واقي شمس Neutrogena SPF50',en:'Neutrogena Sunscreen SPF50'},p:299,o:420,s:'p-beauty',g:'#ff9500',c:['beauty','flash'],r:4.5,rv:3100},
+  {id:46,b:'OGX',n:{ar:'شامبو OGX Coconut Milk',en:'OGX Coconut Milk Shampoo'},p:249,o:349,s:'p-beauty',g:'#1b5e20',c:['beauty'],r:4.4,rv:2200},
+
+  /* ---- KIDS & TOYS ---- */
+  {id:51,b:'LEGO',n:{ar:'ليغو Classic مجموعة كبيرة',en:'LEGO Classic Large Set'},p:699,o:950,s:'p-toy',g:'#4527a0',c:['kids','best'],r:4.9,rv:5400},
+  {id:52,b:'Hot Wheels',n:{ar:'هوت ويلز سيارات 10 قطع',en:'Hot Wheels 10-Pack Cars'},p:349,o:499,s:'p-toycar',g:'#c8371a',c:['kids','flash'],r:4.7,rv:3800},
+  {id:53,b:'Nintendo',n:{ar:'Nintendo Switch OLED',en:'Nintendo Switch OLED'},p:9999,o:12000,s:'p-toy',g:'#c8371a',c:['kids','best','elec'],r:4.8,rv:2400},
+  {id:54,b:'Barbie',n:{ar:'دار باربي الأحلام',en:'Barbie Dreamhouse'},p:1499,o:1999,s:'p-toy',g:'#ff69b4',c:['kids'],r:4.7,rv:1890,nw:1},
+  {id:55,b:'Crayola',n:{ar:'طقم ألوان Crayola 150 قطعة',en:'Crayola 150pc Art Set'},p:299,o:450,s:'p-toy',g:'#ff9500',c:['kids','best'],r:4.8,rv:6700},
+  {id:56,b:'Fisher-Price',n:{ar:'لعبة تعليمية للأطفال',en:'Fisher-Price Learning Toy'},p:449,o:650,s:'p-toy',g:'#4527a0',c:['kids','flash'],r:4.6,rv:2100},
+
+  /* ---- SPORTS ---- */
+  {id:61,b:'Decathlon',n:{ar:'طقم دمبل 20 كيلو',en:'Decathlon 20kg Dumbbell Set'},p:999,o:1400,s:'p-dumbbell',g:'#c8371a',c:['sports','best'],r:4.6,rv:2400},
+  {id:62,b:'Nike',n:{ar:'حذاء Nike Running',en:'Nike Running Shoes'},p:1799,o:2400,s:'p-sneaker',g:'#1a3a6e',cap:'#09b83f',c:['sports','best','flash'],r:4.7,rv:3200},
+  {id:63,b:'Adidas',n:{ar:'ملابس رياضية Adidas طقم',en:'Adidas Sports Set'},p:699,o:999,s:'p-shirt',g:'#1a1a2e',c:['sports'],r:4.4,rv:1600,nw:1},
+  {id:64,b:'Myprotein',n:{ar:'بروتين واي 2.5 كيلو',en:'Myprotein Whey Protein 2.5kg'},p:999,o:1300,s:'p-kitchen',g:'#1b5e20',c:['sports','best'],r:4.6,rv:4800},
+  {id:65,b:'Decathlon',n:{ar:'يوغا ماتش مقاومة',en:'Decathlon Resistance Band Set'},p:149,o:250,s:'p-dumbbell',g:'#c9a24a',c:['sports','flash'],r:4.5,rv:5600},
+  {id:66,b:'Puma',n:{ar:'شنطة رياضية Puma',en:'Puma Sports Duffel Bag'},p:649,o:899,s:'p-bag',g:'#1a1a2e',c:['sports'],r:4.3,rv:980},
+
+  /* ---- GROCERY ---- */
+  {id:71,b:'Almarai',n:{ar:'حليب المراعي 1 لتر',en:'Almarai Full Fat Milk 1L'},p:28,o:0,s:'p-grocery',g:'#1b5e20',c:['grocery'],r:4.8,rv:12000},
+  {id:72,b:'Baraka',n:{ar:'زيت زيتون بركة 750 مل',en:'Baraka Olive Oil 750ml'},p:189,o:230,s:'p-grocery',g:'#1b5e20',c:['grocery','best'],r:4.7,rv:5400},
+  {id:73,b:'Nescafé',n:{ar:'نسكافيه جولد 200 جرام',en:'Nescafé Gold 200g'},p:279,o:340,s:'p-grocery',g:'#c9820a',c:['grocery','best','flash'],r:4.8,rv:8900},
+  {id:74,b:'Cadbury',n:{ar:'هدية شوكولاتة كادبوري',en:'Cadbury Chocolate Gift Box'},p:249,o:0,s:'p-grocery',g:'#4527a0',c:['grocery'],r:4.7,rv:3200,nw:1},
+  {id:75,b:'Lotus',n:{ar:'بسكويت Lotus Biscoff 400 جرام',en:'Lotus Biscoff Biscuits 400g'},p:199,o:260,s:'p-grocery',g:'#c9820a',c:['grocery','best'],r:4.9,rv:14000},
+  {id:76,b:'Pringles',n:{ar:'برينجلز أصلي 165 جرام',en:'Pringles Original 165g'},p:79,o:99,s:'p-grocery',g:'#c8371a',c:['grocery','flash'],r:4.6,rv:7800}
+];
+
+/* Category strip data */
+const CAT_STRIP=[
+  {id:'best',icon:'i-star',bg:'#e8f0ff',label:{ar:'الأكثر مبيعاً',en:'Best Sellers'},link:'#sec-best'},
+  {id:'elec',icon:'p-phone',bg:'#e8f0ff',label:{ar:'إلكترونيات',en:'Electronics'},link:'#sec-elec'},
+  {id:'fashion-m',icon:'p-shirt',bg:'#fce4ec',label:{ar:'رجالي',en:"Men's"},link:'#sec-fashion-m'},
+  {id:'fashion-w',icon:'p-dress',bg:'#fce4ec',label:{ar:'نسائي',en:"Women's"},link:'#sec-fashion-w'},
+  {id:'home',icon:'p-sofa',bg:'#fff3e0',label:{ar:'المنزل',en:'Home'},link:'#sec-home'},
+  {id:'beauty',icon:'p-beauty',bg:'#f3e5f5',label:{ar:'جمال',en:'Beauty'},link:'#sec-beauty'},
+  {id:'kids',icon:'p-toy',bg:'#e8f5e9',label:{ar:'أطفال',en:'Kids'},link:'#sec-kids'},
+  {id:'sports',icon:'p-dumbbell',bg:'#fbe9e7',label:{ar:'رياضة',en:'Sports'},link:'#sec-sports'},
+  {id:'grocery',icon:'p-grocery',bg:'#e8f5e9',label:{ar:'بقالة',en:'Grocery'},link:'#sec-grocery'},
+  {id:'books',icon:'p-book',bg:'#ede7f6',label:{ar:'كتب',en:'Books'},link:'#'},
+  {id:'flash',icon:'i-bolt',bg:'#fff3e0',label:{ar:'عروض',en:'Deals'},link:'#flash'},
+  {id:'new',icon:'i-tag',bg:'#e3f2fd',label:{ar:'جديد',en:'New'},link:'#'}
+];
+
+/* Sections config */
+const SECS=[
+  {id:'best',   t:'secBest',  d:'secBestD',  items:P.filter(x=>x.c.includes('best')).slice(0,8),  dark:1},
+  {id:'elec',   t:'secElec',  d:'secElecD',  items:P.filter(x=>x.c.includes('elec'))},
+  {id:'fashion-m',t:'secFashM',d:'secFashMD',items:P.filter(x=>x.c.includes('fashion-m')), alt:1},
+  {id:'fashion-w',t:'secFashW',d:'secFashWD',items:P.filter(x=>x.c.includes('fashion-w'))},
+  {id:'home',   t:'secHome',  d:'secHomeD',  items:P.filter(x=>x.c.includes('home')),   alt:1},
+  {id:'beauty', t:'secBeauty',d:'secBeautyD',items:P.filter(x=>x.c.includes('beauty'))},
+  {id:'kids',   t:'secKids',  d:'secKidsD',  items:P.filter(x=>x.c.includes('kids')),   alt:1},
+  {id:'sports', t:'secSports',d:'secSportsD',items:P.filter(x=>x.c.includes('sports'))},
+  {id:'grocery',t:'secGrocery',d:'secGroceryD',items:P.filter(x=>x.c.includes('grocery')),alt:1}
+];
+
+/* ========== Render helpers ========== */
+const fmt=v=>lang==='ar'?v.toLocaleString('ar-EG')+" ج.م":"EGP "+v.toLocaleString('en-US');
+const favs=new Set();let cart=0;
+
+function stars(r){
+  const full=Math.floor(r), half=r%1>=.5;
+  let s='';
+  for(let i=0;i<5;i++) s+=`<svg style="opacity:${i<full?1:i===full&&half?.5:.15}"><use href="#i-star"/></svg>`;
+  return s;
+}
+
+function card(x,i,pre){
+  const pct=x.o?Math.round((1-x.p/x.o)*100):0;
+  const tag=pct?('-'+pct+'%'):(x.nw?T('add').startsWith('أ')?'جديد':'NEW':'');
+  const tagCls=x.nw?'nt':'';
+  return `<article class="card rk" style="--d:${(i%5)*.08}s">
+    ${tag?`<span class="tag ${tagCls}">${tag}</span>`:''}
+    <button class="fav ${favs.has(pre+x.id)?'on':''}" data-fav="${pre+x.id}" aria-label="المفضلة"><svg class="ico"><use href="#i-heart"/></svg></button>
+    <div class="img"><svg viewBox="0 0 ${getSVGViewBox(x.s)}" style="--glass:${x.g};--cap:${x.cap||'#333'}"><use href="#${x.s}"/></svg></div>
+    <div class="info">
+      <small class="bn">${x.b}</small>
+      <h4 title="${x.n[lang]}">${x.n[lang]}</h4>
+      <div class="stars">${stars(x.r)}<span class="cnt">(${x.rv.toLocaleString(lang==='ar'?'ar-EG':'en-US')})</span></div>
+      <div class="price"><b>${fmt(x.p)}</b>${x.o?`<s>${fmt(x.o)}</s>`:''}${pct?`<em>${pct}% ${T('off')}</em>`:''}</div>
+      <button class="add"><svg class="ico" style="width:16px;height:16px"><use href="#i-cart"/></svg>${T('add')}</button>
+    </div>
+  </article>`;
+}
+
+function getSVGViewBox(s){
+  const vb={'p-phone':'0 0 80 160','p-laptop':'0 0 200 140','p-headphone':'0 0 130 130','p-tv':'0 0 220 160','p-watch':'0 0 80 140','p-shirt':'0 0 160 140','p-dress':'0 0 130 190','p-sneaker':'0 0 200 100','p-bag':'0 0 140 150','p-sofa':'0 0 220 140','p-kitchen':'0 0 120 170','p-beauty':'0 0 130 130','p-toy':'0 0 180 120','p-toycar':'0 0 200 100','p-dumbbell':'0 0 220 80','p-grocery':'0 0 160 150','p-book':'0 0 120 150'};
+  return vb[s]||'0 0 120 120';
+}
+
+function moreTile(){
+  return `<a class="card more-tile" href="#"><span class="circ"><svg class="ico"><use href="#i-r"/></svg></span><b>${T('viewAll')}</b></a>`;
+}
+
+function rail(id,items,pre=''){
+  return `<div class="rail"><button class="arrow prev" data-rail="rl-${id}" data-dir="-1" aria-label="السابق"><svg class="ico"><use href="#i-l"/></svg></button><div class="track" id="rl-${id}">${items.map((x,i)=>card(x,i,pre||id)).join('')}${moreTile()}</div><button class="arrow next" data-rail="rl-${id}" data-dir="1" aria-label="التالي"><svg class="ico"><use href="#i-r"/></svg></button></div>`;
+}
+
+function renderCatStrip(){
+  const el=document.getElementById('catStrip');
+  el.innerHTML=CAT_STRIP.map((c,i)=>{
+    const isSvg=c.icon.startsWith('p-')||c.icon.startsWith('i-');
+    const vb=getSVGViewBox(c.icon);
+    return `<a class="catbtn" href="${c.link}" style="--i:${i}">
+      <div class="ci" style="background:${c.bg}">
+        <svg viewBox="${vb}" width="38" height="38" style="--glass:var(--brand)"><use href="#${c.icon}"/></svg>
+      </div>
+      <span>${c.label[lang]}</span>
+    </a>`;
+  }).join('');
+}
+
+function renderFlash(){
+  const flashItems=P.filter(x=>x.c.includes('flash')).slice(0,6);
+  document.getElementById('rl-flash').innerHTML=flashItems.map((x,i)=>card(x,i,'flash')).join('')+moreTile();
+  watch();
+}
+
+function renderSections(){
+  let h=SECS.map(sec=>{
+    return `<section class="sec ${sec.dark?'':''}${sec.alt?' alt':''}" id="sec-${sec.id}">
+      <div class="wrap">
+        <div class="sec-h">
+          <div><h2 class="rk">${T(sec.t)}</h2><p class="sub rk" style="--d:.08s">${T(sec.d)}</p></div>
+          <a class="more-btn rk" style="--d:.12s" href="#">${T('viewAll')} <svg class="ico" style="width:16px;height:16px"><use href="#i-r"/></svg></a>
+        </div>
+        ${rail(sec.id,sec.items)}
+      </div>
+    </section>`;
+  }).join('');
+  document.getElementById('sections').innerHTML=h;
+  watch();
+}
+
+/* ========== Events ========== */
+document.addEventListener('click',e=>{
+  const f=e.target.closest('[data-fav]');
+  if(f){
+    const k=f.dataset.fav;favs.has(k)?favs.delete(k):favs.add(k);
+    f.classList.toggle('on');
+    ['favCount'].forEach(id=>{const b=document.getElementById(id);if(b){b.textContent=favs.size;b.hidden=!favs.size;bump(b)}});
+    return;
+  }
+  const a=e.target.closest('.add');
+  if(a&&!a.classList.contains('done')){
+    cart++;
+    ['cartCount','cartBotBadge'].forEach(id=>{const b=document.getElementById(id);if(b){b.textContent=cart;b.hidden=false;bump(b)}});
+    a.classList.add('done');a.textContent=T('added');
+    toast(T('toastAdd'));
+    setTimeout(()=>{a.classList.remove('done');a.innerHTML=`<svg class="ico" style="width:16px;height:16px"><use href="#i-cart"/></svg>${T('add')}`},1700);
+    return;
+  }
+  const r=e.target.closest('[data-rail]');
+  if(r){
+    const t=document.getElementById(r.dataset.rail);
+    const c=t.querySelector('.card');if(!c)return;
+    const w=c.offsetWidth+16;
+    t.scrollBy({left:w*2*(+r.dataset.dir)*(lang==='ar'?-1:1),behavior:'smooth'});
+    return;
+  }
+  const bt=e.target.closest('.bot-tab');
+  if(bt){
+    document.querySelectorAll('.bot-tab').forEach(b=>b.classList.remove('active'));
+    bt.classList.add('active');
+  }
+});
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),2400)}
+
+/* ========== Hero slider ========== */
+let cur=0;const N=3;
+const sl=document.getElementById('slides'),dotsEl=document.getElementById('dots');
+dotsEl.innerHTML=Array.from({length:N},(_,i)=>`<button aria-label="Slide ${i+1}"></button>`).join('');
+function goSlide(i,q){
+  cur=(i+N)%N;
+  const rtl=document.documentElement.dir==='rtl';
+  sl.style.transform=`translateX(${(rtl?1:-1)*cur*100}%)`;
+  [...dotsEl.children].forEach((d,j)=>d.classList.toggle('on',j===cur));
+  [...sl.children].forEach((s,j)=>s.classList.toggle('active',j===cur));
+}
+[...dotsEl.children].forEach((d,i)=>d.onclick=()=>{goSlide(i);restart()});
+document.getElementById('hPrev').onclick=()=>{goSlide(cur-1);restart()};
+document.getElementById('hNext').onclick=()=>{goSlide(cur+1);restart()};
+let auto;const restart=()=>{clearInterval(auto);auto=setInterval(()=>goSlide(cur+1),5500)};
+const hero=document.getElementById('hero');
+hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--mx',((e.clientX-r.left)/r.width-.5).toFixed(3));hero.style.setProperty('--my',((e.clientY-r.top)/r.height-.5).toFixed(3))});
+hero.addEventListener('mouseleave',()=>{hero.style.setProperty('--mx',0);hero.style.setProperty('--my',0)});
+let sx0=null;
+hero.addEventListener('pointerdown',e=>sx0=e.clientX);
+hero.addEventListener('pointerup',e=>{if(sx0===null)return;const dx=e.clientX-sx0;sx0=null;if(Math.abs(dx)>50){goSlide(cur+(dx<0?1:-1)*(document.documentElement.dir==='rtl'?-1:1));restart()}});
+hero.addEventListener('mouseenter',()=>clearInterval(auto));
+hero.addEventListener('mouseleave',restart);
+
+/* bubbles */
+document.querySelectorAll('.slide').forEach(sd=>{
+  for(let i=0;i<8;i++){
+    const b=document.createElement('i'),z=8+Math.random()*24;
+    b.style.cssText=`position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.5),rgba(255,255,255,.08));animation:rise linear infinite;z-index:0;pointer-events:none;left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${7+Math.random()*8}s;animation-delay:${-Math.random()*10}s`;
+    sd.appendChild(b);
+  }
+});
+
+/* ========== Countdown ========== */
+const END=new Date('2026-11-15T23:59:59+02:00').getTime();
+function tick(){
+  let d=Math.max(0,END-Date.now())/1000;
+  const v=[Math.floor(d/86400),Math.floor(d%86400/3600),Math.floor(d%3600/60),Math.floor(d%60)];
+  document.querySelectorAll('#timer2 b').forEach((b,i)=>{
+    const t=String(v[i]).padStart(2,'0');
+    if(b.textContent!==t){b.textContent=t;b.animate([{transform:'translateY(-40%)',opacity:0},{transform:'none',opacity:1}],{duration:300,easing:'ease-out'})}
+  });
+  /* hourly strip */
+  const END2=Date.now()+((23-new Date().getHours())*3600+(59-new Date().getMinutes())*60+(60-new Date().getSeconds()))*1000;
+  let d2=Math.max(0,END2-Date.now())/1000;
+  const v2=[Math.floor(d2%86400/3600),Math.floor(d2%3600/60),Math.floor(d2%60)];
+  document.querySelectorAll('#timer b').forEach((b,i)=>{
+    const t=String(v2[i]).padStart(2,'0');
+    if(b.textContent!==t) b.textContent=t;
+  });
+}
+tick();setInterval(tick,1000);
+
+/* ========== IntersectionObserver (rk) ========== */
+const bump=b=>{if(!b)return;b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump')};
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -4% 0px'}):null;
+function watch(){document.querySelectorAll('.rk:not(.w)').forEach(e=>{e.classList.add('w');io?io.observe(e):e.classList.add('in')})}
+
+/* ========== Rail auto-scroll ========== */
+let dt=null,dsx=0,ds0=0,dmoved=false;
+document.addEventListener('pointerdown',e=>{const t=e.target.closest('.track');if(!t||e.pointerType!=='mouse')return;dt=t;dmoved=false;dsx=e.clientX;ds0=t.scrollLeft});
+addEventListener('pointermove',e=>{if(!dt)return;const dx=e.clientX-dsx;if(Math.abs(dx)>5){dmoved=true;dt.classList.add('drag')}if(dmoved)dt.scrollLeft=ds0-dx});
+addEventListener('pointerup',()=>{if(dt){dt.classList.remove('drag');dt=null}});
+document.addEventListener('click',e=>{if(dmoved){e.stopPropagation();e.preventDefault();dmoved=false}},true);
+setInterval(()=>{
+  document.querySelectorAll('.track').forEach(t=>{
+    if(t.parentElement.matches(':hover')||t.classList.contains('drag'))return;
+    const r=t.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;
+    const c=t.querySelector('.card');if(!c||t.scrollWidth<=t.clientWidth+4)return;
+    const w=c.offsetWidth+16,rtl=document.documentElement.dir==='rtl';
+    const end=Math.abs(t.scrollLeft)+t.clientWidth>=t.scrollWidth-6;
+    end?t.scrollTo({left:0,behavior:'smooth'}):t.scrollBy({left:(rtl?-1:1)*w,behavior:'smooth'});
+  });
+},3400);
+
+/* ========== Scroll: progress + header ========== */
+const hd=document.querySelector('header.main'),prog=document.getElementById('prog');
+function onScroll(){
+  const h=document.documentElement;
+  prog.style.width=(scrollY/(h.scrollHeight-innerHeight||1)*100)+'%';
+  hd.classList.toggle('scrolled',scrollY>20);
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* ========== INIT ========== */
+applyLang();
+renderFlash();
+restart();
+watch();
+</script>
+</body>
+</html>
