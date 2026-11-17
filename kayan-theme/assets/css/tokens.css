@@ -1,0 +1,62 @@
+/**
+ * KYMEET design tokens — Royal Metallic Blue on white (v2 prompt §2)
+ */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f4f8ff;
+  --bg-top: linear-gradient(180deg, #eef4ff 0%, #ffffff 220px);
+  --tile-bg: #f0f2f5;
+  --surface: #ffffff;
+  --border: #e8ecf2;
+  --link: #0a7bff;
+
+  --royal-900: #061a5c;
+  --royal-700: #0b2d8f;
+  --royal-500: #1b4fd1;
+  --royal-300: #5e86e6;
+  --royal-metal: linear-gradient(
+    135deg,
+    #061a5c 0%,
+    #0b2d8f 38%,
+    #2f5fd9 52%,
+    #0b2d8f 66%,
+    #061a5c 100%
+  );
+
+  --pepsi-700: #0056c7;
+  --pepsi-500: #0a7bff;
+  --pepsi-300: #5cb0ff;
+  --pepsi-metal: linear-gradient(
+    135deg,
+    #0049b0 0%,
+    #0a7bff 40%,
+    #7cc2ff 52%,
+    #0a7bff 64%,
+    #0049b0 100%
+  );
+
+  --gold: #b79a62;
+  --gold-light: #d4bd8a;
+  --gold-metal: linear-gradient(135deg, #9a7f4b, #d4bd8a 50%, #9a7f4b);
+
+  --text: #0f1b3d;
+  --muted: #5f6f8c;
+
+  --success: #1e8a5a;
+  --error: #c4423f;
+  --warning: #c98a12;
+
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  --shadow-1: 0 4px 14px rgba(11, 45, 143, 0.08);
+  --shadow-2: 0 12px 32px rgba(11, 45, 143, 0.14);
+  --shadow-btn: 0 8px 20px rgba(10, 123, 255, 0.28);
+
+  --kapp-font-ui-ar: "IBM Plex Sans Arabic", "Alexandria", sans-serif;
+  --kapp-font-head-ar: "Cairo", "IBM Plex Sans Arabic", sans-serif;
+  --kapp-font-brand: "Cormorant Garamond", Georgia, serif;
+  --kapp-font-ui-latin: "Inter", system-ui, sans-serif;
+}
