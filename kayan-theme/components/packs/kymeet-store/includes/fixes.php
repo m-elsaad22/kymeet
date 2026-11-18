@@ -80,6 +80,36 @@ function kymeet_app_contrast_overrides() {
 	echo 'body.kymeet-app .v4-card h3,body.kymeet-app .v4-card b,body.kymeet-app .v4-sec h2{color:#0A1A3D!important}';
 	echo 'body.kymeet-app .v4-sec p{color:#5C6B8A!important}';
 	echo 'body.kymeet-app .v4-hnav a,body.kymeet-app .v4-act{color:#0A1A3D!important}';
+	/* Mobile layout: beat leftover inline v4 CSS after deploy */
+	echo '@media (max-width:720px){';
+	echo 'body.kymeet-app .v4-hero__stage{overflow:hidden!important}';
+	echo 'body.kymeet-app .v4-hero__view{min-height:0!important;height:auto!important}';
+	echo 'body.kymeet-app .v4-slide{position:relative!important;inset:auto!important;display:none!important;opacity:1!important;visibility:visible!important;grid-template-columns:1fr!important;padding:14px 12px 16px!important;gap:10px!important}';
+	echo 'body.kymeet-app .v4-slide.is-on{display:grid!important}';
+	echo 'body.kymeet-app .v4-hero__copy h2{color:#fff!important;font-size:clamp(15px,4.5vw,19px)!important;line-height:1.25!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}';
+	echo 'body.kymeet-app .v4-hero__copy p{color:rgba(255,255,255,.92)!important;font-size:12px!important;margin:6px 0 10px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}';
+	echo 'body.kymeet-app .v4-hero__card{height:auto!important;max-height:none!important;padding:10px 12px 14px!important}';
+	echo 'body.kymeet-app .v4-hero__card img{max-height:112px!important}';
+	echo 'body.kymeet-app .v4-hero__card strong{display:block!important;line-height:1.3!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;letter-spacing:.01em!important}';
+	echo 'body.kymeet-app .v4-cats{display:flex!important;overflow-x:auto!important;gap:10px!important}';
+	echo 'body.kymeet-app .v4-cat{flex:0 0 auto!important;width:78px!important;font-size:11px!important}';
+	echo 'body.kymeet-app .v4-cat b{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;display:block!important}';
+	echo 'body.kymeet-app .v4-spot>div{background:rgba(255,255,255,.96)!important;color:#0A1A3D!important}';
+	echo 'body.kymeet-app .v4-spot h3{color:#0A1A3D!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}';
+	echo 'body.kymeet-app .v4-spot small{color:#0F4CA8!important}';
+	echo 'body.kymeet-app .v4-strip h3,body.kymeet-app .v4-strip p{color:#fff!important}';
+	echo 'body.kymeet-app .v4-card__img{overflow:hidden!important;height:140px!important}';
+	echo 'body.kymeet-app .v4-card__body{position:relative!important;z-index:1!important;background:#fff!important;padding-top:8px!important;min-width:0!important}';
+	echo 'body.kymeet-app .v4-card__body>a{display:block!important;min-width:0!important;max-width:100%!important;overflow:hidden!important}';
+	echo 'body.kymeet-app .v4-card small,body.kymeet-app .v4-card h3{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;min-height:0!important;max-width:100%!important}';
+	echo 'body.kymeet-app .v4-rail__btn{display:none!important}';
+	echo 'body.kymeet-app .v4-deals{grid-template-columns:1fr!important}';
+	echo 'body.kymeet-app .v4-deal{display:grid!important;grid-template-columns:1fr!important;grid-template-areas:"media" "kicker" "title" "cta"!important;min-height:0!important;padding:14px!important;gap:8px!important;justify-items:center!important;text-align:center!important}';
+	echo 'body.kymeet-app .v4-deal small{grid-area:kicker!important;color:#fff!important}';
+	echo 'body.kymeet-app .v4-deal h3{grid-area:title!important;color:#fff!important;font-size:16px!important;max-width:none!important;margin:0!important}';
+	echo 'body.kymeet-app .v4-deal .v4-btn{grid-area:cta!important;justify-self:center!important}';
+	echo 'body.kymeet-app .v4-deal img{grid-area:media!important;position:static!important;inset:auto!important;max-height:100px!important;max-width:100%!important;height:auto!important;width:auto!important;margin:0 auto!important}';
+	echo '}';
 	echo '</style>';
 }
 add_action( 'wp_head', 'kymeet_app_contrast_overrides', 999 );

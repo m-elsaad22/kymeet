@@ -1,3 +1,9 @@
+# 1.6.17 — Mobile layout (user feedback on PR #4)
+- Hero: one-line titles on mobile; content-sized slides so product card stays inside blue stage; title ellipsis
+- Brand chips: horizontal scroll, single-line labels (PARIS CORNER)
+- Product cards: brand/title below image with nowrap ellipsis; hide overlapping rail arrows
+- من المتجر deals: stacked image→copy→CTA; white text (no absolute image overlay)
+
 # 1.6.16 — Contrast + perf (KSA-1)
 - Dark v4 blocks: light nested text panels on `.v4-spot`; white copy on hero/strip/deal/brand/footer; light modal panel
 - Late `#kymeet-contrast-fix` overrides so global `h1–h4` navy cannot hide text on dark surfaces
