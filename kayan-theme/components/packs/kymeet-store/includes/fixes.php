@@ -85,11 +85,12 @@ function kymeet_app_contrast_css() {
 	$css .= 'html body.kymeet-app .v4-hero__view{min-height:0!important;height:auto!important}';
 	$css .= 'html body.kymeet-app .v4-slide{position:relative!important;inset:auto!important;display:none!important;opacity:1!important;visibility:visible!important;grid-template-columns:1fr!important;padding:14px 12px 16px!important;gap:10px!important}';
 	$css .= 'html body.kymeet-app .v4-slide.is-on{display:grid!important}';
-	$css .= 'html body.kymeet-app .v4-hero__copy h2{color:#fff!important;font-size:clamp(15px,4.5vw,19px)!important;line-height:1.25!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}';
-	$css .= 'html body.kymeet-app .v4-hero__copy p{color:rgba(255,255,255,.92)!important;font-size:12px!important;margin:6px 0 10px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important}';
-	$css .= 'html body.kymeet-app .v4-hero__card{height:auto!important;max-height:none!important;padding:10px 12px 14px!important}';
+	$css .= 'html body.kymeet-app .v4-hero__copy{min-width:0!important;max-width:100%!important}';
+	$css .= 'html body.kymeet-app .v4-hero__copy h2{color:#fff!important;font-size:clamp(13px,3.6vw,16px)!important;line-height:1.2!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important;word-break:keep-all!important;-webkit-text-fill-color:#fff!important}';
+	$css .= 'html body.kymeet-app .v4-hero__copy p{color:rgba(255,255,255,.92)!important;font-size:clamp(10px,2.8vw,11px)!important;line-height:1.3!important;margin:4px 0 8px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;max-width:100%!important;word-break:keep-all!important}';
+	$css .= 'html body.kymeet-app .v4-hero__card{height:auto!important;max-height:none!important;padding:10px 12px 14px!important;min-width:0!important}';
 	$css .= 'html body.kymeet-app .v4-hero__card img{max-height:112px!important}';
-	$css .= 'html body.kymeet-app .v4-hero__card strong{display:block!important;line-height:1.3!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;letter-spacing:.01em!important}';
+	$css .= 'html body.kymeet-app .v4-hero__card strong{display:block!important;font-size:13px!important;line-height:1.3!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;letter-spacing:.01em!important;max-width:100%!important}';
 	$css .= 'html body.kymeet-app .v4-cats{display:flex!important;overflow-x:auto!important;gap:10px!important}';
 	$css .= 'html body.kymeet-app .v4-cat{flex:0 0 auto!important;width:78px!important;font-size:11px!important}';
 	$css .= 'html body.kymeet-app .v4-cat b{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;display:block!important}';
@@ -127,6 +128,63 @@ function kymeet_app_contrast_overrides_footer() {
 	echo '<style id="kymeet-contrast-fix-late">' . kymeet_app_contrast_css() . '</style>';
 }
 add_action( 'wp_footer', 'kymeet_app_contrast_overrides_footer', 9999 );
+
+/**
+ * Hero slide copy: drop currency mentions from description lines so mobile nowrap fits.
+ * Live v4 hero HTML is not versioned in this pack; rewrite known phrases in the page HTML.
+ * Keeps «ج.م» on product price UI (only edits .v4-hero__copy <p> bodies).
+ */
+function kymeet_app_hero_copy_replacements() {
+	return array(
+		'تشكيلة أصلية من البيوت المعروضة في المتجر، بأسعار بالجنيه.' => 'تشكيلة أصلية من البيوت المعروضة في المتجر.',
+		'تشكيلة أصلية من البيوت المعروضة في المتجر، بأسعار بالجنيه'   => 'تشكيلة أصلية من البيوت المعروضة في المتجر',
+		'، بأسعار بالجنيه.' => '.',
+		'، بأسعار بالجنيه'  => '',
+		' بأسعار بالجنيه.'  => '.',
+		' بأسعار بالجنيه'   => '',
+		'بالجنيه المصري.'   => '',
+		'بالجنيه المصري'    => '',
+		' بالجنيه.'         => '.',
+		' بالجنيه'          => '',
+	);
+}
+
+function kymeet_app_rewrite_hero_copy_html( $html ) {
+	if ( ! is_string( $html ) || '' === $html || false === strpos( $html, 'v4-hero__copy' ) ) {
+		return $html;
+	}
+	$map = kymeet_app_hero_copy_replacements();
+	$html = str_replace( array_keys( $map ), array_values( $map ), $html );
+	// Belt: strip leftover currency clauses inside hero description <p> only.
+	$html = preg_replace_callback(
+		'/(<div class="v4-hero__copy">[\s\S]*?<p(?![^>]*v4-kicker)[^>]*>)([\s\S]*?)(<\/p>)/u',
+		static function ( $m ) {
+			$had_currency = ( false !== strpos( $m[2], 'بالجنيه' ) || false !== stripos( $m[2], 'EGP' ) );
+			$p            = $m[2];
+			$p            = preg_replace( '/[،,]?\s*بأسعار\s*بالجنيه(?:\s*المصري)?\.?/u', '', $p );
+			$p            = preg_replace( '/\s*\bEGP\b\.?/i', '', $p );
+			$p            = preg_replace( '/\s{2,}/u', ' ', $p );
+			$p            = trim( preg_replace( '/[،,]\s*$/u', '', $p ) );
+			if ( $had_currency && '' !== $p && ! preg_match( '/[.。]$/u', $p ) ) {
+				$p .= '.';
+			}
+			return $m[1] . $p . $m[3];
+		},
+		$html
+	);
+	return $html;
+}
+
+function kymeet_app_hero_copy_buffer_start() {
+	if ( is_admin() || ! function_exists( 'kymeet_store_active' ) || ! kymeet_store_active() ) {
+		return;
+	}
+	if ( ! is_front_page() && ! is_home() ) {
+		return;
+	}
+	ob_start( 'kymeet_app_rewrite_hero_copy_html' );
+}
+add_action( 'template_redirect', 'kymeet_app_hero_copy_buffer_start', 0 );
 
 /**
  * Shop/archive: no giant Woo category tiles or banner images (chips + grid on home cover categories).

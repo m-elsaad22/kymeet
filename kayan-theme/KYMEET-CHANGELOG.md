@@ -1,3 +1,8 @@
+# 1.6.19 — Hero one-line copy (user shots 07–08)
+- Mobile hero title + description: smaller clamp + nowrap/ellipsis (من بيوت العطر, brand list, عطور راقية…)
+- Rewrite hero description: drop `بأسعار بالجنيه` → `تشكيلة أصلية من البيوت المعروضة في المتجر.`
+- Keep product card titles one line; leave «ج.م» on price UI
+
 # 1.6.18 — Spot/strip contrast (user shot 06)
 - Force `#fff` on `.v4-spot` kicker/title and `.v4-strip` heading (beat global h1–h4 navy)
 - Ultra-specific `html body.kymeet-app a.v4-spot…` / `section.v4-strip…` overrides in head + footer
