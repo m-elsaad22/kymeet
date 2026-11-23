@@ -1,3 +1,8 @@
+# 1.6.18 — Spot/strip contrast (user shot 06)
+- Force `#fff` on `.v4-spot` kicker/title and `.v4-strip` heading (beat global h1–h4 navy)
+- Ultra-specific `html body.kymeet-app a.v4-spot…` / `section.v4-strip…` overrides in head + footer
+- Drop light-panel+navy dependency for spots (white-on-dark is resilient if panel CSS missing)
+
 # 1.6.17 — Mobile layout (user feedback on PR #4)
 - Hero: one-line titles on mobile; content-sized slides so product card stays inside blue stage; title ellipsis
 - Brand chips: horizontal scroll, single-line labels (PARIS CORNER)

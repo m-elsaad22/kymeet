@@ -52,10 +52,11 @@ body.kymeet-app .kapp-hdr{display:flex;flex-direction:column;align-items:stretch
 .v4-spot{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px;align-items:center;min-height:210px;padding:22px;border-radius:22px;background:radial-gradient(120% 140% at 100% 0%,#5E9EF5,#1A6BD8 42%,#0B3A85);color:#fff;overflow:hidden}
 .v4-spot--flip{background:radial-gradient(120% 140% at 0% 0%,#3D8AF0,#12306B 52%,#0A1A3D)}
 .v4-spot img{max-height:180px;width:auto;max-width:100%;object-fit:contain;justify-self:center}
-.v4-spot>div{background:rgba(255,255,255,.96);color:#0A1A3D;border-radius:16px;padding:16px 18px;box-shadow:0 10px 28px rgba(5,16,40,.12)}
-.v4-spot small{letter-spacing:.18em;font-weight:700;opacity:1;color:#0F4CA8}
-.v4-spot h3{margin:8px 0 14px;font-size:clamp(22px,5.2vw,40px);line-height:1.15;overflow-wrap:anywhere;color:#0A1A3D}
-.v4-spot .v4-btn{background:#0F4CA8;color:#fff}
+/* Copy sits on the navy gradient — force white (global h1–h4 navy otherwise wins). */
+.v4-spot>div{background:transparent;color:#fff;border-radius:0;padding:0;box-shadow:none}
+.v4-spot small{letter-spacing:.18em;font-weight:700;opacity:1;color:#fff}
+.v4-spot h3{margin:8px 0 14px;font-size:clamp(22px,5.2vw,40px);line-height:1.15;overflow-wrap:anywhere;color:#fff}
+.v4-spot .v4-btn{background:#fff;color:#0A1A3D}
 .v4-bags{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
 .v4-bag{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:92px;border-radius:18px 18px 28px 28px;background:#0F4CA8;color:#fff;box-shadow:0 10px 0 #062A63;font-weight:800}
 .v4-bag b{font-size:18px}
@@ -216,7 +217,8 @@ body.kymeet-app .kapp-hdr{padding:0}
 /* Spots: keep light nested panel readable */
 .v4-spot{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);min-height:0;padding:12px;gap:10px}
 .v4-spot img{max-height:110px}
-.v4-spot>div{padding:12px 14px}
+.v4-spot>div{padding:0}
+.v4-spot small,.v4-spot h3{color:#fff}
 .v4-spot h3{font-size:clamp(18px,5vw,26px);margin:6px 0 10px;overflow-wrap:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* Brand chips: horizontal row, labels stay one line */
 .v4-cats{display:flex;grid-template-columns:none;gap:10px;padding:16px 0 4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
